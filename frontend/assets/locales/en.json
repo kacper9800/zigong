@@ -1,0 +1,341 @@
+{
+    "global": {
+        "yes": "Yes",
+        "no": "No",
+        "country": "Country",
+        "city": "City",
+        "goldUser": "Gold user",
+        "apply": "Apply",
+        "rating": "Rating",
+        "society": "Society",
+        "both": "both",
+        "iConfirmReadAndAgree": "I confirm that I have read and I agree",
+        "login": "Login",
+        "enrollment": "Enrollment",
+        "employerRegistration": "Employer registration",
+        "companyDetails": "Company details",
+        "personalInformation": "Personal Information",
+        "businessAccountRegistration": "Business Account Registration",
+        "favorite": "Favorite",
+        "setAsPrefered": "Set as preferred",
+        "israelIsIsraeli": "Israel is Israeli",
+        "subtlety": "Subtlety",
+        "comingOnly": "Coming only",
+        "nominations": "Nominations",
+        "copyRights": "© R.S. Hotzlarts Ltd.",
+        "poweredBy": "Powered By",
+        "guideVideo": "Guiding video",
+        "moreDetails": "More details",
+        "passportDetails": "Passport details",
+        "date": "Date",
+        "paymentDetails": "Payment details",
+        "peace": "Peace",
+        "welcomeToYourPersonalArea": "Welcome to your personal area",
+        "accoutingVideo": "Accounting video",
+        "iAuthorizeTheUseOfInformation": "I authorize the use of information about me in accordance with the Terms of Use and Privacy Policy"
+    },
+
+    "header": {
+        "contactUsButton": "contact us",
+        "aboutButton": "about",
+        "abroadJobsButton": "Abroad jobs",
+        "hi": "hi,  ",
+        "blueButton": "Lets fly!"
+    },
+
+    "footer": {
+        "contactUs": "Call for details",
+        "menuWrapperOne": {
+            "abroadJob": "Abroad Job",
+            "about": "About",
+            "contactUs": "Contact",
+            "additionalLinkFirst": "Sample Link",
+            "additionalLinkSecond": "Sample Link",
+            "additionalLinkThird": "Sample Link"
+        },
+        "menuWrapperTwo": {
+            "abroadJob": "Abroad Job",
+            "about": "About",
+            "contactUs": "Contact",
+            "additionalLinkFirst": "Sample Link",
+            "additionalLinkSecond": "Sample Link",
+            "additionalLinkThird": "Sample Link"
+        },
+        "yourEmail": "Your email?",
+        "sending": "Sending"
+    },
+
+    "authentication": {
+        "title": "Authentication confirmation",
+        "placeholder": {
+            "verificationNumber": "Verification number"
+        }
+    },
+
+    "pages": {
+        "jobs": {
+            "archiveOfEmployersAbroad": "Archive of employers abroad",
+            "typesOfJobs": "Types of jobs"
+        },
+        "contact": {
+            "contactUs": "Contact Us",
+            "fullName": "Full name",
+            "emailAddress": "Email Address",
+            "requestSubject": "Request Subject",
+            "referralContent": "Referral content"
+        },
+        "payment": {
+            "addingAMeansOfPayment": "Adding a means of payment",
+            "paymentDetailsBussinessAccount": "Payment Details - Business Account",
+            "monthlyAmountToBePaid": "Monthly amount to be paid",
+            "paymentReceiptNear": "Payment receipt near "
+        }
+    },
+
+    "register": {
+        "notVerified": "Not Verified",
+        "continueButton": "Continue",
+        "personalData": {
+            "personalInformation": "Personal Information",
+            "lastName": "Last Name",
+            "firstName": "First Name",
+            "email": "Email",
+            "dateOfBirth": "Date of Birth",
+            "gender": "Gender",
+            "maritalStatus": "Marital Status",
+            "hometown": "Hometown",
+            "phoneInformation": "This number will be used as a means of login",
+            "confirmPrivacyPolicy": "I confirm that I have read and agree to the Privacy Policy and Terms of Use",
+            "mobile": "Mobile"
+        },
+        "goldUser": {
+            "enterToClub": "Enter the Golden Users Club!",
+            "addAnotherCompany": "Add another company",
+            "deleteLastCompany": "Delete last added company",
+            "goldUser": "Gold user",
+            "nameOfCompanyWhereEmployed": "The name of the company where you were employed",
+            "dateOfTransaction": "Date of Transaction",
+            "endOfTransaction": "End of transaction date",
+            "employersMobile": "Employer's Mobile *",
+            "anotherEmployersMobile": "Another mobile employer",
+            "less": "less",
+            "perfect": "perfect",
+            "joinToRecomenders": "Want to join the list of recommenders?",
+            "yourAnswerWillAppearOnTheBussinessPage": "Your answer will appear on the business page only if it is positive",
+            "fewWordsAboutCompany": "A few words about the company"
+        }
+    },
+
+    "toasts": {
+        "errors": {
+            "errorUpdatingProfile": "There was an error updating the profile",
+            "enterCorrectData": "Enter correct data",
+            "requiredField": "Field is required",
+            "filtersCouldNotHaveBeenUpdated": "Filters could not have been updated!",
+            "couldNotStartRecording": "Couldn't start recording. Please make sure your device has a camera and is powered on.",
+            "pleaseTurnYouDeviceOn": "Please make sure that your device has a camera and that it's turned on.",
+            "somethingWentWrong": "Something went wrong!",
+            "companyCouldNotHaveBeenUpdated": "Company could not have been updated!",
+            "errorSendingPinOnGivenPhoneNumber": "Error sending pin on the given phone number",
+            "cannotSubmitApplicationYouAreLoggedAsCompany": "Cannot submit application. You're logged in as a company",
+            "errorSubmittingEmailTryLater": "Error submitting email. Try again later.",
+            "errorUpdatingImageTryLater": "Error updating an image. Please try again later.",
+            "errorUploadingVideoTryLater": "There was an error uploading the video. Please try again later",
+            "pleaseCheckNumberAgain": "Please check the number again",
+            "errorSubmittingTheFormTryLater": "Error submitting the form. Try again later.",
+            "statusHasBeenUsed": "Cannot change status, this status has already been used",
+            "videoMaxLength": "The maximum video length cannot exceed 90 seconds."
+        },
+        "success": {
+            "filtersHaveBeenUpdatedSuccessfully": "Filters have been updated successfully!",
+            "noteHasBeenUpdated": "Note has been updated!",
+            "statusHasBeenUpdated": "Status has been updated!",
+            "profileUpdatedSuccesfully": "Profile updated successfully",
+            "companyHasBeenCreatedSuccessfully": "Company has been created successfully",
+            "companyDetailsUpdatedSuccessfully": "Company details updated successfully!",
+            "theEmailWasRegistered": "Thanks! The email address was registered in the system!",
+            "imageUpdatedSuccessfully": "Image updated successfully!",
+            "yourRequestHasBeenRedirectedToTheSystem": "Your request has been redirected to the system!"
+        }
+    },
+
+    "errors": {
+        "requiredField": "Field is required",
+        "invalidNumber": "Invalid number",
+        "theFormHasErrors": "The form has errors!",
+        "theIdNumberNotMatch": "The identification number that the arc appears does not match",
+        "pinError": "Pin error",
+        "pleaseCheckNumberAgain": "Please check the number again",
+        "enterFullNameInEnglish": "Enter a full name in English"
+    },
+
+    "applicationStatus": {
+        "approved": "Approved",
+        "in_progress": "In progress",
+        "pending": "Pending",
+        "rejected": "Rejected",
+        "applied": "Applied",
+        "follow_up": "Follow up"
+    },
+
+    "videoCvPage": {
+        "title": "Registration - Finding a job abroad",
+        "guidelineToTalkAbout": "Guidelines to talk about",
+        "toWatchTutorialVideo": "To watch a tutorial video click Here"
+    },
+
+    "buttons": {
+        "videoControlButtons": {
+            "clickToRecord": "Click to record",
+            "watchRecord": "Watching the recording",
+            "reRecording": " For re-recording",
+            "saveVideo": "Save video"
+        },
+        "next": "Next",
+        "uploadingVideo": "Uploading video...",
+        "saveChanges": "Save changes",
+        "showMore": "Show more",
+        "inspection": "Inspection",
+        "deleteCompany": "Delete a company",
+        "continue": "Continue",
+        "return": "Return",
+        "forTheNextQuestion": "To the next question",
+        "forThePreviousQuestion": "To the previous question",
+        "takeANewVideo": "Take a new video",
+        "previous": "Previous",
+        "forNextJob": "For the next job",
+        "forPreviousJob": "For a previous position",
+        "cancellationOfCandidacy": "Cancellation of candidacy",
+        "leavingDetails": "Leaving details",
+        "viewTheBussinessPage": "View the business page",
+        "closed": "Closed",
+        "disengagement": "Disengagement",
+        "savingChanges": "Changes are saved"
+    },
+
+    "links": {
+        "wantToKnowHowToUseThisPage": "Want to know how to use this page Click here",
+        "viewCandidateProfile": "View candidate profile",
+        "addAnotherCompany": "Add another company",
+        "completionOfRegistration": "Completion of registration",
+        "letsFly": "Let's fly!",
+        "toPrivacyPolicy": "To the Privacy Policy",
+        "andTermsAndConditions": " and terms of use",
+        "itsTimeToRetire": "It's time to retire",
+        "returnToFillInPhoneNumber": "Return to fill in phone number",
+        "addANewCard": "Add a new card",
+        "backToTheArchivesOfEmployers": "Back to the archives of employers",
+        "lessSuitableForMeShowMoreOptions": "Less suitable for me Show more options",
+        "comeOnLetsLook": "Come on let's look",
+        "viewTheBussinessPage": "View the business page",
+        "addAnotherLanguage": "Add another language",
+        "addAnotherPassport": "Add another passport",
+        "cancelAdditionPassport": "Cancel the addition of an additional passport",
+        "inquiryStatus": "Inquiry status",
+        "candidates": "Candidates",
+        "leadsSettingMenagement": "Lead settings management",
+        "addForeignPassport": "Adding a foreign passport",
+        "removeLastAddedPassport": "Remove last added passport",
+        "removeLastAddedLanguage": "Remove last added language",
+        "toRegister": "To register"
+    },
+
+    "labels": {
+        "nameOfCandidate": "Name of the candidate",
+        "lastUpdate": "Last update",
+        "status": "Status",
+        "aboutTheCompany": "About the company",
+        "residenceAndWorkEnvironment": "Residence and work environment",
+        "natureOfThePositionAndTermsOfEmployment": "The nature of the position and terms of employment",
+        "phoneNumber": "Phone number",
+        "email": "E-mail",
+        "gender": "Gender",
+        "birthday": "Birthday",
+        "maritalStatus": "Marital status",
+        "foreignPassports": "Foreign passports",
+        "visaToUsa": "Visa to USA",
+        "workInTheFieldInThePast": "Work in the field in the past",
+        "flightAvailability": "Flight availability",
+        "hometown": "Hometown",
+        "militaryService": "Military service",
+        "education": "Education",
+        "languages": "Languages",
+        "experienceInTheField": "Experience in the field",
+        "companyName": "Company Name",
+        "myComments": "My comments",
+        "mobilePhoneIncludingPrefix": "Mobile Phone Employer (including prefix)",
+        "sex": "sex",
+        "restrictionsOnBithsOnAWeeklyBasis": "Restrictions on births on a weekly basis",
+        "ageRangeRestrictions": "Age range restriction",
+        "selectMinimumAge": "Select Minimum Age",
+        "selectMaximumAge": "Select Maximum Age",
+        "holdersOfForeignPassport": "Holders of a foreign passport",
+        "goldUsersOnly": "Gold users only",
+        "immediate": "Immediate",
+        "monthsFromToday": "Months from today",
+        "corporateImageVideoOfTheCompany": "Corporate image video of the company",
+        "companyLogo": "Company logo",
+        "mainDisplayImage": "Main display image",
+        "linkToBusinessFacebook": "Link to Business Facebook",
+        "lineOfBusiness": "Line of Business",
+        "linkToBusinessInstagram": "Link to Business Instagram",
+        "contactName": "Contact Name",
+        "goldUserRecommendations": "Gold users recommendations",
+        "comeOnLetsLook": "Come on let's look",
+        "countryAndCity": "Country and city",
+        "openInquiries": "Open inquiries",
+        "closedInquiries": "Closed inquiries",
+        "anotherLanguage": "Another language",
+        "levelOfLanguageProficiency": "Level of language proficiency",
+        "workExperienceAbroad": "Work experience abroad",
+        "seniorityExperience": "Seniority experience",
+        "fieldOfEmployment": "Field of employment",
+        "fullNameInEnglishAsItApperasInThePassport": "Full name in English as it appears in the passport",
+        "fullNameInEnglishAsItApperasInTheIsraeliPassport": "Full name in English as it appears in the Israeli passport",
+        "extendTheIssuanceOfAPassport": "Extend the issuance of a passport",
+        "passportExpirationDate": "Passport expiration date",
+        "doYouHaveAForeignPassport": "Do you have a foreign passport",
+        "nameOfCompanyInWhichYouWereEmployed": "Name of the company in which you were employed",
+        "dateOfCommentcementOfTheTransaction": "Date of commencement of the transaction",
+        "dateOfTerminationOfTheTransaction": "Date of termination of the transaction",
+        "rateOfWorkplace": "Rate the workplace",
+        "countryOfOriginForeignPassport": "Country of origin - foreign passport",
+        "employmentExperienceAbroad": "Employment experience abroad",
+        "rateTheWorkplace": "Rate the workplace"
+    },
+
+    "modals": {
+        "title": {
+            "deleteCompany": "Do you want delete",
+            "applyTo": "Apply to"
+        },
+        "howFunYourDetailsHaveSent": "How fun! Your details have been sent to the employer and he will contact you shortly"
+    },
+
+    "info": {
+        "pleaseContactWithAdmin": "Your company is inactive, please complete the payment or contact the administrator.",
+        "ifYouOwnMoreThanOneCompanyYouCanAddAnother": "If you own more than one company, you can add another company At the end of the process in the personal area",
+        "typeSomethingHere": "Type something here...",
+        "clickingThisButtonWillRequireAnswering": "Clicking this button will require answering and re-capturing any video questions",
+        "youDontHaveAnyCompany": "You don't currently have any business.",
+        "anAdditionalIdCodeWillBeSentToYourPhone": "An additional identification code will be sent to your phone number",
+        "secondsBeforeYourSubmitARequestForIdCode": "Seconds before you submit a request for additional identification code",
+        "youHaveToWait": "You have to wait",
+        "didYouReceiveACode": "Did not receive a code?",
+        "toSeeTheCompanyDetailsClickOnApplyButton": "To see the company details, click on the 'Apply' button",
+        "youCanUnsubscribeAt": "You can unsubscribe at",
+        "doYouWantToWorkHere": "Do you want to work here?",
+        "youHaveMoreLeft": "You have more left",
+        "byClickingOnThisButtonIConfirmTheDetails": "By clicking on this button I confirm the transfer of the details to the employer",
+        "theCompanyHasANumberOfChangesAwaitingApproval": "The company has a number of changes awaiting approval!",
+        "apparentlyTheyAreStillMakingALivingWeWillUploadExperiencesHere": "Apparently they are still making a living, we will upload experiences here later!",
+        "yourPassportIsHungryForSignatures": "Your passport is hungry for signatures, isn't it a shame to leave it like that ?!",
+        "thisNumberWillBeUsedAsAMeansOfEnteringTheSite": "This number will be used as a means of entering the site",
+        "yourBrowserDoesNotSupportCameraSharing": "Sucks but your browser does not support camera sharing",
+        "notBadYouHaveNotYetReachedTheEndOfTheWorld": "Not bad, you have not yet reached the end of the world!",
+        "youCanCopyTheLinkFromTheAddressBarAndContinueInAnotherDevice": "You can copy the link from the address bar and continue the process from another device or browser",
+        "inOrderToApplyYouMustRegister": "In order to apply you must register",
+        "weAreProcessingVideoPleaseCheckBackLater": "We're processing video. Please check back later..."
+    },
+    "loremIpsum": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam molestiae rem accusamus, quos hic iusto possimus minus, at obcaecati repudiandae aspernatur eos? Sequi eaque voluptatem eligendi sunt architecto quasi qui.Delectus ut rerum reprehenderit voluptatum nobis obcaecati quos exercitationem quo neque vero et eaque aliquid corporis veritatis fugiat, distinctio qui alias harum. Commodi, doloribus! Minima quam iste recusandae sapiente et."
+}
