@@ -1,0 +1,26 @@
+"use strict";
+
+const uuid = require("uuid/v4");
+
+module.exports = {
+  up: (queryInterface, Sequelize) => {
+    return queryInterface.bulkInsert(
+      "Roles",
+      [
+        {
+          name: "admin",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          name: "user",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      ],
+      {}
+    );
+  },
+
+  down: (queryInterface, Sequelize) => {},
+};
