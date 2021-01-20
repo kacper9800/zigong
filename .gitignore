@@ -159,3 +159,5 @@ typings/
 # DynamoDB Local files
 .dynamodb/
 
+backend/node_modules
+frontend/node_modules
