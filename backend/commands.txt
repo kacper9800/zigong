@@ -1,0 +1,7 @@
+Create new migration
+npx sequelize-cli model:generate --name {TableName} --attributes {Attributes eg.: name:string,description:string,price:float,deleted:boolean}
+
+Create new seeder
+npx sequelize-cli seed:generate --name {name}
+
+
