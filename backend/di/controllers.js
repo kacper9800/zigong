@@ -12,5 +12,6 @@ module.exports = (container) => {
 
   container
     .register("controller.users", UsersController)
-    .addArgument(new Reference("repositories.user"));
+    .addArgument(new Reference("repositories.user"))
+    .addArgument(new Reference("repositories.role"));
 };

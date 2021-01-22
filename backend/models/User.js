@@ -46,7 +46,7 @@ module.exports = (sequelize, Sequelize) => {
 
   User.associate = (db) => {
     User.belongsToMany(db.Role, {
-      as: "roles",
+      as: "Roles",
       through: "UserRoles",
       foreignKey: "userId",
       otherKey: "roleId",
@@ -56,7 +56,7 @@ module.exports = (sequelize, Sequelize) => {
 
   const Role = sequelize.import("./Role");
 
-  User.prototype.isAdmin = async function() {
+  User.prototype.isAdmin = async function () {
     const roles = await this.getRoles();
 
     return roles.some((role) => role.name === Role.ADMIN);
