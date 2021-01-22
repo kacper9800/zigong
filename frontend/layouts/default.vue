@@ -1,8 +1,11 @@
 <template>
-  <div>
+  <div class="app">
+    <He
     <Nuxt />
   </div>
 </template>
+
+
 
 <style>
 html {
