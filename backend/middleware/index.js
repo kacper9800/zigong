@@ -3,6 +3,7 @@ const isAdmin = require("./isAdmin");
 const isLoggedIn = require("./isLoggedIn");
 const isRecoverHash = require("./isRecoverHash");
 const isRefreshToken = require("./isRefreshToken");
+const adminIsNotRequired = require("./adminIsNotRequired");
 
 module.exports = {
   validate,
@@ -10,4 +11,5 @@ module.exports = {
   isLoggedIn,
   isRecoverHash,
   isRefreshToken,
+  adminIsNotRequired,
 };
