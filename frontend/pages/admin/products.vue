@@ -1,6 +1,6 @@
 <template>
-    <div class = "page">
-      <h1>Wszystkie produkty</h1>
+    <div class="page">
+        <h1>Products</h1>
         <a-table :columns="columns" :data-source="dataa">
             <a slot="name" slot-scope="text">{{ text }}</a>
             <span slot="customTitle"><a-icon type="smile-o" /> Name</span>
@@ -32,14 +32,8 @@
     </div>
 </template>
 <script>
-import back from '@/components/elements/back';
-
 export default {
     layout: 'admin',
-
-    components: {
-        back
-    },
 
     data() {
         return {

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>Panel administracyjny</h1>
+        <h1>Dashboard</h1>
     </div>
 </template>
 
@@ -10,5 +10,3 @@ export default {
     middleware: 'admin'
 };
 </script>
-
-<style scoped></style>

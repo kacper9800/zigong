@@ -56,15 +56,17 @@
                                 <nuxt-link
                                     :to="localePath(page.path)"
                                     class="nav-link dropdown-toggle"
-                                    >{{ page.name }}</nuxt-link
+                                    >{{
+                                        $t(`mainManu.${page.name}`)
+                                    }}</nuxt-link
                                 >
                             </li>
 
                             <li v-else class="nav-item dropdown">
                                 <nuxt-link
-                                   :to="localePath(page.path)"
+                                    :to="localePath(page.path)"
                                     class="nav-link dropdown-toggle"
-                                    >{{ page.name }}
+                                    >{{ $t(`mainManu.${page.name}`) }}
                                     <i class="icofont-thin-down"></i
                                 ></nuxt-link>
                                 <ul
@@ -76,7 +78,11 @@
                                         :key="subpage.name"
                                     >
                                         <nuxt-link
-                                        :to="localePath(page.path + subpage.path)"
+                                            :to="
+                                                localePath(
+                                                    page.path + subpage.path
+                                                )
+                                            "
                                             class="dropdown-item"
                                         >
                                             {{ subpage.name }}</nuxt-link
@@ -108,14 +114,15 @@ export default {
     data() {
         return {
             availableLocales: [
-            {name:'PL', flag:'', path:'pl'},
-            {name:'EN', flag:'', path:'en'},
-            {name:'RU', flag:'', path:'ru'}, ],
+                { name: 'PL', flag: '', path: 'pl' },
+                { name: 'EN', flag: '', path: 'en' },
+                { name: 'RU', flag: '', path: 'ru' }
+            ],
             pagesData: [
-                { path: '/', name: 'Home' },
+                { path: '/', name: 'home' },
                 {
                     path: '/about',
-                    name: 'About',
+                    name: 'about',
                     subPages: [
                         { path: '/organization', name: 'Organization' },
                         { path: '/who-we-are', name: 'Who We Are' },
@@ -130,11 +137,11 @@ export default {
                 },
                 {
                     path: '/products',
-                    name: 'Products',
-                    subPages: [{ path: '/powders', name: 'Powders' }]
+                    name: 'products',
+                    subPages: [{ path: '/powders', name: 'powders' }]
                 },
-                { path: '/resources', name: 'Resources' },
-                { path: '/contact-us/', name: 'Contact US' }
+                { path: '/resources', name: 'resources' },
+                { path: '/contact-us/', name: 'contactUs' }
             ]
         };
     },

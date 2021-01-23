@@ -1,6 +1,10 @@
 {
-  "about": {
-    "pageHeader": "O nas"
+  "mainManu": {
+    "home": "Strona główna",
+    "about": "O nas",
+    "products": "Produkty",
+    "resources": "Zasoby",
+    "contactUs": "Kontakt"
   },
   "global": {
     "firstName": "Imię",

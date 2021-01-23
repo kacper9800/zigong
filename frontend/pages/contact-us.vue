@@ -5,9 +5,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="block text-center">
-                            <h2 class="text-capitalize mb-5 text-lg">
-                                <!-- CONTACT US -->
-                            </h2>
+                            <h2 class="text-capitalize mb-5 text-lg"></h2>
                         </div>
                     </div>
                 </div>
@@ -39,7 +37,6 @@
                                     method="post"
                                     action="mail.php"
                                 >
-                                    <!-- form message -->
                                     <div class="row">
                                         <div class="col-12">
                                             <div

@@ -1,18 +1,11 @@
 <template>
-    <div>
-    </div>
+    <div></div>
 </template>
 
 <script>
-import back from '@/components/elements/back';
-
 export default {
     name: 'home',
-    layout: 'admin',
-
-    components: {
-        back
-    }
+    layout: 'admin'
 };
 </script>
 
