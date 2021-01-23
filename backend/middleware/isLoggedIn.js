@@ -13,7 +13,14 @@ module.exports = async (req, res, next) => {
     return res.status(401).send({ message: "Invalid token" });
   }
 
-  req.loggedUser = await User.findByPk(decoded.id);
+  req.loggedUser = await User.findByPk(decoded.id, {
+    include: [
+      {
+        association: "Roles",
+        through: { attributes: [] },
+      },
+    ],
+  });
 
   return next();
 };

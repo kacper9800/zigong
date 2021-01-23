@@ -88,7 +88,9 @@ class AuthController {
   }
 
   async me(req, res) {
-    return res.send(req.loggedUser);
+    const user = req.loggedUser;
+
+    return res.send({ user });
   }
 
   async recoverPasswordSendMail(req, res) {

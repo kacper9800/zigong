@@ -1,24 +1,21 @@
 <template>
-  <div class="app">
-    <Header/>
-    <NavbarAdmin/>
-    <div class="main">
-      <Nuxt/>
+    <div class="app">
+        <!--  ToDo @Kacper-->
+        //implement some of this layouts https://ant.design/components/layout/
+        <AdminHeader />
+        <div class="main">
+            <Nuxt />
+        </div>
     </div>
-    <Footer/>
-  </div>
 </template>
 
 <script>
-  import NavbarAdmin from "~/components/NavbarAdmin";
-  import Header from "~/components/Header";
-  import Footer from "~/components/Footer";
+import AdminHeader from '@/components/layout/header/AdminHeader';
 
-  export default {
+export default {
     components: {
-      NavbarAdmin,
-      Header,
-      Footer
+        AdminHeader
     }
-  };
+};
+
 </script>

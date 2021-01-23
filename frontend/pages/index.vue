@@ -1,13 +1,9 @@
-<template>
-  <div>
-  </div>
-</template>
+<template></template>
 <script>
-  export default {
+export default {
     data() {
-      return {
-        current: ['mail'],
-      };
-    },
-  };
+        return {};
+    }
+};
+
 </script>
