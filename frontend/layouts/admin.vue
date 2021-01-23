@@ -1,6 +1,20 @@
 <template>
-    <div>Admin CMS Template</div>
+    <div class="app">
+        <!--  ToDo @Kacper-->
+        //implement some of this layouts https://ant.design/components/layout/
+        <AdminHeader />
+        <div class="main">
+            <Nuxt />
+        </div>
+    </div>
 </template>
+
 <script>
-export default {};
+import AdminHeader from '@/components/layout/header/AdminHeader';
+
+export default {
+    components: {
+        AdminHeader
+    }
+};
 </script>

@@ -4,7 +4,7 @@
 
 <script>
   export default {
-    name: "administration-panel"
+    name: "Footer"
   };
 </script>
 
