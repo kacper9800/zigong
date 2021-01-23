@@ -1,5 +1,4 @@
 <template>
-    <back />
 </template>
 
 <script>
