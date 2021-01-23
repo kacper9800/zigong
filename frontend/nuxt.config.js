@@ -26,10 +26,10 @@ export default {
     },
 
     // Global CSS (https://go.nuxtjs.dev/config-css)
-    css: [],
+    css: ['@/assets/design/main.scss', '@/assets/fonts/iconFonts.css'],
 
     // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
-    plugins: ['@/plugins/antd-ui'],
+    plugins: ['@/plugins/antd-ui', '@/plugins/bootstrap'],
 
     // Auto import components (https://go.nuxtjs.dev/config-components)
     components: true,
@@ -50,14 +50,15 @@ export default {
         [
             'nuxt-i18n',
             {
+                strategy: 'prefix_except_default',
                 defaultLocale: 'pl',
-                locales: ['en', 'pl', 'ru'],
-                strategy: 'no_prefix',
+                locales: [process.env.APP_LOCALE || 'pl', 'en', 'ru'],
+
                 vueI18n: {
                     fallbackLocale: 'pl',
                     messages: {
-                        en: enLocale,
                         pl: plLocale,
+                        en: enLocale,
                         ru: ruLocale
                     }
                 }

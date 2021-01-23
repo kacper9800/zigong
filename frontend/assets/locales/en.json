@@ -1,8 +1,19 @@
 {
   "about": {
-    "pageHeader": "About us"
+    "pageHeader": "About Us"
   },
-  "administrationPanel": {
-    "pageHeader": "Administration panel"
+  "global": {
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "email": "Adress e-mail",
+    "phone": "Phone",
+    "firstNameAndLastName": "First name and last name",
+    "send": "Send"
+  },
+  "contact": {
+    "heading": "Ask Us About Our Products and Services",
+    "tip": "Contact us using the form below or give us a call at one of our 2 locations in the US. We will respond promptly. Thank you for your interest in Zigong International.",
+    "messageSubject": "Topis of your message",
+    "meaasge": "Your message"
   }
 }
