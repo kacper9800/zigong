@@ -1,29 +1,69 @@
 <template>
-    <a-form-model ref="ruleForm" :model="formData" v-bind="layout">
-        <a-form-model-item has-feedback label="Email" prop="email">
-            <a-input v-model="formData.email" />
-        </a-form-model-item>
-        <a-form-model-item has-feedback label="Password" prop="pass">
-            <a-input
-                v-model="formData.password"
-                type="password"
-                autocomplete="off"
-            />
-        </a-form-model-item>
+    <div class="container">
+        <section class="page-title bg-1">
+            <div class="overlay"></div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="block text-center">
+                            <h1 class="text-capitalize mb-5 text-md">Login</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-        <a-form-model-item :wrapper-col="{ span: 14, offset: 4 }">
-            <a-button type="primary" @click="submitForm('ruleForm')">
-                Submit
-            </a-button>
-            <a-button style="margin-left: 10px" @click="resetForm('ruleForm')">
-                Reset
-            </a-button>
-        </a-form-model-item>
-    </a-form-model>
+        <section class="contact-form-wrap section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <form id="contact-form" class="contact__form">
+                            <div class="form-group-2 mb-4">
+                                <div class="form-group">
+                                    <input
+                                        name="email"
+                                        id="email"
+                                        type="email"
+                                        class="form-control"
+                                        placeholder="Email"
+                                        v-model="formData.email"
+                                    />
+                                </div>
+                            </div>
+                            <div class="form-group-2 mb-4">
+                                <div class="form-group">
+                                    <input
+                                        name="subject"
+                                        id="subject"
+                                        type="password"
+                                        class="form-control"
+                                        placeholder="Password"
+                                        v-model="formData.password"
+                                    />
+                                </div>
+                            </div>
+
+                            <div class="text-center">
+                                <button
+                                    type="button"
+                                    class="btn btn-main btn-round-full"
+                                    @click="submitForm"
+                                >
+                                    LogIn
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
 </template>
 
 <script>
 export default {
+    middleware: 'user',
+
     data() {
         return {
             formData: {
@@ -37,7 +77,7 @@ export default {
         };
     },
     methods: {
-        async submitForm(formName) {
+        async submitForm() {
             try {
                 const { data: user } = await this.$auth.loginWith('local', {
                     data: {
@@ -48,9 +88,6 @@ export default {
             } catch (e) {
                 console.error(e);
             }
-        },
-        resetForm(formName) {
-            this.$refs[formName].resetFields();
         }
     }
 };
