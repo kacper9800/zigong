@@ -2,7 +2,7 @@
 
 <script>
 export default {
-    name: 'join-us'
+  name: 'join-us'
 };
 </script>
 
