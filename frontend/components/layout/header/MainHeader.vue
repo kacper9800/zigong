@@ -18,9 +18,9 @@
                             </a>
                             <nuxt-link
                                 v-for="locale in availableLocales"
-                                :key="locale"
-                                :to="switchLocalePath(locale)"
-                                >{{ locale }}
+                                :key="locale.name"
+                                :to="switchLocalePath(locale.path)"
+                                >{{ locale.name }}
                             </nuxt-link>
                         </div>
                     </div>
@@ -33,7 +33,7 @@
             style="background-color: #254b8b"
         >
             <div class="container">
-                <nuxt-link to="/" class="navbar-brand">
+                <nuxt-link to="localePath('/')" class="navbar-brand">
                     <img class="img-fluid" src="@/assets/images/logo.png" />
                 </nuxt-link>
 
@@ -54,7 +54,7 @@
                         <div v-for="page in pagesData" :key="page.name">
                             <li v-if="!page.subPages" class="nav-item active">
                                 <nuxt-link
-                                    :to="page.path"
+                                    :to="localePath(page.path)"
                                     class="nav-link dropdown-toggle"
                                     >{{ page.name }}</nuxt-link
                                 >
@@ -62,7 +62,7 @@
 
                             <li v-else class="nav-item dropdown">
                                 <nuxt-link
-                                    :to="page.path"
+                                   :to="localePath(page.path)"
                                     class="nav-link dropdown-toggle"
                                     >{{ page.name }}
                                     <i class="icofont-thin-down"></i
@@ -76,7 +76,7 @@
                                         :key="subpage.name"
                                     >
                                         <nuxt-link
-                                            :to="page.path + subpage.path"
+                                        :to="localePath(page.path + subpage.path)"
                                             class="dropdown-item"
                                         >
                                             {{ subpage.name }}</nuxt-link
@@ -107,7 +107,10 @@ export default {
 
     data() {
         return {
-            availableLocales: ['pl', 'en', 'ru'],
+            availableLocales: [
+            {name:'PL', flag:'', path:'pl'},
+            {name:'EN', flag:'', path:'en'},
+            {name:'RU', flag:'', path:'ru'}, ],
             pagesData: [
                 { path: '/', name: 'Home' },
                 {

@@ -51,8 +51,12 @@ export default {
             'nuxt-i18n',
             {
                 strategy: 'prefix_except_default',
-                defaultLocale: 'pl',
+                defaultLocale: process.env.APP_LOCALE ||'pl',
                 locales: [process.env.APP_LOCALE || 'pl', 'en', 'ru'],
+                detectBrowserLanguage: {
+                    useCookie: true,
+                    fallbackLocale: 'pl',
+                },
 
                 vueI18n: {
                     fallbackLocale: 'pl',
