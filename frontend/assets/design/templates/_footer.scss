@@ -1,28 +1,8 @@
 .footer {
-    padding-bottom: 10px;
-
-    .copyright {
-        a {
-            font-weight: 600;
-        }
-    }
-}
-
-.lh-35 {
-    line-height: 35px;
-}
-
-.logo {
-    h3 {
-        color: $primary-color;
-    }
-
-    font-weight: 600;
-    letter-spacing: 1px;
-
-    span {
-        color: $primary-color;
-    }
+    padding: 16px;
+    background-color: #254b8b;
+    color: white;
+    font-size: 12px;
 }
 
 .widget {

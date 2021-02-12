@@ -139,11 +139,64 @@
                     <div class="row justify-content-center">
                         <div class="col-lg-10">
                             <div class="section-title text-center">
-                                <p class="mb-5">
-                                    Laboriosam exercitationem molestias beatae
-                                    eos pariatur, similique, excepturi mollitia
-                                    sit perferendis maiores ratione aliquam?
-                                </p>
+                                <div class="wpb_wrapper">
+                                    <div class="wpb_wrapper">
+                                        <h2 class="title-color">Houston</h2>
+                                        <p>
+                                            16504 Aldine Westfield Rd., Bldg.
+                                            A<br />
+                                            Houston, TX 77032
+                                        </p>
+                                        <p>
+                                            <strong>phone:</strong>
+                                            <a href="">281-987-1001</a>
+                                            <strong>fax:</strong>
+                                            <a href="">281-987-1002</a>
+                                        </p>
+                                        <p>
+                                            <strong
+                                                ><a
+                                                    href="mailto:info@zim-llc.com"
+                                                    >info@zim-llc.com</a
+                                                ></strong
+                                            >
+                                        </p>
+                                    </div>
+
+                                    <div
+                                        class="wpb_text_column wpb_content_element"
+                                    >
+                                        <div class="wpb_wrapper">
+                                            <h2>Cleveland</h2>
+                                            <p>
+                                                38500 Chardon Road<br />
+                                                Willoughby Hills, OH 44094
+                                            </p>
+                                            <p>
+                                                <strong
+                                                    >phone:
+                                                    <a href="tel:440-269-8160"
+                                                        >440-269-8160</a
+                                                    >
+                                                </strong>
+                                                <strong
+                                                    >fax:
+                                                    <a href="tel:440-269-8160"
+                                                        >440-269-8174</a
+                                                    >
+                                                </strong>
+                                            </p>
+                                            <p>
+                                                <strong
+                                                    ><a
+                                                        href="mailto:info@zim-llc.com"
+                                                        >info@zim-llc.com</a
+                                                    ></strong
+                                                >
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

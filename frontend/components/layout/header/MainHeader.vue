@@ -3,7 +3,7 @@
         <div class="header-top-bar">
             <div class="container">
                 <div class="row align-items-center">
-                    <div class="col-lg-6">
+                    <div class="col">
                         <ul class="top-bar-info list-inline-item pl-0 mb-0">
                             <li class="list-inline-item">
                                 The Subsidiary of Zigong Cemented Carbide Co.,
@@ -11,7 +11,7 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="col-lg-6">
+                    <div class="col">
                         <div class="text-lg-right top-right-bar mt-2 mt-lg-0">
                             <a href="">
                                 <span>LinkedIn</span>
@@ -27,13 +27,9 @@
                 </div>
             </div>
         </div>
-        <nav
-            class="navbar navbar-expand-lg navigation"
-            id="navbar"
-            style="background-color: #254b8b"
-        >
+        <nav class="navbar navbar-expand-lg navigation" id="navbar">
             <div class="container">
-                <nuxt-link to="localePath('/')" class="navbar-brand">
+                <nuxt-link :to="localePath('/')" class="navbar-brand">
                     <img class="img-fluid" src="@/assets/images/logo.png" />
                 </nuxt-link>
 
