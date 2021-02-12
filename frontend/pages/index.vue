@@ -2,16 +2,25 @@
     <div>
         <section class="section service-2">
             <div class="container" style="margin-top: 100px">
-                <div class="carousel-wrapper">
-                    <VueSlickCarousel v-bind="slickOptions">
-                        <div
-                            v-for="image in sliderImages"
-                            :key="image"
-                            class="img-wrapper"
-                        >
-                            <img :src="`${image}`" />
-                        </div>
-                    </VueSlickCarousel>
+                <a-carousel autoplay v-if="show">
+                    <div v-for="item in carouselImages" :key="item.img">
+                        <nuxt-link :to="localePath(item.path)"
+                            ><img
+                                :src="item.img"
+                                class="img-fluid"
+                                alt="Responsive image"
+                        /></nuxt-link>
+                    </div>
+                </a-carousel>
+                <div v-else class="d-flex justify-content-center">
+                    <a-spin>
+                        <a-icon
+                            slot="indicator"
+                            type="loading"
+                            style="font-size: 50px"
+                            spin
+                        />
+                    </a-spin>
                 </div>
             </div>
         </section>
@@ -215,32 +224,41 @@ export default {
 
     data() {
         return {
-            slickOptions: {
-                dots: true,
-                dotsClass: 'slick-dots custom-dot-class',
-                edgeFriction: 0.35,
-                infinite: true,
-                speed: 500,
-                slidesToShow: 1,
-                slidesToScroll: 1,
-                autoplay: true,
-                speed: 5000,
-                autoplaySpeed: 2000
-            },
-            sliderImages: [
-                'https://zim-llc.com/wp-content/uploads/2020/06/SLIDE1.jpg',
-                'https://zim-llc.com/wp-content/uploads/2020/06/SLIDE2.jpg',
-                'https://zim-llc.com/wp-content/uploads/2020/06/SLIDE3.jpg',
-                'https://zim-llc.com/wp-content/uploads/2020/06/Slider-wmo.jpg',
-                'https://zim-llc.com/wp-content/uploads/2020/06/SLIDE5.jpg'
+            show: false,
+            carouselImages: [
+                {
+                    img:
+                        'https://zim-llc.com/wp-content/uploads/2020/06/SLIDE1.jpg',
+                    path: '/'
+                },
+                {
+                    img:
+                        'https://zim-llc.com/wp-content/uploads/2020/06/SLIDE2.jpg',
+                    path: '/'
+                },
+                {
+                    img:
+                        'https://zim-llc.com/wp-content/uploads/2020/06/SLIDE3.jpg',
+                    path: '/'
+                },
+                {
+                    img:
+                        'https://zim-llc.com/wp-content/uploads/2020/06/Slider-wmo.jpg',
+                    path: '/'
+                },
+                {
+                    img:
+                        'https://zim-llc.com/wp-content/uploads/2020/06/SLIDE5.jpg',
+                    path: '/'
+                }
             ]
         };
     },
 
-    methods: {
-        async logout() {
-            await this.$auth.logout(/* .... */);
-        }
-    }
+    mounted() {
+        this.show = true;
+    },
+
+    methods: {}
 };
 </script>

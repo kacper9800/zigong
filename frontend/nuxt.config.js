@@ -29,11 +29,7 @@ export default {
     css: ['@/assets/design/main.scss', '@/assets/fonts/iconFonts.css'],
 
     // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
-    plugins: [
-        '@/plugins/antd-ui',
-        '@/plugins/bootstrap',
-        '@/plugins/vue-slick-carousel'
-    ],
+    plugins: ['@/plugins/antd-ui', '@/plugins/bootstrap'],
 
     // Auto import components (https://go.nuxtjs.dev/config-components)
     components: true,
