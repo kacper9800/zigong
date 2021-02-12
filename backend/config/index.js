@@ -44,5 +44,18 @@ const config = {
     corsSites: env("APP_CORS_SITES", ""),
     routesWithoutBodyParser: env("APP_ROUTES_WITHOUT_BODY_PARSER", ""),
   },
+  swagger: {
+    openapi: "3.0.0",
+    info: {
+      title: env("APP_TITLE"),
+      version: env("APP_VERSION"),
+      description: env("APP_DESCRIPTION"),
+    },
+    servers: [
+      {
+        url: env("APP_URL") + "/api-docs",
+      },
+    ],
+  },
 };
 module.exports = config;

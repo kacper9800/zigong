@@ -2,7 +2,7 @@
     <div>
         <section class="section service-2">
             <div class="container" style="margin-top: 100px">
-                <a-carousel autoplay>
+                <a-carousel autoplay v-if="show">
                     <div v-for="item in carouselImages" :key="item.img">
                         <nuxt-link :to="localePath(item.path)"
                             ><img
@@ -12,6 +12,16 @@
                         /></nuxt-link>
                     </div>
                 </a-carousel>
+                <div v-else class="d-flex justify-content-center">
+                    <a-spin>
+                        <a-icon
+                            slot="indicator"
+                            type="loading"
+                            style="font-size: 50px"
+                            spin
+                        />
+                    </a-spin>
+                </div>
             </div>
         </section>
 
@@ -214,6 +224,7 @@ export default {
 
     data() {
         return {
+            show: false,
             carouselImages: [
                 {
                     img:
@@ -244,10 +255,10 @@ export default {
         };
     },
 
-    methods: {
-        async logout() {
-            await this.$auth.logout(/* .... */);
-        }
-    }
+    mounted() {
+        this.show = true;
+    },
+
+    methods: {}
 };
 </script>

@@ -1,6 +1,6 @@
 <template>
     <header class="fixed-top">
-        <div class="header-top-bar">
+        <div v-if="isVisible" class="header-top-bar">
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col">
@@ -109,6 +109,7 @@ export default {
 
     data() {
         return {
+            isVisible: true,
             availableLocales: [
                 { name: 'PL', flag: '', path: 'pl' },
                 { name: 'EN', flag: '', path: 'en' },
@@ -142,6 +143,13 @@ export default {
         };
     },
 
+    mounted() {
+        window.addEventListener('scroll', this.onScroll);
+    },
+    beforeDestroy() {
+        window.removeEventListener('scroll', this.onScroll);
+    },
+
     computed: {
         ...mapGetters({
             iaAdminUser: 'iaAdminUser'
@@ -151,6 +159,26 @@ export default {
             const { mainBanner } = this.getContent('home-page');
 
             return mainBanner;
+        }
+    },
+
+    methods: {
+        scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        },
+
+        onScroll() {
+            const currentScrollPosition =
+                window.pageYOffset || document.documentElement.scrollTop;
+
+            if (currentScrollPosition >= 100) {
+                this.isVisible = false;
+            } else {
+                this.isVisible = true;
+            }
         }
     }
 };

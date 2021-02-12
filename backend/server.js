@@ -1,7 +1,6 @@
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
-const config = require("./config");
 
 const di = require("./di");
 
@@ -19,7 +18,7 @@ app.use(express.static("./public"));
 
 const server = require("http").createServer(app);
 
-const routes = require("./routes")(di);
+const routes = require("./routes")(di, app);
 
 app.use(routes);
 
