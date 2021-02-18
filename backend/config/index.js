@@ -44,6 +44,10 @@ const config = {
     corsSites: env("APP_CORS_SITES", ""),
     routesWithoutBodyParser: env("APP_ROUTES_WITHOUT_BODY_PARSER", ""),
   },
+  imagerResizer: {
+    versions: [1440, 720, 300],
+    path: env("APP_URL") + "/public",
+  },
   swagger: {
     openapi: "3.0.0",
     info: {

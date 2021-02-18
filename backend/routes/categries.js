@@ -8,11 +8,11 @@ module.exports = (di) => {
 
   router.get("/categories", (...args) => CategoryController.index(...args));
 
-  router.get("/categories/id/:id", (...args) =>
+  router.get("/categories/id/:id", [isLoggedIn, isAdmin], (...args) =>
     CategoryController.show(...args)
   );
 
-  router.get("/categories/:slug", [isLoggedIn, isAdmin], (...args) =>
+  router.get("/categories/:slug", (...args) =>
     CategoryController.showBySlug(...args)
   );
 

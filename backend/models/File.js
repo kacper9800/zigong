@@ -7,17 +7,23 @@ module.exports = (sequelize, Sequelize) => {
         autoIncrement: true,
         primaryKey: true,
       },
-      coverImage: {
+      thumbnail: {
         type: Sequelize.STRING,
       },
       name: {
         type: Sequelize.STRING,
+        allowNull: false,
       },
       description: {
         type: Sequelize.STRING,
       },
-      fileName: {
+      file: {
         type: Sequelize.STRING,
+        allowNull: false,
+      },
+      mimetype: {
+        type: Sequelize.STRING,
+        allowNull: false,
       },
     },
     {}

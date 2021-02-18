@@ -1,34 +1,27 @@
 const HttpStatuses = require("http-status-codes");
 const { Op } = require("sequelize");
-const { Language, File } = require("../models");
+const { File } = require("../models");
 const slugGenerator = require("../helpers/slug");
 
 class CategoryController {
-  constructor(categoryRepository, categoryTranslationRepository) {
+  constructor(
+    categoryRepository,
+    categoryTranslationRepository,
+    languageRepository
+  ) {
     this.categoryRepository = categoryRepository;
     this.categoryTranslationRepository = categoryTranslationRepository;
+    this.languageRepository = languageRepository;
   }
-
-  // @todo - find and fix bugs
 
   async index(req, res) {
     const { lng } = req.query;
 
-    const where = {};
+    const languageId = await this.languageRepository.findLanguageId(lng);
 
-    if (!lng) {
-      where.code = Language.DEFAULT;
-    } else {
-      where.code = lng;
-    }
-
-    const language = await Language.findOne({ where });
-
-    if (!language) {
+    if (!languageId) {
       return res.sendStatus(HttpStatuses.NOT_FOUND);
     }
-
-    const { id: languageId } = language;
 
     const category = await this.categoryTranslationRepository.findAll({
       where: { languageId },
@@ -39,10 +32,16 @@ class CategoryController {
         {
           association: "category",
           attributes: {
-            exclude: ["homePageCoverImageId", "coverImageId"],
+            exclude: ["id", "homePageCoverImageId", "coverImageId"],
           },
           include: [{ model: File, as: "coverImage" }],
           include: [{ model: File, as: "homePageCoverImage" }],
+        },
+        {
+          association: "language",
+          attributes: {
+            exclude: ["id"],
+          },
         },
       ],
     });
@@ -54,21 +53,11 @@ class CategoryController {
     const { id } = req.params;
     const { lng } = req.query;
 
-    const where = {};
+    const languageId = await this.languageRepository.findLanguageId(lng);
 
-    if (!lng) {
-      where.code = Language.DEFAULT;
-    } else {
-      where.code = lng;
-    }
-
-    const language = await Language.findOne({ where });
-
-    if (!language) {
+    if (!languageId) {
       return res.sendStatus(HttpStatuses.NOT_FOUND);
     }
-
-    const { id: languageId } = language;
 
     const categoryTranslation = await this.categoryTranslationRepository.findOne(
       {
@@ -98,21 +87,11 @@ class CategoryController {
     const { slug } = req.params;
     const { lng } = req.query;
 
-    const where = {};
+    const languageId = await this.languageRepository.findLanguageId(lng);
 
-    if (!lng) {
-      where.code = Language.DEFAULT;
-    } else {
-      where.code = lng;
-    }
-
-    const language = await Language.findOne({ where });
-
-    if (!language) {
+    if (!languageId) {
       return res.sendStatus(HttpStatuses.NOT_FOUND);
     }
-
-    const { id: languageId } = language;
 
     const category = await this.categoryRepository.findOne({
       where: { slug },
@@ -128,8 +107,16 @@ class CategoryController {
       {
         where: { languageId, categoryId },
         attributes: {
-          exclude: ["id"],
+          exclude: ["id", "languageId"],
         },
+        include: [
+          {
+            association: "language",
+            attributes: {
+              exclude: ["id"],
+            },
+          },
+        ],
       }
     );
 
@@ -141,13 +128,7 @@ class CategoryController {
   }
 
   async create(req, res) {
-    const {
-      categoryId,
-      name,
-      homePageDescription,
-      description,
-      homePageCoverImageId,
-    } = req.body;
+    const { categoryId, name } = req.body;
     const { id: languageId } = req.language;
 
     const slug = slugGenerator(name);
@@ -157,10 +138,11 @@ class CategoryController {
     });
 
     if (!existCategory) {
+      req.body.slug = slug;
+      req.body.id = categoryId;
+
       existCategory = await this.categoryRepository.create({
-        slug,
-        id: categoryId,
-        homePageCoverImageId,
+        ...req.body,
       });
     }
 
@@ -170,13 +152,12 @@ class CategoryController {
       }
     );
 
+    req.body.categoryId = existCategory.id;
+    req.body.languageId = languageId;
+
     if (!categoryTranslation) {
       const category = await this.categoryTranslationRepository.create({
-        categoryId: existCategory.id,
-        name,
-        homePageDescription,
-        description,
-        languageId,
+        ...req.body,
       });
 
       return res.send(category);
@@ -184,6 +165,8 @@ class CategoryController {
       return res.sendStatus(HttpStatuses.NOT_ACCEPTABLE);
     }
   }
+
+  // @todo - update method
 
   async delete(req, res) {
     const { id } = req.params;

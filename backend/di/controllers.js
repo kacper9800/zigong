@@ -29,5 +29,6 @@ module.exports = (container) => {
   container
     .register("controller.category", CategoryController)
     .addArgument(new Reference("repositories.category"))
-    .addArgument(new Reference("repositories.categoryTranslation"));
+    .addArgument(new Reference("repositories.categoryTranslation"))
+    .addArgument(new Reference("repositories.language"));
 };

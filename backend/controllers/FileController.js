@@ -1,6 +1,5 @@
 const HttpStatuses = require("http-status-codes");
-const bcrypt = require("bcryptjs");
-
+var fs = require("fs");
 class FileController {
   constructor(fileRepository) {
     this.fileRepository = fileRepository;
@@ -45,19 +44,55 @@ class FileController {
     return res.send(file);
   }
 
-  //   @todo CREATE(POST) method
   async create(req, res) {
-    // const { files } = req.files;
+    if (!req.files) {
+      return res.status(400).send("filesInput is required");
+    }
 
-    const file = await this.fileRepository.create({
-      name: "dddd",
-      descriptin: "wrfregr",
-      fileName: "wfowfhiew",
-    });
+    var dir = "./public";
+
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir);
+      fs.mkdirSync(dir + "/thumbnails");
+      fs.mkdirSync(dir + "/s1440");
+      fs.mkdirSync(dir + "/s720");
+      fs.mkdirSync(dir + "/files");
+    }
+
+    const filesInput = req.files.filesInput;
+
+    if (!filesInput) {
+      return res.sendStatus(HttpStatuses.NOT_FOUND);
+    }
+
+    if (filesInput.name) {
+      const uploadedFile = await this.fileRepository.uploadFile(filesInput);
+
+      return res.send(uploadedFile);
+    }
+
+    const uploadedFiles = await Promise.all(
+      filesInput.map(async (file) => {
+        return await this.fileRepository.uploadFile(file);
+      })
+    );
+
+    return res.send(uploadedFiles);
+  }
+
+  async update(req, res) {
+    const { id } = req.params;
+
+    const file = await this.fileRepository.findOne({ where: { id } });
+
+    if (!file) {
+      return res.sendStatus(HttpStatuses.NOT_FOUND);
+    }
+
+    file.update({ ...req.body });
 
     return res.send(file);
   }
-  //   @todo UPDATE(PUT) method
 
   async delete(req, res) {
     const { id } = req.params;

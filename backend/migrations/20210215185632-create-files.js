@@ -8,17 +8,24 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      coverImage: {
+      thumbnail: {
         type: Sequelize.STRING,
+        allowNull: false,
       },
       name: {
         type: Sequelize.STRING,
+        allowNull: false,
       },
       description: {
         type: Sequelize.STRING,
       },
-      fileName: {
+      file: {
         type: Sequelize.STRING,
+        allowNull: false,
+      },
+      mimetype: {
+        type: Sequelize.STRING,
+        allowNull: false,
       },
       createdAt: {
         allowNull: false,
