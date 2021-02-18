@@ -56,6 +56,7 @@ class FileRepository extends AbstractRepository {
           data.pipe(fs.createWriteStream(`${dir}/thumbnails/${thumbnail}`));
         })
         .catch((err) => {
+          console.error(err);
           return false;
         });
     } else {
