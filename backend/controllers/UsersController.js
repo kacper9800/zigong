@@ -45,6 +45,7 @@ class UsersController {
     if (!user) {
       return res.sendStatus(HttpStatuses.NOT_FOUND);
     }
+
     return res.send(user);
   }
 
