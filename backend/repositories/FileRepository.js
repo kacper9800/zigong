@@ -51,18 +51,13 @@ class FileRepository extends AbstractRepository {
 
       const pdfBuffer = fs.readFileSync(`${dir}/files/${fileName}`);
 
-      const data = await pdf(pdfBuffer, {
-        resize: {
-          width: 793,
-          height: 1122,
-        },
-      });
-
-      if (!data) {
-        return false;
-      }
-
-      data.pipe(fs.createWriteStream(`${dir}/thumbnails/${thumbnail}`));
+      pdf(pdfBuffer)
+        .then((data) => {
+          data.pipe(fs.createWriteStream(`${dir}/thumbnails/${thumbnail}`));
+        })
+        .catch((err) => {
+          return false;
+        });
     } else {
       versions.map(async (size) => {
         await sharp(file.data)
