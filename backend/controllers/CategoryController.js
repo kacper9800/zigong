@@ -34,8 +34,10 @@ class CategoryController {
           attributes: {
             exclude: ["id", "homePageCoverImageId", "coverImageId"],
           },
-          include: [{ model: File, as: "coverImage" }],
-          include: [{ model: File, as: "homePageCoverImage" }],
+          include: [
+            { model: File, as: "coverImage" },
+            { model: File, as: "homePageCoverImage" },
+          ],
         },
         {
           association: "language",
