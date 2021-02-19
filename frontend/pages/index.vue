@@ -3,10 +3,13 @@
         <section class="section service-2">
             <div class="container" style="margin-top: 100px">
                 <a-carousel autoplay v-if="show">
-                    <div v-for="item in carouselImages" :key="item.img">
-                        <nuxt-link :to="localePath(item.path)"
+                    <div
+                        v-for="item in content.promotionalImages"
+                        :key="item.file"
+                    >
+                        <nuxt-link :to="localePath(item.redirectTo)"
                             ><img
-                                :src="item.img"
+                                :src="baseUrl + '/s1440/' + item.file"
                                 class="img-fluid"
                                 alt="Responsive image"
                         /></nuxt-link>
@@ -27,68 +30,31 @@
 
         <section>
             <div class="container">
-                <div class="row" v-for="item in 2" :key="item">
-                    <div class="col">
+                <div class="row">
+                    <div
+                        v-for="item in categories"
+                        :key="item.categorieId"
+                        class="col-md-4"
+                    >
                         <div class="cube">
                             <div class="cube__face cube__face--front">
                                 <div class="vckit-trcflp-icon">
                                     <img
-                                        src="https://zim-llc.com/wp-content/uploads/2020/06/powder-1.png"
+                                        :src="
+                                            baseUrl +
+                                            '/thumbnails/' +
+                                            item.category.homePageCoverImage
+                                                .thumbnail
+                                        "
                                         width="auto"
                                         height="110px"
                                     />
                                 </div>
                                 <div style="font-size: 17px; color: #244a8b">
-                                    Powders
+                                    {{ item.name }}
                                 </div>
                                 <div style="font-size: 13px; color: #666666">
-                                    Powder products – for cemented carbide
-                                    manufacturing, military equipment,
-                                    electronic and medical industries.
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col">
-                        <div class="cube">
-                            <div class="cube__face cube__face--front">
-                                <div class="vckit-trcflp-icon">
-                                    <img
-                                        src="https://zim-llc.com/wp-content/uploads/2020/07/2-cemented-carbides-home-page.png"
-                                        width="auto"
-                                        height="110px"
-                                    />
-                                </div>
-                                <div style="font-size: 17px; color: #244a8b">
-                                    Cemented
-                                </div>
-                                <div style="font-size: 13px; color: #666666">
-                                    Cemented carbides, tungsten and molybdenum
-                                    formulated products, powders and finished
-                                    tools.
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col">
-                        <div class="cube">
-                            <div class="cube__face cube__face--front">
-                                <div class="vckit-trcflp-icon">
-                                    <img
-                                        src="https://zim-llc.com/wp-content/uploads/2020/06/powder-1.png"
-                                        width="auto"
-                                        height="110px"
-                                    />
-                                </div>
-                                <div style="font-size: 17px; color: #244a8b">
-                                    Powders
-                                </div>
-                                <div style="font-size: 13px; color: #666666">
-                                    Powder products – for cemented carbide
-                                    manufacturing, military equipment,
-                                    electronic and medical industries.
+                                    {{ item.homePageDescription }}
                                 </div>
                             </div>
                         </div>
@@ -99,30 +65,9 @@
 
         <section class="section service-2">
             <div class="container">
-                <h1 class="title-color">Zigong International Marketing</h1>
+                <h1 class="title-color">{{ content.zim.title }}</h1>
                 <div class="wpb_wrapper">
-                    <p>
-                        <strong>Zigong International Marketing (ZIM)</strong>
-                        was established by Zigong Cemented Carbide Co., LTD
-                        (ZGCC) in 2003 for the purpose of distributing Cemented
-                        Carbide, Tungsten and Molybdenum
-                        <strong
-                            ><a href="https://zim-llc.com/products/"
-                                >Products</a
-                            ></strong
-                        >
-                        outside The People’s Republic of China. Established in
-                        1965, we employ over 3,000 people at our facilities in
-                        China. ZGCC and ZIM distribute more than 2,000 metric
-                        tons of different products across a span of over 40
-                        countries. ZGCC is one of the largest producers of
-                        Cemented Carbide, Tungsten and Molybdenum products in
-                        China. The company is in the top ten of the world as a
-                        producer of these products. With over 50 years of
-                        experience, we have built complete production lines from
-                        raw materials to downstream products as well as have
-                        provided our customers with a full range of materials.
-                    </p>
+                    <div v-html="content.zim.html" />
                 </div>
                 <br />
                 <hr />
@@ -134,31 +79,16 @@
                 <div class="row">
                     <div class="col-md-6 col-sm-12">
                         <h2 class="title-color">
-                            We are an ISO certified company
+                            {{ content.iso.title }}
                         </h2>
-                        <p>
-                            <strong>ZGCC</strong> is an
-                            <strong
-                                ><a
-                                    href="https://zim-llc.com/about/quality-certification/"
-                                    >ISO Certified company</a
-                                ></strong
-                            >&nbsp;with ISO 9001, ISO 14001 and OHSAS-18001
-                            certifications, providing quality control systems to
-                            serve our customers with quality products and
-                            services.
-                        </p>
+                        <div v-html="content.iso.html" />
                     </div>
                     <div class="col-md-6 col-sm-12">
-                        <h2 class="title-color">Locations</h2>
+                        <h2 class="title-color">
+                            {{ content.iso.locations.title }}
+                        </h2>
 
-                        <p>
-                            ZGCC has two offices in the Unites States of
-                            America. One office is in Houston, Texas, and the
-                            other in Willoughby Hills, Ohio. Both locations have
-                            warehouses that have stock to provide customers with
-                            timely delivery service.
-                        </p>
+                        <div v-html="content.iso.locations.html" />
                     </div>
                 </div>
             </div>
@@ -167,23 +97,23 @@
         <section class="section about">
             <div class="container">
                 <div class="row align-items-center">
-                    <div class="col">
+                    <div class="col-md-6 col-sm-12">
                         <div class="embed-responsive embed-responsive-16by9">
                             <iframe
                                 class="embed-responsive-item"
-                                src="https://www.youtube.com/embed/41VsP5hgFFs?controls=0"
+                                :src="content.iso.youtube"
                                 frameborder="0"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                             />
                         </div>
                         <div class="section" />
                         <div class="section" />
+                        <div class="section" />
                     </div>
 
-                    <div class="col-lg-4">
-                        <div class="about-content pl-4 mt-4 mt-lg-0">
+                    <div class="col-md-6 col-sm-12">
+                        <div>
                             <h4 class="title-color">
-                                Zigong International Marketing NEWS
+                                {{ content.news.title }}
                             </h4>
                             <img
                                 src="https://zim-llc.com/wp-content/uploads/2020/10/zigong-texas-1.png"
@@ -192,24 +122,7 @@
                             />
                             <br />
                             <br />
-                            <h3 class="title-color">Houston Location</h3>
-                            <p>Dear Clients,</p>
-                            <p>We have moved! Our new address is:</p>
-                            <p>
-                                Zigong International Marketing<br />
-                                16504 Aldine Westfield Rd., Bldg. A<br />
-                                Houston, TX 77032
-                            </p>
-
-                            <p>
-                                Thank you for your business. Please feel free to
-                                <strong
-                                    ><a href="https://zim-llc.com/contact-us/"
-                                        >contact us</a
-                                    ></strong
-                                >
-                                with any questions.
-                            </p>
+                            <div v-html="content.news.html" />
                         </div>
                     </div>
                 </div>
@@ -219,8 +132,26 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+import config from '@/config';
+
 export default {
     name: 'home',
+
+    async asyncData({ app, store }) {
+        const { code } = app.i18n.localeProperties;
+        try {
+            await store.dispatch('category/getData', {
+                lng: code
+            });
+
+            await store.dispatch('content/getContentBySlug', {
+                params: { lng: code, slug: 'home-page' }
+            });
+        } catch (error) {
+            console.error(error);
+        }
+    },
 
     data() {
         return {
@@ -255,10 +186,29 @@ export default {
         };
     },
 
+    computed: {
+        ...mapGetters({
+            categories: 'category/getCategories',
+            content: 'content/getContent'
+        }),
+
+        baseUrl() {
+            return config.mediaBaseUrl;
+        },
+
+        availableLocales() {
+            return this.$i18n.locale;
+        }
+    },
+
     mounted() {
         this.show = true;
     },
 
-    methods: {}
+    methods: {
+        // ...mapActions({
+        //      postContactForm: 'contact/postContactForm'
+        // })
+    }
 };
 </script>

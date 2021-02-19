@@ -6,6 +6,8 @@ const LanguageRepository = require("../repositories/LanguageRepository");
 const FileRepository = require("../repositories/FileRepository");
 const CategoryRepository = require("../repositories/CategoryRepository");
 const CategoryTranslationRepository = require("../repositories/CategoryTranslationRepository");
+const ContentRepository = require("../repositories/ContentRepository");
+const ContentTranslationRepository = require("../repositories/ContentTranslationRepository");
 
 module.exports = (container) => {
   container.register("repositories.user", UserRepository);
@@ -25,5 +27,12 @@ module.exports = (container) => {
   container.register(
     "repositories.categoryTranslation",
     CategoryTranslationRepository
+  );
+
+  container.register("repositories.content", ContentRepository);
+
+  container.register(
+    "repositories.contentTranslation",
+    ContentTranslationRepository
   );
 };
