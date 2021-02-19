@@ -155,34 +155,7 @@ export default {
 
     data() {
         return {
-            show: false,
-            carouselImages: [
-                {
-                    img:
-                        'https://zim-llc.com/wp-content/uploads/2020/06/SLIDE1.jpg',
-                    path: '/'
-                },
-                {
-                    img:
-                        'https://zim-llc.com/wp-content/uploads/2020/06/SLIDE2.jpg',
-                    path: '/'
-                },
-                {
-                    img:
-                        'https://zim-llc.com/wp-content/uploads/2020/06/SLIDE3.jpg',
-                    path: '/'
-                },
-                {
-                    img:
-                        'https://zim-llc.com/wp-content/uploads/2020/06/Slider-wmo.jpg',
-                    path: '/'
-                },
-                {
-                    img:
-                        'https://zim-llc.com/wp-content/uploads/2020/06/SLIDE5.jpg',
-                    path: '/'
-                }
-            ]
+            show: false
         };
     },
 
@@ -205,10 +178,6 @@ export default {
         this.show = true;
     },
 
-    methods: {
-        // ...mapActions({
-        //      postContactForm: 'contact/postContactForm'
-        // })
-    }
+    methods: {}
 };
 </script>
