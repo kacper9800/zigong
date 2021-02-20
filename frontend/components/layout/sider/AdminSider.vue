@@ -8,7 +8,10 @@
             <a-sub-menu v-for="page in pages" :key="page.name">
                 <span slot="title"
                     ><a-icon :type="page.icon" />
-                    <nuxt-link :to="mainPath + page.path">
+                    <nuxt-link
+                        :to="mainPath + page.path"
+                        :style="{ color: '#111111' }"
+                    >
                         {{ page.name }}
                     </nuxt-link>
                 </span>
@@ -48,28 +51,19 @@ export default {
                     name: 'About',
                     icon: 'appstore',
                     subPages: [
-                        { path: '/powders', name: 'Powders' },
-                        { path: 'cemented-carbides', name: 'Cemented Carbides' }
-                    ]
-                },
-                {
-                    path: '/products',
-                    name: 'Products',
-                    icon: 'appstore',
-                    subPages: [
-                        { path: '/powders', name: 'Powders' },
+                        { path: '/add', name: 'Powders' },
                         { path: 'cemented-carbides', name: 'Cemented Carbides' }
                     ]
                 }
             ],
             singlePages: [
-                { path: '/articles', name: 'Articles', icon: 'file-text' },
-                { path: '/resources', name: 'Resources', icon: 'file' },
+                { path: '/categories', name: 'Categories', icon: 'container' },
+                { path: '/products', name: 'Products', icon: 'appstore' },
+                { path: '/files', name: 'Files', icon: 'file' },
                 { path: '/users', name: 'Users', icon: 'team' }
             ]
         };
     }
 };
 </script>
-
 <style scoped></style>

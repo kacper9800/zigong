@@ -12,12 +12,47 @@
     "email": "Электронный адрес",
     "phone": "телефон",
     "firstNameAndLastName": "Имя и фамилия",
-    "send": "послать"
+    "actions": "акции",
+    "buttons": {
+      "addNew": "Добавить новый",
+      "send": "послать",
+      "save": "спасти",
+      "cancel": "Аннулироватьz",
+      "edit": "отредактировать",
+      "next": "следующий ",
+      "previous": "предыдущий"
+    }
   },
   "contact": {
     "heading": "Спросите нас о наших продуктах и ​​услугах",
     "tip": "Свяжитесь с нами, используя форму ниже, или позвоните нам из одного из двух офисов в США. Мы ответим оперативно. Благодарим вас за интерес к Zigong International.",
     "messageSubject": "Тема",
     "meaasge": "Твое сообщение"
+  },
+  "categories": {
+    "header": "Категории товаров",
+    "name": "Название категории",
+    "description": "Oписание",
+    "amountOfProducts": "Количество продуктов",
+    "modal": {
+      "addNewHeader": "добавление новой категории",
+      "name": "Nazwa kategorii",
+      "namePlaceholder": "Wpisz nazwę kategorii",
+      "description": "Opis kategorii",
+      "descriptionPlaceholder": "Wpisz opis kategorii",
+      "homePageDescription": "Opis na stronie głównej",
+      "homePageDescriptionPlaceholder": "Wpisz opis ze strony głównej",
+      "photosDropdown": {
+        "chooseOption": "Wybierz opcje",
+        "existingPhoto": "Istniejące zdjęcie",
+        "newPhoto": "Nowe zdjęcie z dysku"
+      },
+      "photoUpload": {
+        "choosePhoto": "Wybierz zdjęcie"
+      }
+    }
+  },
+  "products": {
+    "name": "Наименование товара"
   }
 }

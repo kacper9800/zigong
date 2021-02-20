@@ -2,27 +2,67 @@
 
 export const defaultState = () => {
     return {
-        categories: {}
+        categories: [],
+        category: {}
     };
 };
 
 export const state = () => defaultState();
 
 export const getters = {
-    getCategories: state => state.categories
+    getCategories: state => state.categories,
+    getCategoryById: state => state.category,
+    getCategoryBySlug: state => state.category,
+    getSavedCategory: state => state.category
 };
 
 export const mutations = {
-    SET_CATEGORIES(state, categories) {
-        state.categories = categories;
+    SET_CATEGORIES(state, data) {
+        state.categories = data;
+    },
+
+    SET_CATEGORY(state, data) {
+        state.category = data;
     }
 };
 
 export const actions = {
-    async getData({ commit }, lng) {
+    async getAllCategories({ commit }, lng) {
         const { data } = await this.$axios.get(`/categories`, { params: lng });
 
         commit('SET_CATEGORIES', data);
+
+        return data;
+    },
+
+    async getOneById({ commit }, { params }) {
+        const { lng, id } = params;
+
+        const { data } = await this.$axios.get(`/categories/id/${id}`, {
+            params: { lng }
+        });
+
+        commit('SET_CATEGORY', data);
+
+        return data;
+    },
+
+    async getOneBySlug({ commit }, { params }) {
+        const { lng, slug } = params;
+
+        const { data } = await this.$axios.get(`/categories/${slug}`, {
+            params: { lng }
+        });
+
+        commit('SET_CATEGORY', data);
+
+        return data;
+    },
+
+    async createOne({ commit }, { category }) {
+        const { data } = await this.$axios.post('categories', category);
+
+        commit('SET_CATEGORY', data);
 
         return data;
     }

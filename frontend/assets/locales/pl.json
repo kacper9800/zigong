@@ -12,12 +12,44 @@
     "email": "Adres e-mail",
     "phone": "Telefon",
     "firstNameAndLastName": "Imię i Nazwisko",
-    "send": "Wyślij"
+    "actions": "Akcje",
+    "buttons": {
+      "addNew": "Dodaj nowy",
+      "send": "Wyślij",
+      "cancel": "Anuluj",
+      "save": "Zapisz",
+      "edit": "Edytuj",
+      "next": "Poprzednia",
+      "previous": "Następna"
+    }
   },
   "contact": {
     "heading": "Zapytaj nas o nasze produkty i usługi",
     "tip": "Skontaktuj się z nami za pomocą poniższego formularza lub zadzwoń do nas w jednej z naszych 2 lokalizacji w USA. Odpowiemy niezwłocznie. Dziękujemy za zainteresowanie Zigong International.",
     "messageSubject": "Temat",
     "meaasge": "Twoja wiadomość"
+  },
+  "categories": {
+    "header": "Kategorie produktów",
+    "name": "Nazwa kategorii",
+    "description": "Opis",
+    "amountOfProducts": "Liczba produktów",
+    "modal": {
+      "addNewHeader": "Dodawanie nowej kategorii",
+      "name": "Nazwa kategorii",
+      "description": "Opis kategorii",
+      "homePageDescription": "Opis na stronie głównej",
+      "photosDropdown": {
+        "chooseOption": "Wybierz opcje",
+        "existingPhoto": "Istniejące zdjęcie",
+        "newPhoto": "Nowe zdjęcie z dysku"
+      },
+      "photoUpload": {
+        "choosePhoto": "Wybierz zdjęcie"
+      }
+    }
+  },
+  "products": {
+    "name": "Nazwa produktu"
   }
 }
