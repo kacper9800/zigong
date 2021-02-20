@@ -9,15 +9,47 @@
   "global": {
     "firstName": "First Name",
     "lastName": "Last Name",
-    "email": "Adress e-mail",
-    "phone": "Phone",
+    "email": "E-mail address",
+    "phone": "Phone number",
     "firstNameAndLastName": "First name and last name",
-    "send": "Send"
+    "actions": "Actions",
+    "buttons": {
+      "addNew": "Add new",
+      "send": "Send",
+      "cancel": "Cancel",
+      "save": "Save",
+      "edit": "Edit",
+      "next": "Next",
+      "previous": "Previous"
+    }
   },
   "contact": {
     "heading": "Ask Us About Our Products and Services",
     "tip": "Contact us using the form below or give us a call at one of our 2 locations in the US. We will respond promptly. Thank you for your interest in Zigong International.",
     "messageSubject": "Topis of your message",
     "meaasge": "Your message"
+  },
+  "categories": {
+    "header": "Products categories",
+    "name": "Category name",
+    "description": "Description",
+    "amountOfProducts": "Amount of products",
+    "modal": {
+      "addNewHeader": "Adding new category",
+      "name": "Category name",
+      "description": "Category description",
+      "homePageDescription": "Description at home page",
+      "photosDropdown": {
+        "chooseOption": "Choose option",
+        "existingPhoto": "Existing photo",
+        "newPhoto": "New photo from disc"
+      },
+      "photoUpload": {
+        "choosePhoto": "Choose photo"
+      }
+    }
+  },
+  "products": {
+    "name": "Product name"
   }
 }
