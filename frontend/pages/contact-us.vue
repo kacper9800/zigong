@@ -35,7 +35,6 @@
                                     id="contact-form"
                                     class="contact__form"
                                     method="post"
-                                    action="mail.php"
                                 >
                                     <div class="row">
                                         <div class="col-12">
@@ -117,7 +116,7 @@
                                             class="form-control"
                                             rows="8"
                                             :placeholder="$t('contact.meaasge')"
-                                        ></textarea>
+                                        />
                                     </div>
 
                                     <div class="text-center">
@@ -125,7 +124,7 @@
                                             class="btn btn-main btn-round-full"
                                             name="submit"
                                             type="submit"
-                                            :value="$t('global.send')"
+                                            :value="$t('global.buttons.send')"
                                         />
                                     </div>
                                 </form>
@@ -138,22 +137,26 @@
                 <section class="contact-form-wrap section">
                     <div class="row justify-content-center">
                         <div class="col-lg-10">
-                            <div class="section-title text-center">
+                            <div class="section-title">
                                 <div class="wpb_wrapper">
                                     <div class="wpb_wrapper">
-                                        <h2 class="title-color">Houston</h2>
-                                        <p>
-                                            16504 Aldine Westfield Rd., Bldg.
-                                            A<br />
+                                        <h2 class="title-color text-center">
+                                            Houston
+                                        </h2>
+                                        <p class="text-justify">
+                                            16504 Aldine Westfield Rd., Bldg. A
                                             Houston, TX 77032
                                         </p>
-                                        <p>
+                                        <p class="text-center">
                                             <strong>phone:</strong>
                                             <a href="">281-987-1001</a>
+                                        </p>
+                                        <p class="text-center">
                                             <strong>fax:</strong>
                                             <a href="">281-987-1002</a>
                                         </p>
-                                        <p>
+
+                                        <p class="text-center">
                                             <strong
                                                 ><a
                                                     href="mailto:info@zim-llc.com"
@@ -167,18 +170,23 @@
                                         class="wpb_text_column wpb_content_element"
                                     >
                                         <div class="wpb_wrapper">
-                                            <h2>Cleveland</h2>
-                                            <p>
-                                                38500 Chardon Road<br />
-                                                Willoughby Hills, OH 44094
+                                            <h2 class="text-center">
+                                                Cleveland
+                                            </h2>
+                                            <p class="text-justify">
+                                                38500 Chardon Road Willoughby
+                                                Hills, OH 44094
                                             </p>
-                                            <p>
+                                            <p class="text-center">
                                                 <strong
                                                     >phone:
                                                     <a href="tel:440-269-8160"
                                                         >440-269-8160</a
                                                     >
                                                 </strong>
+                                            </p>
+
+                                            <p class="text-center">
                                                 <strong
                                                     >fax:
                                                     <a href="tel:440-269-8160"
@@ -186,7 +194,7 @@
                                                     >
                                                 </strong>
                                             </p>
-                                            <p>
+                                            <p class="text-center">
                                                 <strong
                                                     ><a
                                                         href="mailto:info@zim-llc.com"

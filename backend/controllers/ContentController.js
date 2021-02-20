@@ -11,10 +11,6 @@ class ContentController {
     this.languageRepository = languageRepository;
   }
 
-  async index(req, res) {
-    return res.status(HttpStatuses.OK).json({});
-  }
-
   async show(req, res) {
     const { slug } = req.params;
     const { lng } = req.query;
@@ -42,6 +38,9 @@ class ContentController {
     }
 
     const parsedData = JSON.parse(contentTranslation.value);
+
+    parsedData.slug = slug;
+    parsedData.lng = lng;
 
     return res.send(parsedData);
   }

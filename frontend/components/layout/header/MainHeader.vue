@@ -111,8 +111,8 @@ export default {
         return {
             isVisible: true,
             availableLocales: [
-                { name: 'PL', flag: '', path: 'pl' },
                 { name: 'EN', flag: '', path: 'en' },
+                { name: 'PL', flag: '', path: 'pl' },
                 { name: 'RU', flag: '', path: 'ru' }
             ],
             pagesData: [

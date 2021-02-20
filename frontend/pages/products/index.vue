@@ -5,36 +5,8 @@
                 <div class="row">
                     <div class="col-md-8">
                         <div class="wpb_wrapper">
-                            <h1 class="title-color">Products</h1>
-                            <h6 class="title-color">
-                                <em
-                                    ><br />
-                                    ZGCC is one of the largest producers of
-                                    Cemented Carbide, Tungsten and Molybdenum
-                                    products in China. The company is in the top
-                                    ten of the world as a producer of these
-                                    products.<br />
-                                </em>
-                            </h6>
-                            <p>
-                                With over 50 years of experience we have built
-                                complete production lines from raw materials to
-                                downstream products as well as have provided our
-                                customers with a full range of materials.
-                            </p>
-                            <p>
-                                <em
-                                    ><strong
-                                        >Feel free to
-                                        <nuxt-link
-                                            :to="localePath('contact-us')"
-                                            >contact us</nuxt-link
-                                        >
-                                        for more information on the products
-                                        below.</strong
-                                    ></em
-                                >
-                            </p>
+                            <h1 class="title-color">{{ content.title }}</h1>
+                            <div v-html="content.html" />
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -58,14 +30,55 @@
                         </div>
                     </div>
                 </div>
-                <div class="row"></div>
+                <div class="row">{{ content }}</div>
             </div>
         </section>
     </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+import config from '@/config';
+
 export default {
-    name: 'products'
+    async asyncData({ app, store, redirect }) {
+        const { code } = app.i18n.localeProperties;
+        try {
+            await store.dispatch('content/getContentBySlug', {
+                params: { lng: code, slug: 'products-page' }
+            });
+        } catch (error) {
+            console.error(error);
+
+            return redirect(`/${code}/error`);
+        }
+    },
+
+    data() {
+        return {
+            show: false,
+            lng: this.$i18n.locale
+        };
+    },
+
+    computed: {
+        ...mapGetters({
+            getContent: 'content/getContentByKey'
+        }),
+
+        content() {
+            return this.getContent(`products-page-${this.lng}`);
+        },
+
+        baseUrl() {
+            return config.mediaBaseUrl;
+        }
+    },
+
+    mounted() {
+        this.show = true;
+    },
+
+    methods: {}
 };
 </script>

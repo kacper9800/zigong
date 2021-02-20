@@ -11,9 +11,7 @@ export const state = () => defaultState();
 
 export const getters = {
     getCategories: state => state.categories,
-    getCategoryById: state => state.category,
-    getCategoryBySlug: state => state.category,
-    getSavedCategory: state => state.category
+    getCategory: state => state.category
 };
 
 export const mutations = {

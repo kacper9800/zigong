@@ -44,7 +44,6 @@ input[type='tel'] {
     text-transform: uppercase;
     border-radius: 5px;
     border: 2px solid transparent;
-    // box-shadow: 0 11px 22px rgba(34, 34, 34, 0.2);
     -webkit-transition: all 0.35s ease;
     -moz-transition: all 0.35s ease;
     -ms-transition: all 0.35s ease;
@@ -136,7 +135,7 @@ input[type='tel'] {
 
     &:hover {
         background: $light;
-        color: $black;
+        color: $blue;
     }
 }
 
@@ -245,7 +244,7 @@ input[type='tel'] {
 
 /* Links */
 a {
-    color: $black;
+    color: $blue;
     text-decoration: none;
     -webkit-transition: all 0.35s ease;
     -moz-transition: all 0.35s ease;

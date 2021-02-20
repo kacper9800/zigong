@@ -7,7 +7,7 @@
                         v-for="item in content.promotionalImages"
                         :key="item.file"
                     >
-                        <nuxt-link :to="localePath(item.redirectTo)"
+                        <nuxt-link :to="localePath('/' + item.redirectTo)"
                             ><img
                                 :src="baseUrl + '/s1440/' + item.file"
                                 class="img-fluid"
@@ -37,6 +37,20 @@
                         class="col-md-4"
                     >
                         <div class="cube">
+                            <div class="middle">
+                                <div class="center">
+                                    <nuxt-link
+                                        :to="
+                                            localePath(
+                                                '/products/' +
+                                                    item.category.slug
+                                            )
+                                        "
+                                        class="btn btn-main"
+                                        >Learn More</nuxt-link
+                                    >
+                                </div>
+                            </div>
                             <div class="cube__face cube__face--front">
                                 <div class="vckit-trcflp-icon">
                                     <img
@@ -50,6 +64,7 @@
                                         height="110px"
                                     />
                                 </div>
+                                <br />
                                 <div style="font-size: 17px; color: #244a8b">
                                     {{ item.name }}
                                 </div>
@@ -111,18 +126,20 @@
                     </div>
 
                     <div class="col-md-6 col-sm-12">
-                        <div>
-                            <h4 class="title-color">
-                                {{ content.news.title }}
-                            </h4>
+                        <h4 class="title-color">
+                            {{ content.news.title }}
+                        </h4>
+                        <div class="card">
                             <img
-                                src="https://zim-llc.com/wp-content/uploads/2020/10/zigong-texas-1.png"
-                                class="img-fluid"
-                                alt="Responsive image"
+                                class="card-img-top"
+                                :src="
+                                    baseUrl + '/s720/' + content.news.image.file
+                                "
+                                alt="Card image cap"
                             />
-                            <br />
-                            <br />
-                            <div v-html="content.news.html" />
+                            <div class="card-body">
+                                <div v-html="content.news.html" />
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -155,22 +172,23 @@ export default {
 
     data() {
         return {
-            show: false
+            show: false,
+            lng: this.$i18n.locale
         };
     },
 
     computed: {
         ...mapGetters({
             categories: 'category/getCategories',
-            content: 'content/getContent'
+            getContent: 'content/getContentByKey'
         }),
+
+        content() {
+            return this.getContent(`home-page-${this.lng}`);
+        },
 
         baseUrl() {
             return config.mediaBaseUrl;
-        },
-
-        availableLocales() {
-            return this.$i18n.locale;
         }
     },
 
