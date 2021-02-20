@@ -1,0 +1,18 @@
+{
+  "apps": [
+    {
+      "name": "ZgccApp",
+      "script": "./node_modules/nuxt/bin/nuxt.js",
+      "args": "start",
+      "port": 3001,
+      "watch": false,
+      "instances": "2",
+      "exec_mode": "cluster",
+      "env_production": {
+        "NODE_ENV": "production",
+        "PORT": "3001"
+      },
+      "log_date_format": "YYYY-MM-DD HH:mm"
+    }
+  ]
+}
