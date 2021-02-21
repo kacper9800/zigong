@@ -67,7 +67,7 @@
                                     :to="localePath(page.path)"
                                     class="nav-link dropdown-toggle"
                                     >{{
-                                        $t(`mainManu.${page.name}`)
+                                        $t(`mainMenu.${page.name}`)
                                     }}</nuxt-link
                                 >
                             </li>
@@ -76,7 +76,7 @@
                                 <nuxt-link
                                     :to="localePath(page.path)"
                                     class="nav-link dropdown-toggle"
-                                    >{{ $t(`mainManu.${page.name}`) }}
+                                    >{{ $t(`mainMenu.${page.name}`) }}
                                     <i class="icofont-thin-down"></i
                                 ></nuxt-link>
                                 <ul

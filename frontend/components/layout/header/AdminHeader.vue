@@ -19,7 +19,7 @@ export default {
         return {
             pagesData: [
                 { path: '/', name: 'Back to Home Page', icon: 'home' },
-                { path: '/logout', name: 'Logout', icon: 'info-circle' }
+                { path: '/logout', name: 'Logout', icon: 'logout' }
             ]
         };
     }

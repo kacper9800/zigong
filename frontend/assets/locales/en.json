@@ -1,5 +1,5 @@
 {
-  "mainManu": {
+  "mainMenu": {
     "home": "Home",
     "about": "About",
     "products": "Products",
@@ -13,6 +13,7 @@
     "phone": "Phone number",
     "firstNameAndLastName": "First name and last name",
     "actions": "Actions",
+    "deleteActionQuestion": "Are you sure to delete this item?",
     "buttons": {
       "addNew": "Add new",
       "send": "Send",
@@ -36,9 +37,15 @@
     "amountOfProducts": "Amount of products",
     "modal": {
       "addNewHeader": "Adding new category",
+      "editHeaderEn": "Editing category - English",
+      "editHeaderRu": "Editing category - Russian",
+      "editHeaderPl": "Editing category - Polish",
       "name": "Category name",
+      "namePlaceholder": "Type category name",
       "description": "Category description",
+      "descriptionPlaceholder": "Type category description",
       "homePageDescription": "Description at home page",
+      "homePageDescriptionPlaceholder": "Type category home page description",
       "photosDropdown": {
         "chooseOption": "Choose option",
         "existingPhoto": "Existing photo",

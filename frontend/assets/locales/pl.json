@@ -1,5 +1,5 @@
 {
-  "mainManu": {
+  "mainMenu": {
     "home": "Strona główna",
     "about": "O nas",
     "products": "Produkty",
@@ -13,6 +13,7 @@
     "phone": "Telefon",
     "firstNameAndLastName": "Imię i Nazwisko",
     "actions": "Akcje",
+    "deleteActionQuestion": "Czy na pewno chcesz usunąć ten element?",
     "buttons": {
       "addNew": "Dodaj nowy",
       "send": "Wyślij",
@@ -36,9 +37,15 @@
     "amountOfProducts": "Liczba produktów",
     "modal": {
       "addNewHeader": "Dodawanie nowej kategorii",
+      "editHeaderEn": "Edycja kategorii - Angielski",
+      "editHeaderRu": "Edycja kategorii - Rosyjski",
+      "editHeaderPl": "Edycja kategorii - Polski",
       "name": "Nazwa kategorii",
+      "namePlaceholder": "Wpisz nazwę kategorii",
       "description": "Opis kategorii",
+      "descriptionPlaceholder": "Wpisz opis kategorii",
       "homePageDescription": "Opis na stronie głównej",
+      "homePageDescriptionPlaceholder": "Wpisz opis kategorii ze strony głównej",
       "photosDropdown": {
         "chooseOption": "Wybierz opcje",
         "existingPhoto": "Istniejące zdjęcie",

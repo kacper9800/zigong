@@ -1,5 +1,5 @@
 {
-  "mainManu": {
+  "mainMenu": {
     "home": "Главная",
     "about": "О нас",
     "products": "продукты",
@@ -13,6 +13,7 @@
     "phone": "телефон",
     "firstNameAndLastName": "Имя и фамилия",
     "actions": "акции",
+    "deleteActionQuestion": "Вы уверены, что хотите удалить этот элемент?",
     "buttons": {
       "addNew": "Добавить новый",
       "send": "послать",
@@ -36,19 +37,22 @@
     "amountOfProducts": "Количество продуктов",
     "modal": {
       "addNewHeader": "добавление новой категории",
-      "name": "Nazwa kategorii",
-      "namePlaceholder": "Wpisz nazwę kategorii",
-      "description": "Opis kategorii",
-      "descriptionPlaceholder": "Wpisz opis kategorii",
-      "homePageDescription": "Opis na stronie głównej",
-      "homePageDescriptionPlaceholder": "Wpisz opis ze strony głównej",
+      "editHeaderEn": "Изменить категорию - английский",
+      "editHeaderRu": "Категория редактирования - Русская",
+      "editHeaderPl": "Изменить категорию - Польский",
+      "name": "Название категории",
+      "namePlaceholder": "Введите название категории",
+      "description": "Описание категории",
+      "descriptionPlaceholder": "Описание категории типа",
+      "homePageDescription": "Описание на главной странице",
+      "homePageDescriptionPlaceholder": "Введите описание с домашней страницы",
       "photosDropdown": {
-        "chooseOption": "Wybierz opcje",
-        "existingPhoto": "Istniejące zdjęcie",
-        "newPhoto": "Nowe zdjęcie z dysku"
+        "chooseOption": "Выберите вариант",
+        "existingPhoto": "Существующее фото",
+        "newPhoto": "Новое фото с диска"
       },
       "photoUpload": {
-        "choosePhoto": "Wybierz zdjęcie"
+        "choosePhoto": "Выбрать фото"
       }
     }
   },

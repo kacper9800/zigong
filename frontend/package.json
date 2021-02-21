@@ -12,13 +12,18 @@
     "@nuxtjs/auth-next": "5.0.0-1611346714.218633a",
     "@nuxtjs/axios": "^5.12.2",
     "@nuxtjs/pwa": "^3.0.2",
+    "@nuxtjs/style-resources": "^1.0.0",
     "ant-design-vue": "^1.7.2",
     "bootstrap": "^4.6.0",
     "bootstrap-vue": "^2.21.2",
     "core-js": "^3.6.5",
+    "node-sass": "^5.0.0",
     "nuxt": "^2.14.6",
     "nuxt-i18n": "^6.18.0",
-    "vue": "^2.6.12"
+    "sass-loader": "^10.1.1",
+    "tiptap-extensions": "^1.35.1",
+    "vue": "^2.6.12",
+    "vue-slick-carousel": "^1.0.6"
   },
   "devDependencies": {
     "eslint-config-prettier": "^6.12.0",
