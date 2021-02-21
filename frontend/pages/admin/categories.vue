@@ -11,42 +11,35 @@
         >
             {{ $t('global.buttons.addNew') }}
         </a-button>
-        <a-table
-            bordered
-            :columns="columns"
-            :data-source="dataa"
-            :pagination="pagination"
-        >
+        <a-table :columns="columns" :data-source="categories" bordered>
             <a slot="name" slot-scope="text">{{ text }}</a>
-            <span slot="name">{{ $t(`categories.name`) }}</span>
-            <span slot="description">{{ $t(`categories.description`) }}</span>
-            <span slot="amountOfProducts">{{
-                $t(`categories.amountOfProducts`)
+            <span slot="nameCustomTitle">{{ $t(`categories.name`) }}</span>
+            <a slot="homePageDescription" slot-scope="text">{{ text }}</a>
+            <span slot="homePageDescriptionCustomTitle">{{
+                $t(`categories.modal.homePageDescription`)
             }}</span>
-            <!--      <span slot="actions">{{$t(`global.actions`)}}</span>-->
-            <template slot="actions" slot-scope="text, record">
-                <a-popconfirm
-                    v-if="dataSource.length"
-                    title="Sure to delete?"
-                    @confirm="() => onDelete(record.key)"
-                >
-                    <a href="javascript:;">Delete</a>
-                </a-popconfirm>
-            </template>
-
-            <!--          <a-button type="primary" shape="circle"><img-->
-            <!--            :src="require('../../assets/images/flags/en.png')"/></a-button>-->
-            <!--          <a-button type="primary" shape="circle"><img-->
-            <!--            :src="require('../../assets/images/flags/ru.png')"/></a-button>-->
-            <!--          <a-button type="primary" shape="circle"><img-->
-            <!--            :src="require('../../assets/images/flags/pl.png')"/></a-button>-->
-            <!--          <a-button type="primary" shape="circle" icon="delete"/>-->
+            <a slot="actions" slot-scope="text">
+                <img
+                    :src="require('@/assets/images/flags/en.png')"
+                    @click="openEditModalWithTranslations('en')"
+                />
+                <img
+                    :src="require('@/assets/images/flags/ru.png')"
+                    @click="openEditModalWithTranslations('ru')"
+                />
+                <img
+                    :src="require('@/assets/images/flags/pl.png')"
+                    @click="openEditModalWithTranslations('pl')"
+                />
+                <a-button type="danger">Delete</a-button>
+            </a>
+            <span slot="actionsCustomTitle">{{ $t(`global.actions`) }}</span>
         </a-table>
 
         <!--    Add new category modal-->
         <a-modal
             :title="$t('categories.modal.addNewHeader')"
-            :visible="visible"
+            :visible="addModalVisible"
             :confirm-loading="confirmLoading"
             @ok="saveCategory"
             :ok-button-props="{
@@ -104,7 +97,8 @@
                 </div>
 
                 <div v-if="modalCurrentStep === 1">
-                    <a-form id="categories-form" :form="form">
+                    <a-form id="categories-form">
+                        <!--          <a-form id="categories-form" :form="form">-->
                         <a-form-item
                             :label="
                                 $t(
@@ -238,14 +232,29 @@
 
 <script>
 import AFormItem from 'ant-design-vue/es/form/FormItem';
+import { mapGetters } from 'vuex';
+import config from '@/config';
 
 export default {
     components: { AFormItem },
     layout: 'admin',
     name: 'categories',
+    async asyncData({ app, store }) {
+        const { code } = app.i18n.localeProperties;
+        try {
+            await store.dispatch('category/getAllCategories', {
+                lng: code
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    },
     data() {
         return {
             modalCurrentStep: 0,
+            show: false,
+            formLayout: 'horizontal',
+            form: this.$form.createForm(this, { name: 'coordinated' }),
             // title: Vue.prototype.$nuxt.$options.i18n.t('global.firstName'),
             isSaveButtonDisabled: true,
             steps: [
@@ -271,140 +280,83 @@ export default {
                 }
             ],
             ModalText: 'Content of the modal',
-            visible: false,
+            addModalVisible: false,
+            editModalVisible: false,
             confirmLoading: false,
             columns: [
                 {
                     dataIndex: 'name',
                     key: 'name',
-                    slots: { title: 'name' },
+                    width: '30%',
+                    slots: { title: 'nameCustomTitle' },
                     scopedSlots: { customRender: 'name' }
                 },
                 {
-                    dataIndex: 'description',
-                    key: 'description',
-                    slots: { title: 'description' }
-                },
-                {
-                    dataIndex: 'amountOfProducts',
-                    key: 'amountOfProducts',
-                    slots: { title: 'amountOfProducts' }
+                    key: 'homePageDescription',
+                    dataIndex: 'homePageDescription',
+                    width: '50%',
+                    slots: { title: 'homePageDescriptionCustomTitle' },
+                    scopedSlots: { customRender: 'name' }
                 },
                 {
                     key: 'actions',
+                    // title: 'actions',
                     dataIndex: 'actions',
-                    slots: { customRender: 'actions' }
-                }
-            ],
-            dataa: [
-                {
-                    key: '1',
-                    name: 'Powders',
-                    amountOfProducts: 10,
-                    address: 'New York No. 1 Lake Park',
-                    tags: ['nice', 'developer']
-                },
-                {
-                    key: '2',
-                    name: 'Cemented carbides',
-                    amountOfProducts: 5,
-                    address: 'London No. 1 Lake Park',
-                    tags: ['loser']
-                },
-                {
-                    key: '3',
-                    name: 'Hardfacing Materials',
-                    amountOfProducts: 5,
-                    address: 'Sidney No. 1 Lake Park',
-                    tags: ['cool', 'teacher']
-                },
-                {
-                    key: '4',
-                    name: 'Hardfacing Materials',
-                    amountOfProducts: 5,
-                    address: 'Sidney No. 1 Lake Park',
-                    tags: ['cool', 'teacher']
-                },
-                {
-                    key: '5',
-                    name: 'Hardfacing Materials',
-                    amountOfProducts: 5,
-                    address: 'Sidney No. 1 Lake Park',
-                    tags: ['cool', 'teacher']
-                },
-                {
-                    key: '6',
-                    name: 'Hardfacing Materials',
-                    amountOfProducts: 5,
-                    address: 'Sidney No. 1 Lake Park',
-                    tags: ['cool', 'teacher']
-                },
-                {
-                    key: '7',
-                    name: 'Hardfacing Materials',
-                    amountOfProducts: 5,
-                    address: 'Sidney No. 1 Lake Park',
-                    tags: ['cool', 'teacher']
-                },
-                {
-                    key: '8',
-                    name: 'Hardfacing Materials',
-                    amountOfProducts: 5,
-                    address: 'Sidney No. 1 Lake Park',
-                    tags: ['cool', 'teacher']
-                },
-                {
-                    key: '9',
-                    name: 'Hardfacing Materials',
-                    amountOfProducts: 5,
-                    address: 'Sidney No. 1 Lake Park',
-                    tags: ['cool', 'teacher']
-                },
-                {
-                    key: '10',
-                    name: 'Hardfacing Materials',
-                    amountOfProducts: 5,
-                    address: 'Sidney No. 1 Lake Park',
-                    tags: ['cool', 'teacher']
-                },
-                {
-                    key: '11',
-                    name: 'Hardfacing Materials',
-                    amountOfProducts: 5,
-                    address: 'Sidney No. 1 Lake Park',
-                    tags: ['cool', 'teacher']
-                }
-            ],
-
-            // Upload
-            previewVisible: false,
-            previewImage: '',
-            fileList: [
-                {
-                    uid: '-1',
-                    name: 'image.png',
-                    status: 'done',
-                    url:
-                        'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png'
+                    slots: { title: 'actionsCustomTitle' },
+                    scopedSlots: { customRender: 'actions' }
+                    // slots: { customRender: "actions", title: "actions" }
                 }
             ]
         };
     },
+
+    computed: {
+        ...mapGetters({
+            categories: 'category/getCategories'
+        }),
+        baseUrl() {
+            return config.mediaBaseUrl;
+        },
+
+        availableLocales() {
+            return this.$i18n.locale;
+        }
+    },
+
+    mounted() {
+        this.show = true;
+    },
+    // Upload
+    previewVisible: false,
+    previewImage: '',
+    fileList: [
+        {
+            uid: '-1',
+            name: 'image.png',
+            status: 'done',
+            url:
+                'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png'
+        }
+    ],
     methods: {
         showModal() {
-            this.visible = true;
+            console.log(this.categories);
+            this.addModalVisible = true;
+        },
+        openEditModalWithTranslations(code) {
+            this.editModal = true;
         },
         saveCategory(e) {
             this.ModalText = 'The modal will be closed after two seconds';
             this.confirmLoading = true;
             setTimeout(() => {
-                this.visible = false;
+                this.addModalVisible = false;
                 this.confirmLoading = false;
             }, 2000);
         },
         hideModal(e) {
             console.log('Clicked cancel button');
-            this.visible = false;
+            this.addModalVisible = false;
         },
         next() {
             this.modalCurrentStep++;
@@ -432,11 +384,6 @@ export default {
         handleChange({ fileList }) {
             this.fileList = fileList;
         }
-        // translate(path) {
-        //   const translation = Vue.prototype.$nuxt.$options.i18n.t(path);
-        //   console.log(translation);
-        //   return translation;
-        // }
     }
 };
 </script>
