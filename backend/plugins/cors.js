@@ -9,15 +9,11 @@ module.exports = (app) => {
     config.app.adminUrl,
     ...corsSites,
   ];
+
   const corsOptions = {
-    origin(origin, callback) {
-      if (originsWhitelist.includes(origin) || !origin) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
-    credentials: true,
+    origin: "http://localhost:3000",
+    credentials: true, //access-control-allow-credentials:true
+    optionSuccessStatus: 200,
   };
 
   app.use(cors(corsOptions));
