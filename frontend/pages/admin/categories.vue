@@ -35,11 +35,11 @@
             </template>
 
             <!--          <a-button type="primary" shape="circle"><img-->
-            <!--            :src="require('../../assets/images/flags/english-flag.png')"/></a-button>-->
+            <!--            :src="require('../../assets/images/flags/en.png')"/></a-button>-->
             <!--          <a-button type="primary" shape="circle"><img-->
-            <!--            :src="require('../../assets/images/flags/russian-flag.png')"/></a-button>-->
+            <!--            :src="require('../../assets/images/flags/ru.png')"/></a-button>-->
             <!--          <a-button type="primary" shape="circle"><img-->
-            <!--            :src="require('../../assets/images/flags/polish-flag.png')"/></a-button>-->
+            <!--            :src="require('../../assets/images/flags/pl.png')"/></a-button>-->
             <!--          <a-button type="primary" shape="circle" icon="delete"/>-->
         </a-table>
 
