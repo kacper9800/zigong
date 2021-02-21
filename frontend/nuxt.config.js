@@ -109,7 +109,9 @@ export default {
     // Build Configuration (https://go.nuxtjs.dev/config-build)
     build: {
         extend(config, ctx) {},
-        extractCSS: true,
+        extractCSS: {
+            ignoreOrder: false
+        },
         optimization: {
             splitChunks: {
                 chunks: 'all',
