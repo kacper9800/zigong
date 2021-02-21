@@ -6,11 +6,14 @@ module.exports = (app) => {
   const originsWhitelist = [
     "http://localhost:8080",
     config.app.frontendUrl,
+    config.app.appUrl,
     ...corsSites,
   ];
 
   const corsOptions = {
     origin(origin, callback) {
+      console.log(origin);
+
       callback(null, true);
     },
     credentials: true,
