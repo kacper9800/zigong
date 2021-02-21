@@ -44,9 +44,11 @@ export default {
     async asyncData({ app, store }) {
         const { code } = app.i18n.localeProperties;
         try {
-            await store.dispatch('content/getContentBySlug', {
+            const content = await store.dispatch('content/getContentBySlug', {
                 params: { lng: code, slug: 'products-page' }
             });
+
+            return { content };
         } catch (error) {
             console.error(error);
         }
@@ -60,14 +62,6 @@ export default {
     },
 
     computed: {
-        ...mapGetters({
-            getContent: 'content/getContentByKey'
-        }),
-
-        content() {
-            return this.getContent(`products-page-${this.lng}`);
-        },
-
         baseUrl() {
             return config.mediaBaseUrl;
         }

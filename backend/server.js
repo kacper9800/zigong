@@ -1,18 +1,13 @@
 const express = require("express");
 const app = express();
-const bodyParser = require("body-parser");
 
 const di = require("./di");
 
 app.set("di", di);
 
-app.use(
-  bodyParser.urlencoded({
-    extended: true,
-  })
-);
+require("./plugins/bodyParser")(app);
 
-app.use(bodyParser.json());
+require("./plugins/cors")(app);
 
 app.use(express.static("./public"));
 

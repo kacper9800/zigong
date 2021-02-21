@@ -6,12 +6,14 @@ module.exports = (app) => {
   const originsWhitelist = [
     "http://localhost:8080",
     config.app.frontendUrl,
-    config.app.adminUrl,
+    config.app.appUrl,
     ...corsSites,
   ];
+
   const corsOptions = {
     origin(origin, callback) {
-      if (originsWhitelist.includes(origin) || !origin) {
+      console.log(origin);
+      if (!origin || originsWhitelist.indexOf(origin) !== -1) {
         callback(null, true);
       } else {
         callback(new Error("Not allowed by CORS"));
@@ -21,9 +23,4 @@ module.exports = (app) => {
   };
 
   app.use(cors(corsOptions));
-
-  app.use(function (err, req, res, next) {
-    if (err.message !== "Not allowed by CORS") return next();
-    res.status(200).json({ code: 200, message: "Request not allowed by CORS" });
-  });
 };

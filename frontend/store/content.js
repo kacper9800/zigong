@@ -27,15 +27,17 @@ export const actions = {
     async getContentBySlug({ getters, commit }, { params }) {
         const { lng, slug } = params;
 
-        if (!getters.getContentByKey(slug + '-' + lng)) {
-            const { data } = await this.$axios.get(`/content/${slug}`, {
-                params: { lng }
-            });
+        const { data } = await this.$axios.get(`/content/${slug}`, {
+            params: { lng }
+        });
 
+        if (!getters.getContentByKey(slug + '-' + lng)) {
             data.key = slug + '-' + lng;
 
             commit('ADD_SINGLE_CONTENT_SECTION', data);
         }
+
+        return data;
     }
 };
 
