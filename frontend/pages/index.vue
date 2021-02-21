@@ -157,7 +157,6 @@ export default {
 
     async asyncData({ app, store }) {
         const { code } = app.i18n.localeProperties;
-        console.log('wefwefwefwe');
         try {
             await store.dispatch('category/getAllCategories', {
                 lng: code
