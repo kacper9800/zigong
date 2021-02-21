@@ -1,7 +1,7 @@
 .idea
 **/.DS_Store
 frontend/releases
-frontend/
+# frontend/
 db-backup/
 **/.env
 scratch/
