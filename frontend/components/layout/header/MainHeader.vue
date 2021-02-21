@@ -174,7 +174,7 @@ export default {
             const currentScrollPosition =
                 window.pageYOffset || document.documentElement.scrollTop;
 
-            if (currentScrollPosition >= 100) {
+            if (currentScrollPosition >= 50) {
                 this.isVisible = false;
             } else {
                 this.isVisible = true;

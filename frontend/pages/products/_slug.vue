@@ -43,7 +43,7 @@ import config from '@/config';
 export default {
     name: 'products',
 
-    async asyncData({ app, store, params, redirect }) {
+    async asyncData({ app, store, params }) {
         const { code } = app.i18n.localeProperties;
         const { slug } = params;
 
@@ -53,8 +53,6 @@ export default {
             });
         } catch (error) {
             console.error(error);
-
-            return redirect(`/${code}/error`);
         }
     },
 

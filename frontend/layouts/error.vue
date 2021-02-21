@@ -4,6 +4,10 @@
             <div v-if="error.statusCode === 404" id="notfound">
                 <section class="section confirmation">
                     <div class="notfound">
+                        <br />
+                        <br />
+                        <br />
+                        <br />
                         <div class="notfound-404">
                             <h1>Oops!</h1>
                         </div>
@@ -16,6 +20,10 @@
                             >Go To Homepage</nuxt-link
                         >
                     </div>
+                    <br />
+                    <br />
+                    <br />
+                    <br />
                 </section>
             </div>
         </div>

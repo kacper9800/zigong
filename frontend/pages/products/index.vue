@@ -41,7 +41,7 @@ import { mapGetters } from 'vuex';
 import config from '@/config';
 
 export default {
-    async asyncData({ app, store, redirect }) {
+    async asyncData({ app, store }) {
         const { code } = app.i18n.localeProperties;
         try {
             await store.dispatch('content/getContentBySlug', {
@@ -49,8 +49,6 @@ export default {
             });
         } catch (error) {
             console.error(error);
-
-            return redirect(`/${code}/error`);
         }
     },
 
