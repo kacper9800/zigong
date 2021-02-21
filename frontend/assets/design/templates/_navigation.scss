@@ -86,8 +86,8 @@
     a {
         span {
             color: $light;
-            font-weight: 600;
-            letter-spacing: 1px;
+            font-weight: 100;
+            padding: 5px;
         }
         i {
             color: $light;
@@ -103,7 +103,7 @@
     background: rgb(2, 0, 36);
     background: linear-gradient(
         180deg,
-        rgba(2, 0, 36, 1) 0%,
+        rgba(33, 71, 136, 1) 0%,
         rgba(32, 70, 135, 1) 0%,
         rgba(71, 101, 166, 1) 100%
     );

@@ -16,7 +16,13 @@ export default {
             },
             { hid: 'description', name: 'description', content: '' }
         ],
-        link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
+        link: [
+            {
+                rel: 'icon',
+                type: 'image/x-icon',
+                href: '/favicon.ico'
+            }
+        ]
     },
 
     env: {
@@ -109,7 +115,9 @@ export default {
     // Build Configuration (https://go.nuxtjs.dev/config-build)
     build: {
         extend(config, ctx) {},
-        extractCSS: true,
+        extractCSS: {
+            ignoreOrder: false
+        },
         optimization: {
             splitChunks: {
                 chunks: 'all',
