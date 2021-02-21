@@ -157,14 +157,17 @@ export default {
 
     async asyncData({ app, store }) {
         const { code } = app.i18n.localeProperties;
+        console.log('wefwefwefwe');
         try {
             await store.dispatch('category/getAllCategories', {
                 lng: code
             });
 
-            await store.dispatch('content/getContentBySlug', {
+            const content = await store.dispatch('content/getContentBySlug', {
                 params: { lng: code, slug: 'home-page' }
             });
+
+            return { content };
         } catch (error) {
             console.error(error);
         }
@@ -179,13 +182,8 @@ export default {
 
     computed: {
         ...mapGetters({
-            categories: 'category/getCategories',
-            getContent: 'content/getContentByKey'
+            categories: 'category/getCategories'
         }),
-
-        content() {
-            return this.getContent(`home-page-${this.lng}`);
-        },
 
         baseUrl() {
             return config.mediaBaseUrl;
