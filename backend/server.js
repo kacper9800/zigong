@@ -9,8 +9,6 @@ require("./plugins/bodyParser")(app);
 
 require("./plugins/cors")(app);
 
-app.use(bodyParser.json());
-
 app.use(express.static("./public"));
 
 const server = require("http").createServer(app);
