@@ -4,11 +4,13 @@ const config = require("../config");
 module.exports = (app) => {
   const corsSites = config.app.corsSites.split(",").map((site) => site.trim());
   const originsWhitelist = [
-    "http://localhost:8080",
+    "http://localhost:3001",
     config.app.frontendUrl,
     config.app.adminUrl,
     ...corsSites,
   ];
+
+  console.log(originsWhitelist);
   const corsOptions = {
     origin(origin, callback) {
       if (originsWhitelist.includes(origin) || !origin) {
