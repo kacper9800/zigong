@@ -1,0 +1,181 @@
+<template>
+    <a-modal
+        :title="$t('categories.modal.addNewHeader')"
+        :visible="isVisible"
+        :confirm-loading="confirmLoading"
+        @ok="save"
+        :ok-button-props="{
+            props: { disabled: checkSaveButtonDisability() }
+        }"
+        @cancel="hideModal"
+    >
+        <br />
+
+        <a-steps :current="modalCurrentStep">
+            <a-step
+                v-for="item in steps"
+                :key="item.title"
+                :title="item.title"
+            />
+        </a-steps>
+
+        <div class="steps-content">
+            <div v-if="modalCurrentStep === 0">
+                <a-form id="categories-form" :form="formData">
+                    <a-form-item :label="$t('categories.modal.name')">
+                        <a-input
+                            type="text"
+                            placeholder="Category name"
+                            v-model="formData.name"
+                            required
+                        />
+                    </a-form-item>
+                    <a-form-item
+                        :label="$t('categories.modal.homePageDescription')"
+                    >
+                        <a-input
+                            type="text"
+                            placeholder="Description at home page"
+                            v-model="formData.homePageDescription"
+                            required
+                        />
+                    </a-form-item>
+                    <a-form-item :label="$t('categories.modal.description')">
+                        <!-- @todo change to tinymce -->
+                        <a-input
+                            type="text"
+                            placeholder="Article about sth"
+                            v-model="formData.description"
+                            required
+                        />
+                    </a-form-item>
+                </a-form>
+            </div>
+
+            <div v-if="modalCurrentStep === 1">
+                <file-picker
+                    :quantity="2"
+                    :checkedItems="homePageCoverImage"
+                    @input="e => (homePageCoverImage = e)"
+                />
+            </div>
+
+            <div v-if="modalCurrentStep === 2">
+                <file-picker
+                    :quantity="1"
+                    :checkedItems="coverImage"
+                    @input="e => (coverImage = e)"
+                />
+            </div>
+        </div>
+        <div class="steps-action">
+            <a-button
+                v-if="modalCurrentStep > 0"
+                style="margin-left: 8px"
+                @click="prev"
+            >
+                Previous
+            </a-button>
+            <a-button
+                v-if="modalCurrentStep < steps.length - 1"
+                type="primary"
+                @click="next"
+            >
+                Next
+            </a-button>
+            {{ formData }}
+        </div>
+    </a-modal>
+</template>
+
+<script>
+import { mapGetters, mapActions } from 'vuex';
+import { FilePicker } from '@/components/elements/filePicker';
+
+export default {
+    layout: 'admin',
+
+    components: {
+        FilePicker
+    },
+
+    props: {
+        isVisible: {
+            type: Boolean,
+            default: true
+        }
+    },
+
+    data() {
+        return {
+            modalCurrentStep: 0,
+            selectedOption: null,
+            formData: {
+                coverImageId: null,
+                homePageCoverImageId: null
+            },
+            steps: [
+                {
+                    title: 'Basic data'
+                },
+                {
+                    title: 'Photos'
+                },
+                {
+                    title: 'Summary'
+                }
+            ],
+            homePageCoverImage: [],
+            coverImage: [],
+            confirmLoading: false
+        };
+    },
+
+    computed: {},
+
+    methods: {
+        ...mapActions({
+            createCategory: 'category/createOne',
+            getAllCategories: 'category/getAllCategories'
+        }),
+
+        hideModal(e) {
+            this.$emit('showOfHiddeModal');
+        },
+
+        save(e) {
+            this.confirmLoading = true;
+            setTimeout(() => {
+                this.hideModal();
+
+                this.formData.coverImageId = this.coverImage.shift();
+                this.formData.homePageCoverImageId = this.homePageCoverImage.shift();
+
+                try {
+                    this.createCategory(this.formData);
+                } catch (error) {
+                    console.log(error);
+                }
+
+                this.getAllCategories();
+
+                this.confirmLoading = false;
+            }, 2000);
+        },
+
+        next() {
+            this.modalCurrentStep++;
+        },
+
+        prev() {
+            this.modalCurrentStep--;
+        },
+
+        checkSaveButtonDisability() {
+            return this.modalCurrentStep !== this.steps.length - 1;
+        }
+    }
+};
+</script>
+
+<style scoped></style>

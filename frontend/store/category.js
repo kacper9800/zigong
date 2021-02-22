@@ -21,6 +21,10 @@ export const mutations = {
 
     SET_CATEGORY(state, data) {
         state.category = data;
+    },
+
+    ADD_CATEGORY(state, data) {
+        state.category = data;
     }
 };
 
@@ -57,10 +61,9 @@ export const actions = {
         return data;
     },
 
-    async createOne({ commit }, { category }) {
-        const { data } = await this.$axios.post('categories', category);
-
-        commit('SET_CATEGORY', data);
+    async createOne({ commit }, category) {
+        console.log(category);
+        await this.$axios.post('/categories', category);
 
         return data;
     }
