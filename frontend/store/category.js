@@ -63,6 +63,11 @@ export const actions = {
         commit('SET_CATEGORY', data);
 
         return data;
+    },
+
+    async deleteOne({commit}, id) {
+      console.log(id);
+      await this.$axios.delete(`/categories/${id}`);
     }
 };
 

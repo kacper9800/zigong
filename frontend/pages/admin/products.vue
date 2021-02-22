@@ -3,7 +3,7 @@
         <h1>Products</h1>
         <a-table :columns="columns" :data-source="dataa">
             <a slot="name" slot-scope="text">{{ text }}</a>
-            <span slot="customTitle"><a-icon type="smile-o" /> Name</span>
+            <span slot="customTitle">Name</span>
             <span slot="tags" slot-scope="tags">
                 <a-tag
                     v-for="tag in tags"
@@ -29,6 +29,7 @@
                 </a>
             </span>
         </a-table>
+      <NuxtChild  />
     </div>
 </template>
 <script>

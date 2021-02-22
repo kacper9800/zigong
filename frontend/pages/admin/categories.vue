@@ -14,7 +14,7 @@
         slot="homePageDescriptionCustomTitle">{{$t(`categories.modal.homePageDescription`)}}</span>
       <a slot="homePageDescription" slot-scope="text">{{ text }}</a>
       <span slot="actionsCustomTitle">{{$t(`global.actions`)}}</span>
-      <a slot="actions" slot-scope="text">
+      <a slot="actions" slot-scope="text, record">
         <img :src="require('../../assets/images/flags/en.png')"
              @click="openEditModalWithTranslations(record, 'En')"/>
         <img :src="require('../../assets/images/flags/ru.png')"
@@ -23,7 +23,7 @@
              @click="openEditModalWithTranslations(record, 'Pl')"/>
         <a-popconfirm v-if="categories.length"
                       :title='$t("global.deleteActionQuestion")'
-                      @confirm="() => onDelete(record.key)">
+                      @confirm="() => onDelete(record.categoryId)">
           <a-button type="danger">Delete</a-button>
         </a-popconfirm>
       </a>
@@ -156,7 +156,8 @@
                        required/>
             </a-form-item>
             <a-form-item :label='$t("categories.modal.homePageDescription")'>
-              <a-input type="text" :placeholder="$t('categories.modal.homePageDescriptionPlaceholder')"
+              <a-input type="text"
+                       :placeholder="$t('categories.modal.homePageDescriptionPlaceholder')"
                        required/>
             </a-form-item>
           </a-form>
@@ -238,7 +239,7 @@
 
 <script>
   import AFormItem from 'ant-design-vue/es/form/FormItem';
-  import {mapGetters} from 'vuex';
+  import {mapGetters, mapActions} from 'vuex';
   import config from '@/config';
 
   export default {
@@ -247,6 +248,7 @@
     },
     layout: "admin",
     name: "categories",
+    selectedLanguage: null,
     async asyncData({app, store}) {
       const {code} = app.i18n.localeProperties;
       try {
@@ -255,6 +257,8 @@
         });
       } catch (error) {
         console.log(error);
+      } finally {
+        // this.selectedLanguage = code;
       }
     },
     data() {
@@ -346,6 +350,10 @@
       }
     ],
     methods: {
+      ...mapActions({
+        delete: 'category/deleteOne',
+        allCategories: 'category/getAllCategories'
+      }),
       showModal() {
         console.log(this.categories);
         this.addModalVisible = true;
@@ -356,15 +364,31 @@
         this.selectedLanguageEdition = code;
 
       },
-      saveCategory(e) {
+      async saveCategory(e) {
         this.confirmLoading = true;
-        setTimeout(() => {
+        try {
+          const {data} = await this.createOne('', {
+            name: this.form.name,
+            description: this.description,
+            homePageDescription: this.homePageDescription
+          });
+        } catch (e) {
+          console.log(e);
+        } finally {
           this.addModalVisible = false;
           this.confirmLoading = false;
-        }, 2000);
+        }
       },
       updateCategory(e) {
 
+      },
+      async onDelete(id) {
+        try {
+          await this.delete(id);
+          await this.allCategories('En');
+        } catch (e) {
+          console.error(e);
+        }
       },
       hideModal(e) {
         this.addModalVisible = false;
