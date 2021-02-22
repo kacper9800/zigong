@@ -4,7 +4,6 @@ import plLocale from './assets/locales/pl';
 import ruLocale from './assets/locales/ru';
 
 export default {
-    mode: 'universal',
     // Global page headers (https://go.nuxtjs.dev/config-head)
     head: {
         title: 'Zigong website',
@@ -35,7 +34,11 @@ export default {
     css: ['@/assets/design/main.scss', '@/assets/fonts/iconFonts.css'],
 
     // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
-    plugins: ['@/plugins/antd-ui', '@/plugins/bootstrap'],
+    plugins: [
+        '@/plugins/antd-ui',
+        '@/plugins/bootstrap',
+        '@/plugins/vue-infinite-scroll'
+    ],
 
     // Auto import components (https://go.nuxtjs.dev/config-components)
     components: true,
@@ -125,6 +128,12 @@ export default {
                 name: undefined,
                 cacheGroups: {}
             }
+        }
+    },
+
+    vue: {
+        config: {
+            ignoredElements: ['stream']
         }
     }
 };
