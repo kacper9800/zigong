@@ -70,7 +70,6 @@ export const actions = {
     },
 
     async uploadFiles({ commit }, file) {
-        console.log(file);
         const { data } = await this.$axios.post(`/files`, file, {
             headers: {
                 accept: 'application/json',

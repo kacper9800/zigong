@@ -120,15 +120,14 @@ export default {
 
         infiniteScroll($state) {
             setTimeout(() => {
+                $state.loaded();
                 if (this.params.page <= this.totalPages) {
-                    $state.loaded();
                     this.params.page++;
                     const params = this.params;
                     this.getFiles({ params });
-
-                    $state.complete();
                 }
-            }, 500);
+                $state.complete();
+            }, 100);
         },
 
         async handleChange(info) {
@@ -144,7 +143,7 @@ export default {
                 data.append('filesInput', info.file.originFileObj);
 
                 try {
-                    result = await this.uploadFiles(data);
+                    await this.uploadFiles(data);
                 } catch (e) {
                     console.error(e);
                 }

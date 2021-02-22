@@ -27,7 +27,10 @@
                             type="text"
                             placeholder="Category name"
                             v-model="formData.name"
-                            required
+                            :class="{
+                                'is-invalid': $v.formData.name.$error
+                            }"
+                            @blur="$v.formData.name.$touch()"
                         />
                     </a-form-item>
                     <a-form-item
@@ -37,7 +40,11 @@
                             type="text"
                             placeholder="Description at home page"
                             v-model="formData.homePageDescription"
-                            required
+                            :class="{
+                                'is-invalid':
+                                    $v.formData.homePageDescription.$error
+                            }"
+                            @blur="$v.formData.homePageDescription.$touch()"
                         />
                     </a-form-item>
                     <a-form-item :label="$t('categories.modal.description')">
@@ -46,7 +53,10 @@
                             type="text"
                             placeholder="Article about sth"
                             v-model="formData.description"
-                            required
+                            :class="{
+                                'is-invalid': $v.formData.description.$error
+                            }"
+                            @blur="$v.formData.description.$touch()"
                         />
                     </a-form-item>
                 </a-form>
@@ -54,7 +64,7 @@
 
             <div v-if="modalCurrentStep === 1">
                 <file-picker
-                    :quantity="2"
+                    :quantity="1"
                     :checkedItems="homePageCoverImage"
                     @input="e => (homePageCoverImage = e)"
                 />
@@ -68,7 +78,7 @@
                 />
             </div>
         </div>
-        <div class="steps-action">
+        <div class="steps-action" style="margin-top: 10px">
             <a-button
                 v-if="modalCurrentStep > 0"
                 style="margin-left: 8px"
@@ -79,18 +89,19 @@
             <a-button
                 v-if="modalCurrentStep < steps.length - 1"
                 type="primary"
+                :disabled="this.$v.$invalid"
                 @click="next"
             >
                 Next
             </a-button>
-            {{ formData }}
         </div>
     </a-modal>
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex';
-import { FilePicker } from '@/components/elements/filePicker';
+import { mapActions } from 'vuex';
+import { required, minLength } from 'vuelidate/lib/validators';
+import FilePicker from '~/components/elements/filePicker';
 
 export default {
     layout: 'admin',
@@ -103,6 +114,14 @@ export default {
         isVisible: {
             type: Boolean,
             default: true
+        }
+    },
+
+    validations: {
+        formData: {
+            name: { required, minLength: minLength(4) },
+            homePageDescription: { required, minLength: minLength(4) },
+            description: { required, minLength: minLength(4) }
         }
     },
 
@@ -139,11 +158,11 @@ export default {
             getAllCategories: 'category/getAllCategories'
         }),
 
-        hideModal(e) {
+        hideModal() {
             this.$emit('showOfHiddeModal');
         },
 
-        save(e) {
+        save() {
             this.confirmLoading = true;
             setTimeout(() => {
                 this.hideModal();
@@ -157,7 +176,7 @@ export default {
                     console.log(error);
                 }
 
-                this.getAllCategories();
+                this.$emit('featchData');
 
                 this.confirmLoading = false;
             }, 2000);
