@@ -21,28 +21,31 @@
 
         <div class="steps-content">
             <div v-if="modalCurrentStep === 0">
-                <a-form id="categories-form" :form="form">
+                <a-form id="categories-form" :form="formData">
                     <a-form-item :label="$t('categories.modal.name')">
                         <a-input
                             type="text"
                             placeholder="Category name"
-                            required
-                        />
-                    </a-form-item>
-                    <a-form-item :label="$t('categories.modal.description')">
-                        <a-input
-                            type="text"
-                            placeholder="Category description"
+                            v-model="formData.name"
                             required
                         />
                     </a-form-item>
                     <a-form-item
                         :label="$t('categories.modal.homePageDescription')"
                     >
-                        <!-- @todo change to tinymce -->
                         <a-input
                             type="text"
                             placeholder="Description at home page"
+                            v-model="formData.homePageDescription"
+                            required
+                        />
+                    </a-form-item>
+                    <a-form-item :label="$t('categories.modal.description')">
+                        <!-- @todo change to tinymce -->
+                        <a-input
+                            type="text"
+                            placeholder="Article about sth"
+                            v-model="formData.description"
                             required
                         />
                     </a-form-item>
@@ -60,8 +63,8 @@
             <div v-if="modalCurrentStep === 2">
                 <file-picker
                     :quantity="1"
-                    :checkedItems="coverImageId"
-                    @input="e => (coverImageId = e)"
+                    :checkedItems="coverImage"
+                    @input="e => (coverImage = e)"
                 />
             </div>
         </div>
@@ -80,11 +83,13 @@
             >
                 Next
             </a-button>
+            {{ formData }}
         </div>
     </a-modal>
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex';
 import { FilePicker } from '@/components/elements/filePicker';
 
 export default {
@@ -105,7 +110,10 @@ export default {
         return {
             modalCurrentStep: 0,
             selectedOption: null,
-            form: this.$form.createForm(this, { name: 'coordinated' }),
+            formData: {
+                coverImageId: null,
+                homePageCoverImageId: null
+            },
             steps: [
                 {
                     title: 'Basic data'
@@ -118,7 +126,7 @@ export default {
                 }
             ],
             homePageCoverImage: [],
-            coverImageId: [],
+            coverImage: [],
             confirmLoading: false
         };
     },
@@ -126,6 +134,11 @@ export default {
     computed: {},
 
     methods: {
+        ...mapActions({
+            createCategory: 'category/createOne',
+            getAllCategories: 'category/getAllCategories'
+        }),
+
         hideModal(e) {
             this.$emit('showOfHiddeModal');
         },
@@ -134,6 +147,18 @@ export default {
             this.confirmLoading = true;
             setTimeout(() => {
                 this.hideModal();
+
+                this.formData.coverImageId = this.coverImage.shift();
+                this.formData.homePageCoverImageId = this.homePageCoverImage.shift();
+
+                try {
+                    this.createCategory(this.formData);
+                } catch (error) {
+                    console.log(error);
+                }
+
+                this.getAllCategories();
+
                 this.confirmLoading = false;
             }, 2000);
         },

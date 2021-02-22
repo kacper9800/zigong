@@ -7,7 +7,7 @@ class FileController {
 
   async index(req, res) {
     const {
-      perPage = 5,
+      perPage = 10,
       page = 1,
       sortBy = "createdAt",
       order = "desc",
