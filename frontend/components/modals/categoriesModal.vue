@@ -3,7 +3,7 @@
         :title="$t('categories.modal.addNewHeader')"
         :visible="isVisible"
         :confirm-loading="confirmLoading"
-        @ok="saveCategory"
+        @ok="save"
         :ok-button-props="{
             props: { disabled: checkSaveButtonDisability() }
         }"
@@ -50,10 +50,19 @@
             </div>
 
             <div v-if="modalCurrentStep === 1">
-                <file-picker />
+                <file-picker
+                    :quantity="2"
+                    :checkedItems="homePageCoverImage"
+                    @input="e => (homePageCoverImage = e)"
+                />
             </div>
+
             <div v-if="modalCurrentStep === 2">
-                <file-picker />
+                <file-picker
+                    :quantity="1"
+                    :checkedItems="coverImageId"
+                    @input="e => (coverImageId = e)"
+                />
             </div>
         </div>
         <div class="steps-action">
@@ -108,9 +117,8 @@ export default {
                     title: 'Summary'
                 }
             ],
-
-            ModalText: 'Content of the modal',
-
+            homePageCoverImage: [],
+            coverImageId: [],
             confirmLoading: false
         };
     },
@@ -122,15 +130,10 @@ export default {
             this.$emit('showOfHiddeModal');
         },
 
-        openEditModalWithTranslations(code) {
-            this.editModal = true;
-        },
-
-        saveCategory(e) {
-            this.ModalText = 'The modal will be closed after two seconds';
+        save(e) {
             this.confirmLoading = true;
             setTimeout(() => {
-                this.addModalVisible = false;
+                this.hideModal();
                 this.confirmLoading = false;
             }, 2000);
         },
@@ -145,26 +148,6 @@ export default {
 
         checkSaveButtonDisability() {
             return this.modalCurrentStep !== this.steps.length - 1;
-        },
-
-        onDropdownValueChange(value) {
-            this.selectedOption = value;
-        },
-
-        handleCancel() {
-            this.previewVisible = false;
-        },
-
-        async handlePreview(file) {
-            if (!file.url && !file.preview) {
-                file.preview = await getBase64(file.originFileObj);
-            }
-            this.previewImage = file.url || file.preview;
-            this.previewVisible = true;
-        },
-
-        handleChange({ fileList }) {
-            this.fileList = fileList;
         }
     }
 };

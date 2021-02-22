@@ -4,14 +4,27 @@
             {{ $t('categories.header') }}
         </h1>
         <br />
-        <a-button
-            class="editable-add-btn ant-btn-primary"
-            icon="plus"
-            @click="showOfHiddeModal()"
+
+        <div
+            :style="{
+                padding: '26px 16px 16px'
+            }"
         >
-            {{ $t('global.buttons.addNew') }}
-        </a-button>
-        <a-table :columns="columns" :data-source="categories" bordered>
+            <a-button
+                class="editable-add-btn ant-btn-primary"
+                icon="plus"
+                @click="showOfHiddeModal()"
+            >
+                {{ $t('global.buttons.addNew') }}
+            </a-button>
+        </div>
+
+        <a-table
+            :columns="columns"
+            :data-source="categories"
+            rowKey="name"
+            bordered
+        >
             <a slot="name" slot-scope="text">{{ text }}</a>
             <span slot="nameCustomTitle">{{ $t(`categories.name`) }}</span>
             <a slot="homePageDescription" slot-scope="text">{{ text }}</a>
