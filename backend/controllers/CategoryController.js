@@ -16,6 +16,15 @@ class CategoryController {
 
   async index(req, res) {
     const { lng } = req.query;
+    const {
+      perPage = 9,
+      page = 1,
+      sortBy = "createdAt",
+      order = "ASC",
+    } = req.query;
+
+    const limit = perPage;
+    const offset = (page - 1) * limit;
 
     const languageId = await this.languageRepository.findLanguageId(lng);
 
@@ -23,7 +32,10 @@ class CategoryController {
       return res.sendStatus(HttpStatuses.NOT_FOUND);
     }
 
-    const category = await this.categoryTranslationRepository.findAll({
+    const category = await this.categoryTranslationRepository.findAndCountAll({
+      offset,
+      limit,
+      order: [[sortBy, order]],
       where: { languageId },
       attributes: {
         exclude: ["id", "languageId"],
@@ -35,20 +47,30 @@ class CategoryController {
             exclude: ["id", "homePageCoverImageId", "coverImageId"],
           },
           include: [
-            { model: File, as: "coverImage" },
-            { model: File, as: "homePageCoverImage" },
+            {
+              model: File,
+              as: "coverImage",
+              attributes: {
+                exclude: ["id", "name", "description", "file"],
+              },
+            },
+            {
+              model: File,
+              as: "homePageCoverImage",
+              attributes: {
+                exclude: ["id", "name", "description", "file"],
+              },
+            },
           ],
-        },
-        {
-          association: "language",
-          attributes: {
-            exclude: ["id"],
-          },
         },
       ],
     });
 
-    return res.send(category);
+    const { count } = category;
+
+    const totalPages = Math.ceil(count / limit);
+
+    return res.send({ count, totalPages, data: category.rows });
   }
 
   async show(req, res) {
@@ -69,10 +91,14 @@ class CategoryController {
         },
         include: [
           {
-            association: "language",
+            association: "category",
             attributes: {
-              exclude: ["id"],
+              exclude: ["id", "homePageCoverImageId", "coverImageId"],
             },
+            include: [
+              { model: File, as: "coverImage" },
+              { model: File, as: "homePageCoverImage" },
+            ],
           },
         ],
       }
@@ -158,11 +184,11 @@ class CategoryController {
     req.body.languageId = languageId;
 
     if (!categoryTranslation) {
-      const category = await this.categoryTranslationRepository.create({
+      const createdCategory = await this.categoryTranslationRepository.create({
         ...req.body,
       });
 
-      return res.send(category);
+      return res.send(createdCategory);
     } else {
       return res.sendStatus(HttpStatuses.NOT_ACCEPTABLE);
     }
