@@ -52,17 +52,19 @@
         <categories-modal
             :isVisible="isVisible"
             @showOfHiddeModal="showOfHiddeModal"
+            @featchData="featchData()"
         />
     </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 import config from '@/config';
-import { CategoriesModal } from '../../components/modals/categoriesModal';
+import CategoriesModal from '~/components/modals/categoriesModal.vue';
 
 export default {
     layout: 'admin',
+    middleware: 'admin',
 
     components: {
         CategoriesModal
@@ -122,12 +124,22 @@ export default {
     },
 
     methods: {
+        ...mapActions({
+            getAllCategories: 'category/getAllCategories'
+        }),
+
         showOfHiddeModal() {
             this.isVisible = !this.isVisible;
         },
 
         openEditModalWithTranslations(code) {
             this.editModal = true;
+        },
+
+        featchData() {
+            this.getAllCategories({
+                lng: ''
+            });
         }
     }
 };

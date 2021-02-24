@@ -37,7 +37,8 @@ export default {
     plugins: [
         '@/plugins/antd-ui',
         '@/plugins/bootstrap',
-        '@/plugins/vue-infinite-scroll'
+        '@/plugins/vue-infinite-scroll',
+        '@/plugins/vuelidate'
     ],
 
     // Auto import components (https://go.nuxtjs.dev/config-components)
