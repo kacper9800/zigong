@@ -21,11 +21,13 @@
                 </a-layout-content>
             </a-layout>
         </a-layout>
+      <AdminFooter/>
     </a-layout>
 </template>
 <script>
-import AdminHeader from '@/components/layout/header/AdminHeader';
-import AdminSider from '@/components/layout/sider/AdminSider';
+import AdminHeader from '~/components/layout/header/AdminHeader';
+import AdminSider from '~/components/layout/sider/AdminSider';
+import AdminFooter from '~/components/layout/footer/AdminFooter';
 
 export default {
     data() {
@@ -34,8 +36,9 @@ export default {
         };
     },
     components: {
-        AdminSider,
-        AdminHeader
+      AdminFooter,
+      AdminSider,
+      AdminHeader
     }
 };
 </script>

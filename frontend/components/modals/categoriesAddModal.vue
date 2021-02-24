@@ -8,7 +8,7 @@
             props: { disabled: checkSaveButtonDisability() }
         }"
         @cancel="hideModal"
-    >
+        >
         <br />
 
         <a-steps :current="modalCurrentStep">
@@ -71,7 +71,7 @@
         <div class="steps-action">
             <a-button
                 v-if="modalCurrentStep > 0"
-                style="margin-left: 8px"
+                style="margin-left: 8px;"
                 @click="prev"
             >
                 Previous
@@ -90,7 +90,7 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
-import { FilePicker } from '@/components/elements/filePicker';
+import FilePicker from '../elements/filePicker';
 
 export default {
     layout: 'admin',
@@ -109,7 +109,6 @@ export default {
     data() {
         return {
             modalCurrentStep: 0,
-            selectedOption: null,
             formData: {
                 coverImageId: null,
                 homePageCoverImageId: null
@@ -140,7 +139,7 @@ export default {
         }),
 
         hideModal(e) {
-            this.$emit('showOfHiddeModal');
+            this.$emit('toggleAddModal');
         },
 
         save(e) {
@@ -150,17 +149,13 @@ export default {
 
                 this.formData.coverImageId = this.coverImage.shift();
                 this.formData.homePageCoverImageId = this.homePageCoverImage.shift();
-
                 try {
                     this.createCategory(this.formData);
                 } catch (error) {
                     console.log(error);
                 }
-
-                this.getAllCategories();
-
                 this.confirmLoading = false;
-            }, 2000);
+            }, 1000);
         },
 
         next() {
