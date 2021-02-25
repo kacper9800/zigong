@@ -12,7 +12,6 @@ module.exports = (app) => {
 
   const corsOptions = {
     origin(origin, callback) {
-      console.log(origin);
       if (!origin || originsWhitelist.indexOf(origin) !== -1) {
         callback(null, true);
       } else {

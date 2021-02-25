@@ -2,16 +2,14 @@
     <header class="fixed-top">
         <div v-if="isVisible" class="header-top-bar">
             <div class="container">
-                <div class="row align-items-center">
-                    <div class="col">
+                <div class="row justify-content-between">
+                    <div class="col-6">
                         <ul class="top-bar-info list-inline-item pl-0 mb-0">
-                            <li class="list-inline-item">
-                                The Subsidiary of Zigong Poland
-                            </li>
+                            <li class="list-inline-item">The Subsidiary of Zigong Poland</li>
                         </ul>
                     </div>
-                    <div class="col">
-                        <div class="text-lg-right top-right-bar mt-2 mt-lg-0">
+                    <div class="col-6">
+                        <div class="top-right-bar">
                             <a
                                 href="https://www.linkedin.com/company/zigong-international-marketing"
                             >
@@ -53,22 +51,25 @@
                     data-toggle="collapse"
                     data-target="#navbarmain"
                     aria-controls="navbarmain"
-                    aria-expanded="false"
+                    aria-expanded="true"
                     aria-label="Toggle navigation"
+                    @click="toggleNavBar"
                 >
                     <span class="icofont-navigation-menu"></span>
                 </button>
 
-                <div class="collapse navbar-collapse" id="navbarmain">
+                <div
+                    class="collapse navbar-collapse"
+                    id="navbarmain"
+                    v-bind:class="{ show: showMobileMenu }"
+                >
                     <ul class="navbar-nav ml-auto">
                         <div v-for="page in pagesData" :key="page.name">
                             <li v-if="!page.subPages" class="nav-item active">
                                 <nuxt-link
                                     :to="localePath(page.path)"
                                     class="nav-link dropdown-toggle"
-                                    >{{
-                                        $t(`mainMenu.${page.name}`)
-                                    }}</nuxt-link
+                                    >{{ $t(`mainMenu.${page.name}`) }}</nuxt-link
                                 >
                             </li>
 
@@ -76,35 +77,22 @@
                                 <nuxt-link
                                     :to="localePath(page.path)"
                                     class="nav-link dropdown-toggle"
-                                    >{{ $t(`mainMenu.${page.name}`) }}
-                                    <i class="icofont-thin-down"></i
-                                ></nuxt-link>
-                                <ul
-                                    class="dropdown-menu"
-                                    aria-labelledby="dropdown05"
-                                >
-                                    <li
-                                        v-for="subpage in page.subPages"
-                                        :key="subpage.name"
-                                    >
+                                    >{{ $t(`mainMenu.${page.name}`) }} <i class="icofont-thin-down"
+                                /></nuxt-link>
+                                <ul class="dropdown-menu" aria-labelledby="dropdown05">
+                                    <li v-for="subpage in page.subPages" :key="subpage.name">
                                         <nuxt-link
-                                            :to="
-                                                localePath(
-                                                    page.path + subpage.path
-                                                )
-                                            "
+                                            :to="localePath(page.path + subpage.path)"
                                             class="dropdown-item"
                                         >
-                                            {{ subpage.name }}</nuxt-link
-                                        >
+                                            {{ $t(`mainMenu.${subpage.name}`) }}
+                                        </nuxt-link>
                                     </li>
                                 </ul>
                             </li>
                         </div>
                         <li v-if="iaAdminUser" class="nav-item active">
-                            <nuxt-link
-                                to="/admin"
-                                class="nav-link dropdown-toggle"
+                            <nuxt-link to="/admin" class="nav-link dropdown-toggle"
                                 >Admin</nuxt-link
                             >
                         </li>
@@ -124,6 +112,7 @@ export default {
     data() {
         return {
             isVisible: true,
+            showMobileMenu: false,
             availableLocales: [
                 { name: 'EN', flag: '', path: 'en' },
                 { name: 'PL', flag: '', path: 'pl' },
@@ -135,14 +124,14 @@ export default {
                     path: '/about',
                     name: 'about',
                     subPages: [
-                        { path: '/organization', name: 'Organization' },
-                        { path: '/who-we-are', name: 'Who We Are' },
-                        { path: '/our-facilities', name: 'Our Facilities' },
-                        { path: '/capabilities', name: 'Capabilities' },
-                        { path: '/credentials', name: 'Credentials' },
+                        { path: '/organization', name: 'organization' },
+                        { path: '/who-we-are', name: 'whoWeAre' },
+                        { path: '/our-facilities', name: 'ourFacilities' },
+                        { path: '/capabilities', name: 'capabilities' },
+                        { path: '/credentials', name: 'credentials' },
                         {
                             path: '/quality-certification',
-                            name: 'quality-certification'
+                            name: 'qualityCertification'
                         }
                     ]
                 },
@@ -177,6 +166,10 @@ export default {
     },
 
     methods: {
+        toggleNavBar() {
+            this.showMobileMenu = !this.showMobileMenu;
+        },
+
         scrollToTop() {
             window.scrollTo({
                 top: 0,
@@ -185,8 +178,7 @@ export default {
         },
 
         onScroll() {
-            const currentScrollPosition =
-                window.pageYOffset || document.documentElement.scrollTop;
+            const currentScrollPosition = window.pageYOffset || document.documentElement.scrollTop;
 
             if (currentScrollPosition >= 50) {
                 this.isVisible = false;

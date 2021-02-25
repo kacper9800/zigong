@@ -21,6 +21,7 @@
     "nuxt": "^2.14.6",
     "nuxt-i18n": "^6.18.0",
     "vue": "^2.6.12",
+    "vue-cool-lightbox": "^2.7.1",
     "vue-infinite-loading": "^2.4.5",
     "vuelidate": "^0.7.6"
   },
