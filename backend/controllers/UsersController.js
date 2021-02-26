@@ -16,8 +16,9 @@ class UsersController {
       order = "desc",
     } = req.query;
 
-    const limit = perPage;
-    const offset = (page - 1) * limit;
+    const pageNumber = parseInt(page);
+    const limit = parseInt(perPage);
+    const offset = (pageNumber - 1) * limit;
 
     const where = {};
 

@@ -4,6 +4,7 @@ import plLocale from './assets/locales/pl';
 import ruLocale from './assets/locales/ru';
 
 export default {
+    ssr: true,
     // Global page headers (https://go.nuxtjs.dev/config-head)
     head: {
         title: 'Zigong website',
@@ -37,7 +38,9 @@ export default {
     plugins: [
         '@/plugins/antd-ui',
         '@/plugins/bootstrap',
-        '@/plugins/vue-infinite-scroll'
+        '@/plugins/vue-infinite-scroll',
+        '@/plugins/vuelidate',
+        '@/plugins/vue-cool-lightbox'
     ],
 
     // Auto import components (https://go.nuxtjs.dev/config-components)

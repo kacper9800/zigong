@@ -31,7 +31,7 @@ module.exports = {
       "powders-pl": {
         languageId: pl.id,
         categoryId: powders,
-        name: "Pudry",
+        name: "Proszki",
         homePageDescription:
           "Produkty proszkowe - do produkcji węglika spiekanego, sprzętu wojskowego, przemysłu elektronicznego i medycznego.",
         description: `<p> ZGCC posiada kompletną linię produkcyjną od parawolframianu amonu (APT) do metawolframianu amonu (AMT), proszku wolframu, proszku węglika wolframu i proszku gotowego do prasowania (RTP). Wszystkie te proszki są produkowane w siedzibie ZGCC. Dzięki zaawansowanemu sprzętowi produkcyjnemu, ponad 50-letniemu doświadczeniu w produkcji i najnowocześniejszym narzędziom testującym, jakość jest dobrze kontrolowana i stała na każdym etapie przed przejściem do następnego procesu produkcyjnego. </p>

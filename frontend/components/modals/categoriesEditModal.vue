@@ -1,4 +1,5 @@
 <template>
+    <!-- @todo - fix this modal (now it doesnt work as expected) -->
     <a-modal
         :title="$t('categories.modal.editHeader' + languageCode)"
         :visible="isVisible"
@@ -8,12 +9,7 @@
     >
         <a-form id="categories-form" :form="formData">
             <a-form-item :label="$t('categories.modal.name')">
-                <a-input
-                    type="text"
-                    placeholder="Category name"
-                    v-model="formData.name"
-                    required
-                />
+                <a-input type="text" placeholder="Category name" v-model="formData.name" required />
             </a-form-item>
             <a-form-item :label="$t('categories.modal.homePageDescription')">
                 <a-input

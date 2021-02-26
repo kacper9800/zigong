@@ -17,6 +17,7 @@ module.exports = {
 
     const homePage = findContentId(contentSlugs, "home-page");
     const productsPage = findContentId(contentSlugs, "products-page");
+    const aboutPage = findContentId(contentSlugs, "about-page");
 
     const pages = {
       "home-page-pl": {
@@ -337,6 +338,45 @@ module.exports = {
         последующие продукты, а также предоставили наши
         Заказчики с полным спектром материалов.
         </p><p><em><strong>Не стесняйтесь обращаться к нам для получения дополнительной информации о продуктах ниже.</strong></em></p>`,
+        },
+      },
+
+      "about-page-pl": {
+        languageId: pl.id,
+        contentId: aboutPage,
+        content: {
+          title: "O nas",
+          html: `<div class = "wpb_wrapper">
+          <p> <strong> Zigong International Marketing (ZIM) </strong> została założona przez Zigong Cemented Carbide Co., LTD (ZGCC) w 2003 r. w celu dystrybucji węglika spiekanego, wolframu i molibdenu <strong> <a href = " https://zim-llc.com/products/">Products </a> </strong> poza Chińską Republiką Ludową. Założona w 1965 roku zatrudniamy ponad 3000 osób w naszych zakładach w Chinach. ZGCC i ZIM dystrybuują ponad 2000 ton metrycznych różnych produktów w ponad 40 krajach. ZGCC jest jednym z największych producentów wyrobów z węglika spiekanego, wolframu i molibdenu w Chinach. Firma znajduje się w pierwszej dziesiątce świata jako producent tych produktów. Dzięki ponad 50-letniemu doświadczeniu zbudowaliśmy kompletne linie od surowców do produktów końcowych, a także zapewniliśmy naszym klientom pełną gamę materiałów. </p>
+          <p> ZGCC jest <strong> <a href="https://zim-llc.com/about/quality-certification/"> firmą z certyfikatem ISO </a> </strong> z ISO 9001, ISO 14001 i Certyfikaty OHSAS-18001, zapewniające systemy kontroli jakości, aby służyć naszym klientom wysokiej jakości produktami i usługami. </p>
+          <p> ZIM ma <a href="https://zim-llc.com/contact-us/"> <strong> dwa biura </strong> </a> w Stanach Zjednoczonych. Jedno biuro znajduje się w Houston w Teksasie, a drugie w Willoughby Hills w stanie Ohio. Obie lokalizacje mają magazyny, które mają zapasy, aby zapewnić klientom terminową dostawę. </p>
+          </div>`,
+        },
+      },
+
+      "about-page-en": {
+        languageId: en.id,
+        contentId: aboutPage,
+        content: {
+          title: "About Us",
+          html: `<div class="wpb_wrapper">
+          <p><strong>Zigong International Marketing (ZIM)</strong> was established by Zigong Cemented Carbide Co., LTD (ZGCC) in 2003 for the purpose of distributing Cemented Carbide, Tungsten and Molybdenum <strong><a href="https://zim-llc.com/products/">Products</a></strong> outside The People’s Republic of China. Established in 1965, we employ over 3,000 people at our facilities in China. ZGCC and ZIM distribute more than 2,000 metric tons of different products across a span of over 40 countries. ZGCC is one of the largest producers of Cemented Carbide, Tungsten and Molybdenum products in China. The company is in the top ten of the world as a producer of these products. With over 50 years of experience, we have built complete lines from raw materials to downstream products as wll as have provided our customers with a full range of materials.</p>
+          <p>ZGCC is an <strong><a href="https://zim-llc.com/about/quality-certification/">ISO Certified company</a></strong> with ISO 9001, ISO 14001 and OHSAS-18001 certifications, providing quality control systems to serve our customers with quality products and services.</p>
+          <p>ZIM has <a href="https://zim-llc.com/contact-us/"><strong>two offices</strong></a> in the United States of America. One office is in Houston, Texas, and the other in Willoughby Hills, Ohio. Both locations have warehouses that have stock to provide customers with timely delivery service.</p>
+          </div>`,
+        },
+      },
+
+      "about-page-ru": {
+        languageId: ru.id,
+        contentId: aboutPage,
+        content: {
+          title: "О нас",
+          html: `<div class = "wpb_wrapper">
+          <p> <strong> Zigong International Marketing (ZIM) </strong> была основана Zigong Cemented Carbide Co., LTD (ZGCC) в 2003 году с целью сбыта цементированного карбида, вольфрама и молибдена <strong> <a href = " https://zim-llc.com/products/">Products </a> </strong> за пределами Китайской Народной Республики. Основанная в 1965 году, на наших предприятиях в Китае работает более 3000 человек. ZGCC и ZIM распространяют более 2000 метрических тонн различной продукции в более чем 40 странах. ZGCC - один из крупнейших производителей цементированного карбида, вольфрама и молибдена в Китае. Компания входит в десятку мировых лидеров по производству данной продукции. Обладая более чем 50-летним опытом, мы построили полные линии от сырья до последующих продуктов, а также предоставили нашим клиентам полный спектр материалов. </p>
+          <p> ZGCC является <strong> <a href="https://zim-llc.com/about/quality-certification/"> сертифицированной компанией ISO </a> </strong> с ISO 9001, ISO 14001 и Сертификаты OHSAS-18001, обеспечивающие системы контроля качества для предоставления нашим клиентам качественных продуктов и услуг. </p>
+          <p> ZIM имеет <a href="https://zim-llc.com/contact-us/"> <strong> два офиса </strong> </a> в Соединенных Штатах Америки. Один офис находится в Хьюстоне, штат Техас, а другой в Уиллоуби-Хиллз, штат Огайо. В обоих филиалах есть склады, на которых можно обеспечить своевременную доставку. </p>
+          </div>`,
         },
       },
     };

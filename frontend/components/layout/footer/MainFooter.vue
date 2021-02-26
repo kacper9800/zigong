@@ -1,13 +1,10 @@
 <template>
-    <footer class="footer gray-bg">
+    <footer class="footer gray-bg" id="sticky-footer">
         <div class="container">
             <div class="footer-btm">
                 <div class="row">
                     <div class="col-md-4 col-sm-6">
-                        <p>
-                            16504 Aldine Westfield Rd., Bldg. A | Houston, TX
-                            77032
-                        </p>
+                        <p>16504 Aldine Westfield Rd., Bldg. A | Houston, TX 77032</p>
                         phone: 281-987-1001 fax: 281-987-1002
                     </div>
 
@@ -19,9 +16,7 @@
                     <div class="col-md-4 col-sm-12">
                         <p>
                             Email:
-                            <a href="mailto:info@zim-llc.com"
-                                >info@zim-llc.com</a
-                            >
+                            <a href="mailto:info@zim-llc.com">info@zim-llc.com</a>
                             <br />
                             © Zigong International Marketing, LLC
                         </p>
@@ -69,8 +64,7 @@ export default {
             });
         },
         onScroll() {
-            const currentScrollPosition =
-                window.pageYOffset || document.documentElement.scrollTop;
+            const currentScrollPosition = window.pageYOffset || document.documentElement.scrollTop;
 
             if (currentScrollPosition >= 100) {
                 this.isVisible = true;

@@ -25,42 +25,98 @@
     max-width: 150px;
 }
 
-.dropdown {
+ul {
     .dropdown-menu {
-        position: absolute;
-        display: block;
-        background: $light;
-        min-width: 240px;
-        top: 130%;
-        left: 0;
-        right: 0px;
-        opacity: 0;
-        padding: 0px;
-        visibility: hidden;
-        -webkit-transition: all 0.3s ease-out 0s;
-        -moz-transition: all 0.3s ease-out 0s;
-        -ms-transition: all 0.3s ease-out 0s;
-        -o-transition: all 0.3s ease-out 0s;
-        transition: all 0.3s ease-out 0s;
-        border: 0px;
-        border-top: 5px solid #e12454;
-        border-radius: 0px;
+        li {
+            display: block;
+        }
+    }
+}
+
+.dropdown {
+    @media (max-width: 992px) {
+        .dropdown-menu {
+            left: 0;
+            right: 0px;
+            visibility: hidden;
+            background: transparent;
+        }
+
+        &:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            display: block;
+            min-width: 100%;
+            top: 130%;
+            left: 0;
+            right: 0px;
+            padding: 0px;
+            -webkit-transition: all 0.3s ease-out 0s;
+            -moz-transition: all 0.3s ease-out 0s;
+            -ms-transition: all 0.3s ease-out 0s;
+            -o-transition: all 0.3s ease-out 0s;
+            transition: all 0.3s ease-out 0s;
+            border: 0px;
+            border-top: 5px solid transparent;
+            border-radius: 0px;
+        }
+
+        .dropdown-item {
+            text-align: center;
+            display: inline-block;
+            padding: 13px 20px;
+            background: transparent;
+            font-weight: 400;
+            color: #cadade;
+            &:hover {
+                color: $secondary-color;
+            }
+        }
+
+        .dropdown-item {
+            float: left;
+        }
     }
 
-    &:hover .dropdown-menu {
-        opacity: 1;
-        visibility: visible;
-        top: 115%;
-    }
+    @media (min-width: 992px) {
+        .dropdown-menu {
+            position: absolute;
+            display: block;
+            background: $light;
+            min-width: 240px;
+            top: 130%;
+            left: 0;
+            right: 0px;
+            opacity: 0;
+            padding: 0px;
+            visibility: hidden;
+            -webkit-transition: all 0.3s ease-out 0s;
+            -moz-transition: all 0.3s ease-out 0s;
+            -ms-transition: all 0.3s ease-out 0s;
+            -o-transition: all 0.3s ease-out 0s;
+            transition: all 0.3s ease-out 0s;
+            border: 0px;
+            border-top: 5px solid #e12454;
+            border-radius: 0px;
+        }
 
-    .dropdown-item {
-        padding: 13px 20px;
-        border-bottom: 1px solid #eee;
-        background: transparent;
-        font-weight: 400;
-        color: #555;
-        &:hover {
-            color: $secondary-color;
+        &:hover .dropdown-menu {
+            -webkit-box-shadow: -2px 43px 72px -17px rgba(145, 145, 145, 0.75);
+            -moz-box-shadow: -2px 43px 72px -17px rgba(145, 145, 145, 0.75);
+            box-shadow: -2px 43px 72px -17px rgba(145, 145, 145, 0.75);
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .dropdown-item {
+            padding: 13px 20px;
+            border-bottom: 1px solid #eee;
+            background: transparent;
+            font-weight: 400;
+            color: #555;
+            &:hover {
+                color: $secondary-color;
+            }
         }
     }
 }
@@ -83,6 +139,7 @@
 }
 
 .top-right-bar {
+    text-align: right;
     a {
         span {
             color: $light;
@@ -99,6 +156,7 @@
 .navbar {
     padding: 0;
 }
+
 #navbar {
     background: rgb(2, 0, 36);
     background: linear-gradient(
@@ -107,4 +165,51 @@
         rgba(32, 70, 135, 1) 0%,
         rgba(71, 101, 166, 1) 100%
     );
+}
+
+dt {
+    margin-bottom: -1px;
+    padding: 10px;
+    padding-left: 10px;
+    border: solid 0.5px lightgray;
+    a {
+        color: white;
+        color: $blue;
+    }
+    a:focus,
+    a:hover {
+        color: $secondary-color;
+        text-decoration: none;
+    }
+
+    &.active {
+        background: #e12454;
+        a {
+            color: white;
+        }
+    }
+}
+
+dd {
+    margin-bottom: -1px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 25px;
+    text-align: left;
+    border: solid 0.5px lightgray;
+    a {
+        color: white;
+        color: $blue;
+    }
+    a:focus,
+    a:hover {
+        color: $secondary-color;
+        text-decoration: none;
+    }
+    &.active {
+        background: #e12454;
+        a {
+            color: white;
+        }
+    }
 }

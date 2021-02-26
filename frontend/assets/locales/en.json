@@ -4,7 +4,14 @@
     "about": "About",
     "products": "Products",
     "resources": "Resources",
-    "contactUs": "Contact Us"
+    "contactUs": "Contact Us",
+    "organization": "Organization",
+    "whoWeAre": "Who We Are",
+    "ourFacilities": "Our Facilities",
+    "capabilities": "Capabilities",
+    "credentials": "credentials",
+    "qualityCertification": "quality-certification",
+    "powders": "powders"
   },
   "global": {
     "firstName": "First Name",

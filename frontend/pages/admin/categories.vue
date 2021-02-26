@@ -55,10 +55,7 @@
             </a>
             <span slot="actionsCustomTitle">{{ $t(`global.actions`) }}</span>
         </a-table>
-        <categories-add-modal
-            :isVisible="isAddModalVisible"
-            @toggleAddModal="toggleAddModal"
-        />
+        <categories-add-modal :isVisible="isAddModalVisible" @toggleAddModal="toggleAddModal" />
         <categories-edit-modal
             :isVisible="isEditModalVisible"
             :languageCode="languageCode"
@@ -76,6 +73,7 @@ import CategoriesEditModal from '~/components/modals/categoriesEditModal';
 
 export default {
     layout: 'admin',
+    middleware: 'admin',
 
     components: {
         CategoriesAddModal,
@@ -159,6 +157,19 @@ export default {
             this.categoryIdToEdit = id;
             this.languageCode = code;
         }
+
+        //     showOfHiddeModal() {
+        //         this.isVisible = !this.isVisible;
+        //     },
+
+        //     openEditModalWithTranslations(code) {
+        //         this.editModal = true;
+        //     },
+
+        //     featchData() {
+        //         this.getAllCategories({
+        //             lng: ''
+        //         });
     }
 };
 </script>

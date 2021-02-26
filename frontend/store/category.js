@@ -15,8 +15,8 @@ export const getters = {
 };
 
 export const mutations = {
-    SET_CATEGORIES(state, data) {
-        state.categories = data;
+    SET_CATEGORIES(state, categories) {
+        state.categories = categories.data;
     },
 
     SET_CATEGORY(state, data) {
@@ -29,8 +29,8 @@ export const mutations = {
 };
 
 export const actions = {
-    async getAllCategories({ commit }, lng) {
-        const { data } = await this.$axios.get(`/categories`, { params: lng });
+    async getAllCategories({ commit }) {
+        const { data } = await this.$axios.get(`/categories`);
 
         commit('SET_CATEGORIES', data);
 
