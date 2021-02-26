@@ -31,7 +31,7 @@ export const mutations = {
 export const actions = {
     async getAllCategories({ commit }) {
         const { data } = await this.$axios.get(`/categories`);
-        console.log(data);
+
         commit('SET_CATEGORIES', data);
 
         return data;

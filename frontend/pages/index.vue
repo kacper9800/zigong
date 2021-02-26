@@ -3,10 +3,7 @@
         <section class="section service-2">
             <div class="container" style="margin-top: 100px">
                 <a-carousel autoplay v-if="show">
-                    <div
-                        v-for="item in content.promotionalImages"
-                        :key="item.file"
-                    >
+                    <div v-for="item in content.promotionalImages" :key="item.file">
                         <nuxt-link :to="localePath('/' + item.redirectTo)"
                             ><img
                                 :src="baseUrl + '/s1440/' + item.file"
@@ -17,12 +14,7 @@
                 </a-carousel>
                 <div v-else class="d-flex justify-content-center">
                     <a-spin>
-                        <a-icon
-                            slot="indicator"
-                            type="loading"
-                            style="font-size: 50px"
-                            spin
-                        />
+                        <a-icon slot="indicator" type="loading" style="font-size: 50px" spin />
                     </a-spin>
                 </div>
             </div>
@@ -31,21 +23,12 @@
         <section>
             <div class="container">
                 <div class="row">
-                    <div
-                        v-for="item in categories"
-                        :key="item.categorieId"
-                        class="col-md-4"
-                    >
+                    <div v-for="item in categories" :key="item.categorieId" class="col-md-4">
                         <div class="cube">
                             <div class="middle">
                                 <div class="center">
                                     <nuxt-link
-                                        :to="
-                                            localePath(
-                                                '/products/' +
-                                                    item.category.slug
-                                            )
-                                        "
+                                        :to="localePath('/products/' + item.category.slug)"
                                         class="btn btn-main"
                                         >Learn More</nuxt-link
                                     >
@@ -57,8 +40,7 @@
                                         :src="
                                             baseUrl +
                                             '/thumbnails/' +
-                                            item.category.homePageCoverImage
-                                                .thumbnail
+                                            item.category.homePageCoverImage.thumbnail
                                         "
                                         width="auto"
                                         height="110px"
@@ -112,7 +94,7 @@
         <section class="section about">
             <div class="container">
                 <div class="row align-items-center">
-                    <div class="col-md-6 col-sm-12">
+                    <div class="col-md-6 col-sm-12 align-self-start">
                         <div class="embed-responsive embed-responsive-16by9">
                             <iframe
                                 class="embed-responsive-item"
@@ -120,9 +102,6 @@
                                 frameborder="0"
                             />
                         </div>
-                        <div class="section" />
-                        <div class="section" />
-                        <div class="section" />
                     </div>
 
                     <div class="col-md-6 col-sm-12">
@@ -132,9 +111,7 @@
                         <div class="card">
                             <img
                                 class="card-img-top"
-                                :src="
-                                    baseUrl + '/s720/' + content.news.image.file
-                                "
+                                :src="baseUrl + '/s720/' + content.news.image.file"
                                 alt="Card image cap"
                             />
                             <div class="card-body">

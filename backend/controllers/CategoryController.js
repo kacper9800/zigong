@@ -23,8 +23,9 @@ class CategoryController {
       order = "ASC",
     } = req.query;
 
-    const limit = perPage;
-    const offset = (page - 1) * limit;
+    const pageNumber = parseInt(page);
+    const limit = parseInt(perPage);
+    const offset = (pageNumber - 1) * limit;
 
     const languageId = await this.languageRepository.findLanguageId(lng);
 
