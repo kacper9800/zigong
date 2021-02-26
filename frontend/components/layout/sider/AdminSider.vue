@@ -1,19 +1,31 @@
 <template>
-    <a-layout-sider width="200">
+    <a-layout-sider
+        :style="{
+            overflow: 'auto',
+            height: '100vh',
+            position: 'fixed',
+            left: 0
+        }"
+    >
+        <div class="logo">
+            <img
+                class="img-fluid"
+                src="@/assets/images/logo.png"
+                width="120"
+                style="margin: 20px 0px 10px 30px"
+            />
+        </div>
+
         <a-menu
+            :default-selected-keys="['1']"
+            :default-open-keys="['sub1']"
             mode="inline"
-            :open-keys.sync="openKeys"
-            :style="{ height: '80vh', borderRight: 0 }"
+            theme="dark"
         >
             <a-sub-menu v-for="page in pages" :key="page.name">
                 <span slot="title"
                     ><a-icon :type="page.icon" />
-                    <nuxt-link
-                        :to="mainPath + page.path"
-                        :style="{ color: '#111111' }"
-                    >
-                        {{ page.name }}
-                    </nuxt-link>
+                    {{ page.name }}
                 </span>
                 <a-menu-item
                     v-for="subPage in page.subPages"
@@ -46,6 +58,17 @@ export default {
             openKeys: ['products'],
             mainPath: '/admin',
             pages: [
+                {
+                    path: '/content',
+                    name: 'Content',
+                    icon: 'appstore',
+                    subPages: [
+                        { path: '/home-page', name: 'Home ' },
+                        { path: '/about-page', name: 'About ' },
+                        { path: '/products-page', name: 'Products ' },
+                        { path: '/contact-us', name: 'Contact US ' }
+                    ]
+                },
                 {
                     path: '/about',
                     name: 'About',

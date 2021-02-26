@@ -62,9 +62,18 @@ export const actions = {
     },
 
     async createOne({ commit }, category) {
-        const { data } = await this.$axios.post('/categories', category);
+        await this.$axios.post('/categories', category);
 
-        commit('ADD_CATEGORY', data);
+        return data;
+    },
+
+    async updateOne({ commit }, category) {
+        await this.$axios.put('/categories', category);
+    },
+
+    async deleteOne({ commit }, id) {
+        console.log(id);
+        await this.$axios.delete(`/categories/${id}`);
     }
 };
 

@@ -1,73 +1,83 @@
 <template>
-    <div class="page" style="max-height: 40vh !important">
+    <div style="overflow: hidden; height: 81vh">
         <h1 class="page-header" style="color: #9e9e9e">
             {{ $t('categories.header') }}
         </h1>
         <br />
-
-        <div
-            :style="{
-                padding: '26px 16px 16px'
-            }"
-        >
-            <a-button
-                class="editable-add-btn ant-btn-primary"
-                icon="plus"
-                @click="showOfHiddeModal()"
-            >
-                {{ $t('global.buttons.addNew') }}
-            </a-button>
-        </div>
-
         <a-table
             :columns="columns"
             :data-source="categories"
             rowKey="name"
             bordered
+            :pagination="{
+                defaultPageSize: 10,
+                showLessItems: true,
+                showSizeChanger: true,
+                showTitle: true
+            }"
         >
+            <template slot="title">
+                <a-button
+                    class="editable-add-btn ant-btn-primary"
+                    icon="plus"
+                    @click="toggleAddModal()"
+                >
+                    {{ $t('global.buttons.addNew') }}
+                </a-button>
+            </template>
+
             <a slot="name" slot-scope="text">{{ text }}</a>
             <span slot="nameCustomTitle">{{ $t(`categories.name`) }}</span>
             <a slot="homePageDescription" slot-scope="text">{{ text }}</a>
             <span slot="homePageDescriptionCustomTitle">{{
                 $t(`categories.modal.homePageDescription`)
             }}</span>
-            <a slot="actions" slot-scope="">
+            <a slot="actions" slot-scope="text, record">
                 <img
-                    :src="require('@/assets/images/flags/en.png')"
-                    @click="openEditModalWithTranslations('en')"
+                    src="~/assets/images/flags/en.png"
+                    @click="toggleEditModal(record.categoryId, 'En')"
                 />
                 <img
-                    :src="require('@/assets/images/flags/ru.png')"
-                    @click="openEditModalWithTranslations('ru')"
+                    src="~/assets/images/flags/ru.png"
+                    @click="toggleEditModal(record.categoryId, 'Ru')"
                 />
                 <img
-                    :src="require('@/assets/images/flags/pl.png')"
-                    @click="openEditModalWithTranslations('pl')"
+                    src="~/assets/images/flags/pl.png"
+                    @click="toggleEditModal(record.categoryId, 'Pl')"
                 />
-                <a-button type="danger">Delete</a-button>
+                <a-popconfirm
+                    v-if="categories.length"
+                    :title="$t('global.deleteActionQuestion')"
+                    @confirm="() => onDelete(record.categoryId)"
+                >
+                    <a-button type="danger">Delete</a-button>
+                </a-popconfirm>
             </a>
             <span slot="actionsCustomTitle">{{ $t(`global.actions`) }}</span>
         </a-table>
-
-        <categories-modal
-            :isVisible="isVisible"
-            @showOfHiddeModal="showOfHiddeModal"
-            @featchData="featchData()"
+        <categories-add-modal :isVisible="isAddModalVisible" @toggleAddModal="toggleAddModal" />
+        <categories-edit-modal
+            :isVisible="isEditModalVisible"
+            :languageCode="languageCode"
+            :categoryId="categoryIdToEdit"
+            @toggleEditModal="toggleEditModal"
         />
     </div>
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex';
-import config from '@/config';
-import CategoriesModal from '~/components/modals/categoriesModal.vue';
+import { mapActions, mapGetters } from 'vuex';
+import config from '~/config';
+import CategoriesAddModal from '~/components/modals/categoriesAddModal.vue';
+import CategoriesEditModal from '~/components/modals/categoriesEditModal';
 
 export default {
     layout: 'admin',
     middleware: 'admin',
 
     components: {
-        CategoriesModal
+        CategoriesAddModal,
+        CategoriesEditModal
     },
 
     async asyncData({ app, store }) {
@@ -83,7 +93,10 @@ export default {
 
     data() {
         return {
-            isVisible: false,
+            isAddModalVisible: false,
+            isEditModalVisible: false,
+            categoryIdToEdit: null,
+            languageCode: 'En',
             columns: [
                 {
                     dataIndex: 'name',
@@ -125,22 +138,38 @@ export default {
 
     methods: {
         ...mapActions({
-            getAllCategories: 'category/getAllCategories'
+            delete: 'category/deleteOne',
+            allCategories: 'category/getAllCategories'
         }),
-
-        showOfHiddeModal() {
-            this.isVisible = !this.isVisible;
+        async onDelete(id) {
+            try {
+                await this.delete(id);
+                await this.allCategories('En');
+            } catch (e) {
+                console.error(e);
+            }
         },
-
-        openEditModalWithTranslations(code) {
-            this.editModal = true;
+        toggleAddModal() {
+            this.isAddModalVisible = !this.isAddModalVisible;
         },
-
-        featchData() {
-            this.getAllCategories({
-                lng: ''
-            });
+        toggleEditModal(id, code) {
+            this.isEditModalVisible = !this.isEditModalVisible;
+            this.categoryIdToEdit = id;
+            this.languageCode = code;
         }
+
+        //     showOfHiddeModal() {
+        //         this.isVisible = !this.isVisible;
+        //     },
+
+        //     openEditModalWithTranslations(code) {
+        //         this.editModal = true;
+        //     },
+
+        //     featchData() {
+        //         this.getAllCategories({
+        //             lng: ''
+        //         });
     }
 };
 </script>

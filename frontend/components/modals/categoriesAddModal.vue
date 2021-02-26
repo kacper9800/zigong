@@ -12,11 +12,7 @@
         <br />
 
         <a-steps :current="modalCurrentStep">
-            <a-step
-                v-for="item in steps"
-                :key="item.title"
-                :title="item.title"
-            />
+            <a-step v-for="item in steps" :key="item.title" :title="item.title" />
         </a-steps>
 
         <div class="steps-content">
@@ -33,16 +29,13 @@
                             @blur="$v.formData.name.$touch()"
                         />
                     </a-form-item>
-                    <a-form-item
-                        :label="$t('categories.modal.homePageDescription')"
-                    >
+                    <a-form-item :label="$t('categories.modal.homePageDescription')">
                         <a-input
                             type="text"
                             placeholder="Description at home page"
                             v-model="formData.homePageDescription"
                             :class="{
-                                'is-invalid':
-                                    $v.formData.homePageDescription.$error
+                                'is-invalid': $v.formData.homePageDescription.$error
                             }"
                             @blur="$v.formData.homePageDescription.$touch()"
                         />
@@ -79,11 +72,7 @@
             </div>
         </div>
         <div class="steps-action" style="margin-top: 10px">
-            <a-button
-                v-if="modalCurrentStep > 0"
-                style="margin-left: 8px"
-                @click="prev"
-            >
+            <a-button v-if="modalCurrentStep > 0" style="margin-left: 8px" @click="prev">
                 Previous
             </a-button>
             <a-button
@@ -97,7 +86,6 @@
         </div>
     </a-modal>
 </template>
-
 <script>
 import { mapActions } from 'vuex';
 import { required, minLength } from 'vuelidate/lib/validators';
@@ -128,7 +116,6 @@ export default {
     data() {
         return {
             modalCurrentStep: 0,
-            selectedOption: null,
             formData: {
                 coverImageId: null,
                 homePageCoverImageId: null
@@ -159,7 +146,7 @@ export default {
         }),
 
         hideModal() {
-            this.$emit('showOfHiddeModal');
+            this.$emit('toggleAddModal');
         },
 
         save() {
@@ -169,17 +156,13 @@ export default {
 
                 this.formData.coverImageId = this.coverImage.shift();
                 this.formData.homePageCoverImageId = this.homePageCoverImage.shift();
-
                 try {
                     this.createCategory(this.formData);
                 } catch (error) {
                     console.log(error);
                 }
-
-                this.$emit('featchData');
-
                 this.confirmLoading = false;
-            }, 2000);
+            }, 1000);
         },
 
         next() {
