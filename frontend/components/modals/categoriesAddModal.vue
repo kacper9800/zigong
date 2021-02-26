@@ -88,7 +88,7 @@
 </template>
 <script>
 import { mapActions } from 'vuex';
-import FilePicker from '../elements/filePicker';
+import FilePicker from '~/components/elements/filePicker';
 
 export default {
     layout: 'admin',
