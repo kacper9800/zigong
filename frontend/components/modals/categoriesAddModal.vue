@@ -8,7 +8,7 @@
             props: { disabled: checkSaveButtonDisability() }
         }"
         @cancel="hideModal"
-        >
+    >
         <br />
 
         <a-steps :current="modalCurrentStep">
@@ -71,7 +71,7 @@
         <div class="steps-action">
             <a-button
                 v-if="modalCurrentStep > 0"
-                style="margin-left: 8px;"
+                style="margin-left: 8px"
                 @click="prev"
             >
                 Previous
@@ -83,13 +83,11 @@
             >
                 Next
             </a-button>
-            {{ formData }}
         </div>
     </a-modal>
 </template>
-
 <script>
-import { mapGetters, mapActions } from 'vuex';
+import { mapActions } from 'vuex';
 import FilePicker from '../elements/filePicker';
 
 export default {

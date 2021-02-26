@@ -37,11 +37,10 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex';
+import { mapActions } from 'vuex';
 
 export default {
     layout: 'admin',
-
 
     props: {
         isVisible: {
@@ -67,25 +66,24 @@ export default {
         };
     },
 
-    computed: {},
-
     methods: {
         ...mapActions({
             updateCategory: 'category/createOne',
             getAllCategories: 'category/getAllCategories'
         }),
 
-        hideModal(e) {
-          this.$emit('toggleEditModal');
+        hideModal() {
+            this.$emit('toggleEditModal');
         },
 
-        save(e) {
+        save() {
             this.confirmLoading = true;
             setTimeout(() => {
                 this.hideModal();
 
                 this.formData.coverImageId = this.coverImage.shift();
                 this.formData.homePageCoverImageId = this.homePageCoverImage.shift();
+
                 try {
                     this.createCategory(this.formData);
                 } catch (error) {
@@ -97,5 +95,3 @@ export default {
     }
 };
 </script>
-
-<style scoped></style>
