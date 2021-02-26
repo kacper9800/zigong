@@ -74,6 +74,7 @@ export default {
 
     data() {
         return {
+            // @todo - remove it and use store to get data
             items: [
                 'https://pix10.agoda.net/hotelImages/1199068/-1/09cb9a2780bf41ad1e8f8a3d2e074754.jpg?s=1024x768',
                 'https://pix10.agoda.net/hotelImages/1199068/-1/09cb9a2780bf41ad1e8f8a3d2e074754.jpg?s=1024x768',

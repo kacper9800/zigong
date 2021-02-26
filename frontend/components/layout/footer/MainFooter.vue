@@ -1,5 +1,5 @@
 <template>
-    <footer class="footer gray-bg">
+    <footer class="footer gray-bg" id="sticky-footer">
         <div class="container">
             <div class="footer-btm">
                 <div class="row">
