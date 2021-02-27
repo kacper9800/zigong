@@ -29,8 +29,8 @@ export const mutations = {
 };
 
 export const actions = {
-    async getAllCategories({ commit }) {
-        const { data } = await this.$axios.get(`/categories`);
+    async getAllCategories({ commit }, params) {
+        const { data } = await this.$axios.get(`/categories`, { params });
 
         commit('SET_CATEGORIES', data);
 
@@ -72,7 +72,6 @@ export const actions = {
     },
 
     async deleteOne({ commit }, id) {
-        console.log(id);
         await this.$axios.delete(`/categories/${id}`);
     }
 };

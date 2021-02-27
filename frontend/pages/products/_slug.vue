@@ -11,21 +11,17 @@
                     </div>
                     <div class="col-md-4">
                         <div class="wpb_wrapper" style="margin-top: 30px">
-                            <h2 style="text-align: center" class="title-color">
-                                Questions?
-                            </h2>
+                            <h2 style="text-align: center" class="title-color">Questions?</h2>
                             <p style="text-align: center">
-                                Do you have questions, need a quote? We have a
-                                wide range of products, materials and supplies!
+                                Do you have questions, need a quote? We have a wide range of
+                                products, materials and supplies!
                             </p>
                         </div>
                         <div class="d-flex justify-content-center">
                             <nuxt-link
                                 :to="localePath('contact-us')"
                                 class="btn btn-main-2 btn-round-full"
-                                >Contact US<i
-                                    class="icofont-simple-right ml-2"
-                                ></i
+                                >Contact US<i class="icofont-simple-right ml-2"></i
                             ></nuxt-link>
                         </div>
                     </div>

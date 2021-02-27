@@ -159,7 +159,7 @@ export default {
                 try {
                     this.createCategory(this.formData);
                 } catch (error) {
-                    console.log(error);
+                    console.erroe(error);
                 }
                 this.confirmLoading = false;
             }, 1000);
