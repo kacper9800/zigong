@@ -70,7 +70,11 @@ export default {
                         { path: '/about/credentials', name: 'Credentials' },
                         {
                             path: '/about/quality-certification',
-                            name: 'quality-certification'
+                            name: 'Quality Certification'
+                        },
+                        {
+                            path: '/about/conflict-free-minerals',
+                            name: 'Conflict-Free Minerals'
                         }
                     ]
                 }
