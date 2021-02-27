@@ -1,15 +1,13 @@
 <template>
-  <div style="background-color: #001529; height: 5vh; overflow: hidden" >
-    Foooter
-  </div>
+    <a-layout-footer :style="{ textAlign: 'center' }">
+        Ant Design ©2018 Created by Ant UED
+    </a-layout-footer>
 </template>
 
 <script>
-  export default {
-    name: "AdminFooter"
-  }
+export default {
+    name: 'AdminFooter'
+};
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

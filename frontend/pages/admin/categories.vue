@@ -1,10 +1,9 @@
 <template>
-    <div style="overflow: hidden; height: 81vh;">
-        <h1 class="page-header" style="color: #9e9e9e;">
+    <div style="overflow: hidden; height: 81vh">
+        <h1 class="page-header" style="color: #9e9e9e">
             {{ $t('categories.header') }}
         </h1>
         <br />
-        <!--            :scroll="{'y': '55vh' }"-->
         <a-table
             :columns="columns"
             :data-source="categories"
@@ -17,7 +16,7 @@
                 showTitle: true
             }"
         >
-            <template slot="title" slot-scope="currentPageData">
+            <template slot="title">
                 <a-button
                     class="editable-add-btn ant-btn-primary"
                     icon="plus"
@@ -34,15 +33,15 @@
             }}</span>
             <a slot="actions" slot-scope="text, record">
                 <img
-                    :src="require('../../assets/images/flags/en.png')"
+                    src="~/assets/images/flags/en.png"
                     @click="toggleEditModal(record.categoryId, 'En')"
                 />
                 <img
-                    :src="require('../../assets/images/flags/ru.png')"
+                    src="~/assets/images/flags/ru.png"
                     @click="toggleEditModal(record.categoryId, 'Ru')"
                 />
                 <img
-                    :src="require('../../assets/images/flags/pl.png')"
+                    src="~/assets/images/flags/pl.png"
                     @click="toggleEditModal(record.categoryId, 'Pl')"
                 />
                 <a-popconfirm
@@ -55,9 +54,13 @@
             </a>
             <span slot="actionsCustomTitle">{{ $t(`global.actions`) }}</span>
         </a-table>
-      <categories-add-modal :isVisible="isAddModalVisible" @toggleAddModal="toggleAddModal"/>
-      <categories-edit-modal :isVisible="isEditModalVisible" :languageCode="languageCode"
-                             :categoryId="categoryIdToEdit" @toggleEditModal="toggleEditModal"/>
+        <categories-add-modal :isVisible="isAddModalVisible" @toggleAddModal="toggleAddModal" />
+        <categories-edit-modal
+            :isVisible="isEditModalVisible"
+            :languageCode="languageCode"
+            :categoryId="categoryIdToEdit"
+            @toggleEditModal="toggleEditModal"
+        />
     </div>
 </template>
 
@@ -69,10 +72,11 @@ import CategoriesEditModal from '~/components/modals/categoriesEditModal';
 
 export default {
     layout: 'admin',
+    middleware: 'admin',
 
     components: {
-      CategoriesAddModal,
-      CategoriesEditModal
+        CategoriesAddModal,
+        CategoriesEditModal
     },
 
     async asyncData({ app, store }) {
@@ -151,7 +155,11 @@ export default {
             this.isEditModalVisible = !this.isEditModalVisible;
             this.categoryIdToEdit = id;
             this.languageCode = code;
-        },
+        }
+
+        // openEditModalWithTranslations(code) {
+        //     this.editModal = true;
+        // }
     }
 };
 </script>

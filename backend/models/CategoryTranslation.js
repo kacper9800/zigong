@@ -13,7 +13,7 @@ module.exports = (sequelize, Sequelize) => {
       allowNull: false,
       type: Sequelize.STRING,
     },
-    value: {
+    description: {
       allowNull: false,
       type: Sequelize.JSON,
     },

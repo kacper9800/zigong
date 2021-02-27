@@ -11,6 +11,11 @@ module.exports = {
           updatedAt: new Date(),
         },
         {
+          slug: "about-page",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
           slug: "products-page",
           createdAt: new Date(),
           updatedAt: new Date(),

@@ -1,34 +1,29 @@
 <template>
-    <a-layout id="components-layout-demo-top-side-2">
-        <AdminHeader />
-        <a-layout>
-            <AdminSider />
-            <a-layout style="padding: 0 24px 24px">
-<!--                <a-breadcrumb style="margin: 16px 0">-->
-<!--                    <a-breadcrumb-item>Home</a-breadcrumb-item>-->
-<!--                    <a-breadcrumb-item>List</a-breadcrumb-item>-->
-<!--                    <a-breadcrumb-item>App</a-breadcrumb-item>-->
-<!--                </a-breadcrumb>-->
-                <a-layout-content
+    <a-layout id="components-layout-demo-fixed-sider">
+        <AdminSider />
+        <a-layout :style="{ marginLeft: '200px' }">
+            <a-layout-header :style="{ background: '#fff', padding: 0 }">
+                <AdminHeader />
+            </a-layout-header>
+            <a-layout-content :style="{ margin: '24px 16px 0', overflow: 'initial' }">
+                <div
                     :style="{
-                        background: '#fff',
                         padding: '24px',
-                        margin: 0,
-                        minHeight: '280px'
+                        background: '#fff'
                     }"
                 >
                     <Nuxt />
-                </a-layout-content>
-            </a-layout>
+                </div>
+            </a-layout-content>
+            <AdminFooter />
         </a-layout>
-      <AdminFooter/>
     </a-layout>
 </template>
+
 <script>
 import AdminHeader from '~/components/layout/header/AdminHeader';
 import AdminSider from '~/components/layout/sider/AdminSider';
 import AdminFooter from '~/components/layout/footer/AdminFooter';
-
 export default {
     data() {
         return {
@@ -36,19 +31,17 @@ export default {
         };
     },
     components: {
-      AdminFooter,
-      AdminSider,
-      AdminHeader
+        AdminFooter,
+        AdminSider,
+        AdminHeader
     }
 };
 </script>
 
-<style>
-#components-layout-demo-top-side-2 .logo {
-    width: 120px;
-    height: 31px;
+<style scoped>
+#components-layout-demo-fixed-sider .logo {
+    height: 32px;
     background: rgba(255, 255, 255, 0.2);
-    margin: 16px 28px 16px 0;
-    float: left;
+    margin: 16px;
 }
 </style>

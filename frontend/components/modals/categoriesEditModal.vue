@@ -1,4 +1,5 @@
 <template>
+    <!-- @todo - fix this modal (now it doesnt work as expected) -->
     <a-modal
         :title="$t('categories.modal.editHeader' + languageCode)"
         :visible="isVisible"
@@ -8,12 +9,7 @@
     >
         <a-form id="categories-form" :form="formData">
             <a-form-item :label="$t('categories.modal.name')">
-                <a-input
-                    type="text"
-                    placeholder="Category name"
-                    v-model="formData.name"
-                    required
-                />
+                <a-input type="text" placeholder="Category name" v-model="formData.name" required />
             </a-form-item>
             <a-form-item :label="$t('categories.modal.homePageDescription')">
                 <a-input
@@ -37,11 +33,10 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex';
+import { mapActions } from 'vuex';
 
 export default {
     layout: 'admin',
-
 
     props: {
         isVisible: {
@@ -67,19 +62,17 @@ export default {
         };
     },
 
-    computed: {},
-
     methods: {
         ...mapActions({
             updateCategory: 'category/createOne',
             getAllCategories: 'category/getAllCategories'
         }),
 
-        hideModal(e) {
-          this.$emit('toggleEditModal');
+        hideModal() {
+            this.$emit('toggleEditModal');
         },
 
-        save(e) {
+        save() {
             this.confirmLoading = true;
             setTimeout(() => {
                 this.hideModal();
@@ -97,5 +90,3 @@ export default {
     }
 };
 </script>
-
-<style scoped></style>
