@@ -3,11 +3,7 @@ const { Op } = require("sequelize");
 const slugGenerator = require("../helpers/slug");
 
 class AboutController {
-  constructor(
-      aboutRepository,
-      aboutTranslationRepository,
-      languageRepository
-  ) {
+  constructor(aboutRepository, aboutTranslationRepository, languageRepository) {
     this.aboutRepository = aboutRepository;
     this.aboutTranslationRepository = aboutTranslationRepository;
     this.languageRepository = languageRepository;
@@ -22,8 +18,9 @@ class AboutController {
       order = "ASC",
     } = req.query;
 
-    const limit = perPage;
-    const offset = (page - 1) * limit;
+    const pageNumber = parseInt(page);
+    const limit = parseInt(perPage);
+    const offset = (pageNumber - 1) * limit;
 
     const languageId = await this.languageRepository.findLanguageId(lng);
 
@@ -37,13 +34,13 @@ class AboutController {
       order: [[sortBy, order]],
       where: { languageId },
       attributes: {
-        exclude: ["id", "languageId"],
+        exclude: ["id", "languageId", "value", "deleted"],
       },
       include: [
         {
           association: "about",
           attributes: {
-            exclude: ["id"],
+            exclude: ["id", "deleted"],
           },
         },
       ],
@@ -66,28 +63,30 @@ class AboutController {
       return res.sendStatus(HttpStatuses.NOT_FOUND);
     }
 
-    const aboutTranslation = await this.aboutTranslationRepository.findOne(
+    const aboutTranslation = await this.aboutTranslationRepository.findOne({
+      where: { languageId, aboutId: id },
+      attributes: {
+        exclude: ["id", "languageId"],
+      },
+      include: [
         {
-          where: { languageId, aboutId: id },
+          association: "about",
           attributes: {
-            exclude: ["id", "languageId"],
+            exclude: ["id"],
           },
-          include: [
-            {
-              association: "about",
-              attributes: {
-                exclude: ["id"],
-              },
-            },
-          ],
-        }
-    );
+        },
+      ],
+    });
 
     if (!aboutTranslation) {
       return res.sendStatus(HttpStatuses.NOT_FOUND);
     }
 
-    return res.send(aboutTranslation);
+    const parsedData = aboutTranslation.value;
+
+    parsedData.name = aboutTranslation.name;
+
+    return res.send(parsedData);
   }
 
   async showBySlug(req, res) {
@@ -110,28 +109,29 @@ class AboutController {
 
     const { id: aboutId } = about;
 
-    const aboutTranslation = await this.aboutTranslationRepository.findOne(
+    const aboutTranslation = await this.aboutTranslationRepository.findOne({
+      where: { languageId, aboutId },
+      attributes: {
+        exclude: ["id", "languageId"],
+      },
+      include: [
         {
-          where: { languageId, aboutId },
+          association: "language",
           attributes: {
-            exclude: ["id", "languageId"],
+            exclude: ["id"],
           },
-          include: [
-            {
-              association: "language",
-              attributes: {
-                exclude: ["id"],
-              },
-            },
-          ],
-        }
-    );
+        },
+      ],
+    });
 
     if (!aboutTranslation) {
       return res.sendStatus(HttpStatuses.NOT_FOUND);
     }
 
-    return res.send(aboutTranslation);
+    const parsedData = aboutTranslation.value;
+    parsedData.name = aboutTranslation.name;
+
+    return res.send(parsedData);
   }
 
   async create(req, res) {
@@ -153,11 +153,9 @@ class AboutController {
       });
     }
 
-    const aboutTranslation = await this.aboutTranslationRepository.findOne(
-        {
-          where: { languageId, aboutId: existAbout.id },
-        }
-    );
+    const aboutTranslation = await this.aboutTranslationRepository.findOne({
+      where: { languageId, aboutId: existAbout.id },
+    });
 
     req.body.aboutId = existAbout.id;
     req.body.languageId = languageId;
@@ -177,11 +175,7 @@ class AboutController {
   async update(req, res) {
     const { id } = req.params;
 
-    await this.aboutTranslationRepository.delete({
-      where: { aboutId: id },
-    });
-
-    return res.sendStatus(HttpStatuses.NO_CONTENT);
+    return res.sendStatus(HttpStatuses.NOT_MODIFIED);
   }
 
   async delete(req, res) {

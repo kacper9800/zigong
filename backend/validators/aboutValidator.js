@@ -6,11 +6,11 @@ const update = [];
 
 const create = [
   body(["name"])
-  .trim()
-  .not()
-  .isEmpty()
-  .withMessage("should be not empty")
-  .bail(),
+    .trim()
+    .not()
+    .isEmpty()
+    .withMessage("should be not empty")
+    .bail(),
 
   body(["lng"]).custom(async (lng, { req }) => {
     if (!lng) {
@@ -30,12 +30,19 @@ const create = [
     req.language = language;
   }),
 
-  body(["description"])
-  .trim()
-  .not()
-  .isEmpty()
-  .withMessage("should be not empty")
-  .bail(),
+  body(["value"])
+    .trim()
+    .not()
+    .isEmpty()
+    .withMessage("should be not empty")
+    .bail()
+    .custom(async (value, { req }) => {
+      try {
+        JSON.parse(value);
+      } catch (e) {
+        return Promise.reject("incorrect JSON!");
+      }
+    }),
 
   body(["aboutId"]).custom(async (aboutId, { req }) => {
     let lng = req.body.lng;

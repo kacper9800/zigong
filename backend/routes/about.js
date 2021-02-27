@@ -14,15 +14,20 @@ module.exports = (di) => {
 
   router.get("/about/:slug", (...args) => AboutController.showBySlug(...args));
 
-  router.post("/about", [isLoggedIn, isAdmin, aboutValidator.create, validate],
+  router.post(
+    "/about",
+    [isLoggedIn, isAdmin, aboutValidator.create, validate],
     (...args) => AboutController.create(...args)
   );
 
-  router.put("/about", [isLoggedIn, isAdmin, aboutValidator.update, validate],
+  // @todo - put method
+  router.put(
+    "/about",
+    [isLoggedIn, isAdmin, aboutValidator.update, validate],
     (...args) => AboutController.update(...args)
   );
 
-  router.delete("/abouts/:id", [isLoggedIn, isAdmin], (...args) =>
+  router.delete("/about/:id", [isLoggedIn, isAdmin], (...args) =>
     AboutController.delete(...args)
   );
 

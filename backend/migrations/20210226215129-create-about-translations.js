@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
@@ -14,9 +14,10 @@ module.exports = {
         type: Sequelize.STRING,
       },
       name: {
+        allowNull: false,
         type: Sequelize.STRING,
       },
-      description: {
+      value: {
         allowNull: false,
         type: Sequelize.JSON,
       },
@@ -26,7 +27,7 @@ module.exports = {
       },
       deleted: {
         type: Sequelize.BOOLEAN,
-        defaultValue: false
+        defaultValue: false,
       },
       createdAt: {
         allowNull: false,
@@ -43,5 +44,5 @@ module.exports = {
 
   down: (queryInterface, Sequelize) => {
     return queryInterface.dropTable("AboutTranslations");
-  }
+  },
 };

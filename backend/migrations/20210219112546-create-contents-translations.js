@@ -10,7 +10,7 @@ module.exports = {
       },
       value: {
         allowNull: false,
-        type: Sequelize.TEXT,
+        type: Sequelize.JSON,
       },
       contentId: {
         allowNull: false,
