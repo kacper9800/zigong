@@ -25,7 +25,6 @@
                     {{ $t('global.buttons.addNew') }}
                 </a-button>
             </template>
-
             <a slot="name" slot-scope="text">{{ text }}</a>
             <span slot="nameCustomTitle">{{ $t(`categories.name`) }}</span>
             <a slot="homePageDescription" slot-scope="text">{{ text }}</a>
@@ -158,18 +157,9 @@ export default {
             this.languageCode = code;
         }
 
-        //     showOfHiddeModal() {
-        //         this.isVisible = !this.isVisible;
-        //     },
-
-        //     openEditModalWithTranslations(code) {
-        //         this.editModal = true;
-        //     },
-
-        //     featchData() {
-        //         this.getAllCategories({
-        //             lng: ''
-        //         });
+        // openEditModalWithTranslations(code) {
+        //     this.editModal = true;
+        // }
     }
 };
 </script>

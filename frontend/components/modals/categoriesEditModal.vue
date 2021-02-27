@@ -79,7 +79,6 @@ export default {
 
                 this.formData.coverImageId = this.coverImage.shift();
                 this.formData.homePageCoverImageId = this.homePageCoverImage.shift();
-
                 try {
                     this.createCategory(this.formData);
                 } catch (error) {
