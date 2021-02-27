@@ -23,42 +23,130 @@ module.exports = {
     const qualityCertification = findAboutId(about, "quality-certification");
     const conflictFreeMinerals = findAboutId(about, "conflict-free-minerals");
 
-    const defaultDescription = `{
-      "name": "Nasza organizacja",
-      "article": "",
-      "gallery": [
-        {
-          "id": 1,
-          "thumbnail": "G1ASjM2JelgQhfROKB6yJTkNj.png",
-          "name": "zigong-texas-1.png",
-          "description": null,
-          "file": "seya9EDRNFuyrMfid1TQ7ZsuS.png",
-          "mimetype": "png"
-        },
-        {
-          "id": 1,
-          "thumbnail": "G1ASjM2JelgQhfROKB6yJTkNj.png",
-          "name": "zigong-texas-1.png",
-          "description": null,
-          "file": "seya9EDRNFuyrMfid1TQ7ZsuS.png",
-          "mimetype": "png"
-        }
-      ],
-      "sections": [
-        {
-          "key": "1",
-          "article": "html",
-          "file": {
-            "id": 1,
-            "thumbnail": "G1ASjM2JelgQhfROKB6yJTkNj.png",
-            "name": "zigong-texas-1.png",
-            "description": null,
-            "file": "seya9EDRNFuyrMfid1TQ7ZsuS.png",
-            "mimetype": "png"
-          }
-        }
-      ]
-    }`;
+    const gallery1 = [
+      {
+        id: 18,
+        thumbnail: "QXNQ8G6SIONhzO6C9sQdLEPZY.png",
+        name: "pobrane (1).jpeg",
+        file: "nkmHixBTYe4WYWpZZwXz2lHZr.jpeg",
+        mimetype: "jpeg",
+      },
+      {
+        id: 19,
+        thumbnail: "2VQFv6crxewmNG6QeahjpiiOK.png",
+        name: "pobrane (2).jpeg",
+        file: "vBWYwZFmVkF8yuZJFYN5IYGkW.jpeg",
+        mimetype: "jpeg",
+      },
+      {
+        id: 20,
+        thumbnail: "nxuFMFi6BhGHGrQnkfX4QbO1K.png",
+        name: "pobrane (3).jpeg",
+        file: "DsZJSqLPOBD6IpnvJQQNT9oPY.jpeg",
+        mimetype: "jpeg",
+      },
+    ];
+
+    const gallery2 = [
+      {
+        id: 21,
+        thumbnail: "0eD2nz5MGIOwCIJTs8iBbZnNZ.png",
+        name: "pobrane (1).jpeg",
+        file: "MaC2A5L4WSK1vkxXHfXyyTOvg.jpeg",
+        mimetype: "jpeg",
+      },
+      {
+        id: 22,
+        thumbnail: "iCYM2zE9Gf2wYANU0QBRZwvIF.png",
+        name: "pobrane (2).jpeg",
+        file: "0NeOUqAQtHXaIh19hTF15myzO.jpeg",
+        mimetype: "jpeg",
+      },
+      {
+        id: 23,
+        thumbnail: "sNXEkQrEZcWhowYhJ3wD3Q0sj.png",
+        name: "pobrane (3).jpeg",
+        file: "Oi27eIf51BD1yJerU6XV9pF8d.jpeg",
+        mimetype: "jpeg",
+      },
+      {
+        id: 26,
+        thumbnail: "FGgbwsGiTqIF5G5iUrXmcoRN2.png",
+        name: "pobrane (4).jpeg",
+        file: "wm282jpArZmFBR1rOay701gXj.jpeg",
+        mimetype: "jpeg",
+      },
+      {
+        id: 27,
+        thumbnail: "hs4ytt8R4yZWhwenA8fEw3rBS.png",
+        name: "pobrane (5).jpeg",
+        file: "9USPWJ0fLoTVXjylQUN8ec8Hh.jpeg",
+        mimetype: "jpeg",
+      },
+      {
+        id: 24,
+        thumbnail: "i2Udl04q0Gxi9rT6xVyahGZhV.png",
+        name: "pobrane (6).jpeg",
+        file: "SM7MiX1jvqdClyll5HWZ9Eo3k.jpeg",
+        mimetype: "jpeg",
+      },
+      {
+        id: 29,
+        thumbnail: "eWcvUuZ7Ck5nYcTwTjo54IoNt.png",
+        name: "pobrane (7).jpeg",
+        file: "7kuZrYN2ZJa3zv8ArnebP0YjH.jpeg",
+        mimetype: "jpeg",
+      },
+      {
+        id: 25,
+        thumbnail: "IpLQaObCrXBZJ34vrqN9aZfbW.png",
+        name: "pobrane (8).jpeg",
+        file: "rCrTtH00o7jX9z33ZJknJRcfD.jpeg",
+        mimetype: "jpeg",
+      },
+      {
+        id: 28,
+        thumbnail: "EYWpzlJo6tK6cN3RcakpWk0br.png",
+        name: "pobrane.jpeg",
+        file: "uXAHiYZlEnjOwiNUC5FE4wBYX.jpeg",
+        mimetype: "jpeg",
+      },
+    ];
+
+    const certifications = [
+      {
+        id: 31,
+        thumbnail: "hnJbTg33RBpgMhtQ5qd4YpiYl.png",
+        name: "CNAS-1-1.pdf",
+        description: "CNAS",
+        file: "JGzM98fs0qrxXItGTcpnLFpng.pdf",
+        mimetype: "pdf",
+      },
+      {
+        id: 30,
+        thumbnail: "gZruu7TmZgpBEXfX5eHiW7aJj.png",
+        name: "ISO-9001-1.pdf",
+        description: "ISO-9001",
+        file: "M3bSlHoZ1fqOzpppIiVrv7fro.pdf",
+        mimetype: "pdf",
+      },
+      {
+        id: 33,
+        thumbnail: "Y1ehJrAY4BWnwFKogsOh9l2tF.png",
+        name: "ISO-14001-2.pdf",
+        description: "ISO-14001",
+        file: "tLRAJWlqmzOXYsGi6wETDZF2Q.pdf",
+        mimetype: "pdf",
+      },
+      {
+        id: 32,
+        thumbnail: "gIdWVSS72WuU2qyHlZfN04pda.png",
+        name: "ISO-45001-1.pdf",
+        description: "ISO-45001",
+        file: "5I3mLvVmTDx5MO52vQ1F9ptzi.pdf",
+        mimetype: "pdf",
+      },
+    ];
 
     const pages = {
       "organization-pl": {
@@ -68,7 +156,7 @@ module.exports = {
         jsonData: {
           title: "Nasza organizacja",
           article:
-            '<img class="img-fluid" src="https://zim-llc.com/wp-content/uploads/2017/04/Organization-Structure-1.jpg">',
+            '<img class="img-fluid" src="http://localhost:3001/s720/muXYiOSIFbnGOplvHROGE0WVF.jpeg">',
         },
       },
       "organization-en": {
@@ -78,7 +166,7 @@ module.exports = {
         jsonData: {
           title: "Our Organization",
           article:
-            '<img class="img-fluid" src="https://zim-llc.com/wp-content/uploads/2017/04/Organization-Structure-1.jpg">',
+            '<img class="img-fluid" src="http://localhost:3001/s720/muXYiOSIFbnGOplvHROGE0WVF.jpeg">',
         },
       },
       "organization-ru": {
@@ -88,7 +176,7 @@ module.exports = {
         jsonData: {
           title: "Наша организация",
           article:
-            '<img class="img-fluid" src="https://zim-llc.com/wp-content/uploads/2017/04/Organization-Structure-1.jpg">',
+            '<img class="img-fluid" src="http://localhost:3001/s720/muXYiOSIFbnGOplvHROGE0WVF.jpeg">',
         },
       },
 
@@ -130,16 +218,7 @@ module.exports = {
           title: "Nasze obiekty",
           article:
             '<div>\\n   <p>\\n     Nasze biura sprzedaży i centra dystrybucyjne znajdują się w dużych miastach w Chinach\\n     w tym Pekin, Szanghaj i Kanton, a także nasze biura w\\n     <strong> <a href="https://zim-llc.com/contact-us/"> Stany Zjednoczone </a> </strong>, które\\n     zawierać\\n     <silny\\n       > <a href="https://zim-llc.com/contact-us/"> Ohio i Teksas. </a> </ strong\\n     >\\n   </p>\\n   <p>\\n     Nasze produkty są sprzedawane w Chinach, Japonii, Korei, Azji Południowo-Wschodniej i krajach\\n     Bliski Wschód, w całej Europie oraz w Ameryce Północnej i Południowej.\\n   </p>\\n</div>',
-          gallery: [
-            {
-              id: 1,
-              thumbnail: "G1ASjM2JelgQhfROKB6yJTkNj.png",
-              name: "zigong-texas-1.png",
-              description: null,
-              file: "seya9EDRNFuyrMfid1TQ7ZsuS.png",
-              mimetype: "png",
-            },
-          ],
+          gallery: gallery1,
         },
       },
       "our-facilities-en": {
@@ -150,16 +229,7 @@ module.exports = {
           title: "Our Facilities",
           article:
             '<div>\\n  <p>\\n    Our sales offices and distribution centers are in large cities in China\\n    including Beijing, Shanghai and Guangzhou, as well as our offices in the\\n    <strong><a href="https://zim-llc.com/contact-us/">USA,</a> </strong>which\\n    include\\n    <strong\\n      ><a href="https://zim-llc.com/contact-us/">Ohio and Texas.</a></strong\\n    >\\n  </p>\\n  <p>\\n    Our products are sold throughout China, Japan, Korea, Southeast Asia and the\\n    Middle East, across Europe, and North and South America.\\n  </p>\\n</div>\\n',
-          gallery: [
-            {
-              id: 1,
-              thumbnail: "G1ASjM2JelgQhfROKB6yJTkNj.png",
-              name: "zigong-texas-1.png",
-              description: null,
-              file: "seya9EDRNFuyrMfid1TQ7ZsuS.png",
-              mimetype: "png",
-            },
-          ],
+          gallery: gallery1,
         },
       },
       "our-facilities-ru": {
@@ -170,16 +240,7 @@ module.exports = {
           title: "Наши объекты",
           article:
             '<div>\\n   <p>\\n     Наши офисы продаж и дистрибьюторские центры находятся в крупных городах Китая.\\n     включая Пекин, Шанхай и Гуанчжоу, а также наши офисы в\\n     <strong> <a href="https://zim-llc.com/contact-us/"> США </a> </strong>, которые\\n     включают\\n     <сильный\\n       > <a href="https://zim-llc.com/contact-us/"> Огайо и Техас. </a> </ strong\\n     >\\n   </p>\\n   <p>\\n     Наши продукты продаются в Китае, Японии, Корее, Юго-Восточной Азии и в других странах.\\n     Ближний Восток, Европа, Северная и Южная Америка.\\n   </p>\\n</div>',
-          gallery: [
-            {
-              id: 1,
-              thumbnail: "G1ASjM2JelgQhfROKB6yJTkNj.png",
-              name: "zigong-texas-1.png",
-              description: null,
-              file: "seya9EDRNFuyrMfid1TQ7ZsuS.png",
-              mimetype: "png",
-            },
-          ],
+          gallery: gallery1,
         },
       },
 
@@ -191,16 +252,7 @@ module.exports = {
           title: "Możliwości ZGCC / ZIM",
           article:
             "<div>\n   <p>\n     Ponad 3000 wykwalifikowanych pracowników i profesjonalnych zespołów skupiło się na platformie\n     produkcja od ponad 50 lat. Posiadamy krajową certyfikowaną inspekcję\n     Centrum. Obejmujemy surowce do wykończenia części dla spójności,\n     powtarzalność i wyższość, które są gwarantowane. Zaawansowany system MIS\n     oraz zdolność RD do obsługi klienta z szybką reakcją i pod klucz\n     rozwiązania. Kompletna linia produkcyjna wolframu i molibdenu\n     każdy proces pod kontrolą.\n   </p>\n   <p>\n     Oferujemy zaawansowany sprzęt do testów i badań, najwyższej jakości w stanie surowym\n     produkcja materiałów i wykorzystanie zaawansowanego sprzętu produkcyjnego.\n   </p>\n</div>",
-          gallery: [
-            {
-              id: 1,
-              thumbnail: "G1ASjM2JelgQhfROKB6yJTkNj.png",
-              name: "zigong-texas-1.png",
-              description: null,
-              file: "seya9EDRNFuyrMfid1TQ7ZsuS.png",
-              mimetype: "png",
-            },
-          ],
+          gallery: gallery2,
         },
       },
 
@@ -212,16 +264,7 @@ module.exports = {
           title: "ZGCC/ZIM Capabilities",
           article:
             "<div>\n  <p>\n    More than 3,000 skilled employees and professional teams have focused on the\n    production for over 50 years. We have a nationally certified inspection\n    center. We cover raw materials to finish parts for consistency,\n    repeatability, and superiority, which are guaranteed. An advance MIS system\n    and RD capability to serve the customer with rapid response and turn-key\n    solutions. A complete production line of Tungsten and Molybdenum to have\n    every process under control.\n  </p>\n  <p>\n    We offer advanced testing and examination equipment, first-class raw\n    material production and the use of advanced production equipment.\n  </p>\n</div>\n",
-          gallery: [
-            {
-              id: 1,
-              thumbnail: "G1ASjM2JelgQhfROKB6yJTkNj.png",
-              name: "zigong-texas-1.png",
-              description: null,
-              file: "seya9EDRNFuyrMfid1TQ7ZsuS.png",
-              mimetype: "png",
-            },
-          ],
+          gallery: gallery2,
         },
       },
 
@@ -233,16 +276,7 @@ module.exports = {
           title: "Возможности ZGCC / ZIM",
           article:
             "<div>\n   <p>\n     Более 3000 квалифицированных сотрудников и профессиональных команд сосредоточили свое внимание на\n     производство более 50 лет. У нас есть национально сертифицированная инспекция\n     центр. Мы покрываем сырье, чтобы закончить детали для согласованности,\n     повторяемость и превосходство, которое гарантировано. Передовая система MIS\n     и способность RD обслуживать клиентов с быстрым ответом и под ключ\n     решения. Полная производственная линия вольфрама и молибдена, чтобы иметь\n     каждый процесс под контролем.\n   </p>\n   <p>\n     Предлагаем современное испытательное и экзаменационное оборудование, первоклассное сырье.\n     материальное производство и использование современного производственного оборудования.\n   </p>\n</div>",
-          gallery: [
-            {
-              id: 1,
-              thumbnail: "G1ASjM2JelgQhfROKB6yJTkNj.png",
-              name: "zigong-texas-1.png",
-              description: null,
-              file: "seya9EDRNFuyrMfid1TQ7ZsuS.png",
-              mimetype: "png",
-            },
-          ],
+          gallery: gallery2,
         },
       },
 
@@ -285,6 +319,7 @@ module.exports = {
           title: "Certyfikat jakości",
           article:
             "<p> ZGCC to firma z certyfikatem ISO, posiadająca certyfikaty ISO 9001, ISO 14001 i OHSAS-18001, zapewniająca systemy kontroli jakości w celu dostarczania naszym klientom produktów i usług wysokiej jakości. </p>",
+          certifications,
         },
       },
       "quality-certification-en": {
@@ -295,6 +330,7 @@ module.exports = {
           title: "Quality Certification",
           article:
             "<div><p>ZGCC is an ISO Certified company with ISO 9001, ISO 14001 and OHSAS-18001 certifications, providing quality control systems to serve our customers with quality products and services.</p></div>",
+          certifications,
         },
       },
       "quality-certification-ru": {
@@ -305,6 +341,7 @@ module.exports = {
           title: "Сертификация качества",
           article:
             "<p> ZGCC - это сертифицированная по ISO компания, имеющая сертификаты ISO 9001, ISO 14001 и OHSAS-18001, предоставляющая системы контроля качества для предоставления нашим клиентам качественных продуктов и услуг. </p>",
+          certifications,
         },
       },
 
