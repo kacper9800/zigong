@@ -14,11 +14,21 @@ module.exports = (sequelize, Sequelize) => {
           type: Sequelize.STRING,
         },
         description: {
-          type: Sequelize.JSON,
+          type: Sequelize.TEXT,
+          get: function () {
+            return JSON.parse(this.getDataValue('value'));
+          },
+          set: function (value) {
+            this.setDataValue('value', JSON.stringify(value));
+          },
         },
         languageId: {
           type: Sequelize.INTEGER
-        }
+        },
+        deleted: {
+          type: Sequelize.BOOLEAN,
+          defaultValue: false
+        },
       },
       {}
   );

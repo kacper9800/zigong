@@ -6,23 +6,19 @@ const aboutValidator = require("../validators/aboutValidator");
 module.exports = (di) => {
   const AboutController = di.get("controller.about");
 
-  router.get("/abouts", (...args) => AboutController.index(...args));
+  router.get("/about", (...args) => AboutController.index(...args));
 
-  router.get("/abouts/id/:id", [isLoggedIn, isAdmin], (...args) =>
+  router.get("/about/id/:id", [isLoggedIn, isAdmin], (...args) =>
     AboutController.show(...args)
   );
 
-  router.get("/abouts/:slug", (...args) => AboutController.showBySlug(...args));
+  router.get("/about/:slug", (...args) => AboutController.showBySlug(...args));
 
-  router.post(
-    "/abouts",
-    [isLoggedIn, isAdmin, aboutValidator.create, validate],
+  router.post("/about", [isLoggedIn, isAdmin, aboutValidator.create, validate],
     (...args) => AboutController.create(...args)
   );
 
-  router.put(
-    "/abouts",
-    [isLoggedIn, isAdmin, aboutValidator.update, validate],
+  router.put("/about", [isLoggedIn, isAdmin, aboutValidator.update, validate],
     (...args) => AboutController.update(...args)
   );
 
