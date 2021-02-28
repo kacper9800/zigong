@@ -11,11 +11,32 @@
                         <h1 class="text-color">{{ about.name }}</h1>
 
                         <div v-html="about.article" />
+
+                        <div v-if="about.certifications" class="row">
+                            <div
+                                v-for="(item, index) in about.certifications"
+                                :key="index"
+                                class="col-sm-12 col-md-3"
+                            >
+                                <a
+                                    :href="baseUrl + '/files/' + item.file"
+                                    class="nav-link dropdown-toggle"
+                                >
+                                    <h3 class="text-color text-center">{{ item.description }}</h3>
+                                    <img
+                                        :src="baseUrl + '/thumbnails/' + item.thumbnail"
+                                        class="figure-img img-fluid rounded"
+                                        alt=""
+                                    />
+                                </a>
+                            </div>
+                        </div>
+
                         <div v-if="about.sections">
                             <div v-for="item in about.sections" :key="item.key">
                                 <div class="row">
                                     <div class="col-sm-12 col-md">
-                                        {{ item.article }}
+                                        <div v-html="item.article" />
                                     </div>
                                     <div class="flex-column">
                                         <div class="row">
@@ -28,7 +49,8 @@
                                                     ><img
                                                         class="thumbnailImage"
                                                         :src="
-                                                            'http://localhost:3001/thumbnails/' +
+                                                            baseUrl +
+                                                            '/thumbnails/' +
                                                             file.thumbnail
                                                         "
                                                         alt="Responsive image"
@@ -41,25 +63,36 @@
                             </div>
                         </div>
                         <hr />
-                        <div class="row text-center text-lg-left">
+                        <div class="row text-center">
                             <div
-                                v-for="(image, imageIndex) in items"
+                                v-for="(item, imageIndex) in about.gallery"
                                 :key="imageIndex"
                                 @click="index = imageIndex"
-                                class="col-lg-3 col-md-4 col-6"
+                                class="col-md-4 mt-4"
                             >
-                                <img class="img-fluid img-thumbnail" :src="image" alt="" />
+                                <img
+                                    class="img-fluid img-thumbnail"
+                                    :src="baseUrl + '/thumbnails/' + item.thumbnail"
+                                    alt=""
+                                />
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-        <CoolLightBox :items="items" :index="index" @close="index = null" :slideshow="false" />
+        <CoolLightBox
+            v-if="about.gallery"
+            :items="items"
+            :index="index"
+            @close="index = null"
+            :slideshow="false"
+        />
     </div>
 </template>
 <script>
 import navigator from '~/components/elements/navigator';
+import config from '@/config';
 
 export default {
     components: {
@@ -68,29 +101,21 @@ export default {
 
     async asyncData({ app, store, params }) {
         const { slug } = params;
+        const { code } = app.i18n.localeProperties;
 
-        return { slug };
+        try {
+            const about = await store.dispatch('about/getOneBySlug', {
+                params: { lng: code, slug }
+            });
+
+            return { about, slug };
+        } catch (error) {
+            console.error(error);
+        }
     },
 
     data() {
         return {
-            // @todo - remove it and use store to get data
-            items: [
-                'https://pix10.agoda.net/hotelImages/1199068/-1/09cb9a2780bf41ad1e8f8a3d2e074754.jpg?s=1024x768',
-                'https://pix10.agoda.net/hotelImages/1199068/-1/09cb9a2780bf41ad1e8f8a3d2e074754.jpg?s=1024x768',
-                'https://pix10.agoda.net/hotelImages/1199068/-1/09cb9a2780bf41ad1e8f8a3d2e074754.jpg?s=1024x768',
-                'https://pix10.agoda.net/hotelImages/1199068/-1/09cb9a2780bf41ad1e8f8a3d2e074754.jpg?s=1024x768',
-                'https://pix10.agoda.net/hotelImages/1199068/-1/09cb9a2780bf41ad1e8f8a3d2e074754.jpg?s=1024x768',
-                'https://pix10.agoda.net/hotelImages/1199068/-1/09cb9a2780bf41ad1e8f8a3d2e074754.jpg?s=1024x768',
-                'https://pix10.agoda.net/hotelImages/1199068/-1/09cb9a2780bf41ad1e8f8a3d2e074754.jpg?s=1024x768',
-                'https://pix10.agoda.net/hotelImages/1199068/-1/09cb9a2780bf41ad1e8f8a3d2e074754.jpg?s=1024x768',
-                'https://pix10.agoda.net/hotelImages/1199068/-1/09cb9a2780bf41ad1e8f8a3d2e074754.jpg?s=1024x768',
-                'https://pix10.agoda.net/hotelImages/1199068/-1/09cb9a2780bf41ad1e8f8a3d2e074754.jpg?s=1024x768',
-                'https://pix10.agoda.net/hotelImages/1199068/-1/09cb9a2780bf41ad1e8f8a3d2e074754.jpg?s=1024x768',
-                'https://pix10.agoda.net/hotelImages/1199068/-1/09cb9a2780bf41ad1e8f8a3d2e074754.jpg?s=1024x768',
-                'https://pix10.agoda.net/hotelImages/1199068/-1/09cb9a2780bf41ad1e8f8a3d2e074754.jpg?s=1024x768',
-                'https://pix10.agoda.net/hotelImages/1199068/-1/09cb9a2780bf41ad1e8f8a3d2e074754.jpg?s=1024x768'
-            ],
             index: null,
             pagesData: [
                 {
@@ -104,17 +129,26 @@ export default {
                         { path: '/about/credentials', name: 'Credentials' },
                         {
                             path: '/about/quality-certification',
-                            name: 'quality-certification'
+                            name: 'Quality Certification'
+                        },
+                        {
+                            path: '/about/conflict-free-minerals',
+                            name: 'Conflict-Free Minerals'
                         }
                     ]
                 }
-            ],
-
-            about: {
-                name: 'Our Organization',
-                article: `<img loading="lazy" class="img-fluid" src="https://zim-llc.com/wp-content/uploads/2017/04/Organization-Structure-1.jpg" alt="" width="700" height="872" srcset="https://zim-llc.com/wp-content/uploads/2017/04/Organization-Structure-1.jpg 700w, https://zim-llc.com/wp-content/uploads/2017/04/Organization-Structure-1-241x300.jpg 241w, https://zim-llc.com/wp-content/uploads/2017/04/Organization-Structure-1-241x300@2x.jpg 482w" sizes="(max-width: 700px) 100vw, 700px">`
-            }
+            ]
         };
+    },
+
+    computed: {
+        baseUrl() {
+            return config.mediaBaseUrl;
+        },
+
+        items() {
+            return this.about.gallery.map(({ file }) => this.baseUrl + '/s720/' + file);
+        }
     }
 };
 </script>
