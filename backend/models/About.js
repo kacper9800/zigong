@@ -17,7 +17,7 @@ module.exports = (sequelize, Sequelize) => {
     {}
   );
   About.associate = function (db) {
-    About.belongsTo(db.About, {
+    About.belongsTo(db.AboutTranslations, {
       as: "aboutTranslation",
       foreignKey: "id",
       onDelete: "cascade",
