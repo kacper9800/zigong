@@ -39,9 +39,6 @@ class ContentController {
 
     const parsedData = contentTranslation.value;
 
-    parsedData.slug = slug;
-    parsedData.lng = lng;
-
     return res.send(parsedData);
   }
 
