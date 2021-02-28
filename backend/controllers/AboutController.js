@@ -84,7 +84,7 @@ class AboutController {
 
     const parsedData = aboutTranslation.value;
 
-    parsedData.name = aboutTranslation.name;
+    // parsedData.name = aboutTranslation.name;
 
     return res.send(parsedData);
   }
@@ -129,7 +129,7 @@ class AboutController {
     }
 
     const parsedData = aboutTranslation.value;
-    parsedData.name = aboutTranslation.name;
+    // parsedData.name = aboutTranslation.name;
 
     return res.send(parsedData);
   }
