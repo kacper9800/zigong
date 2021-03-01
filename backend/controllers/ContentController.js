@@ -37,10 +37,7 @@ class ContentController {
       return res.sendStatus(HttpStatuses.NOT_FOUND);
     }
 
-    const parsedData = JSON.parse(contentTranslation.value);
-
-    parsedData.slug = slug;
-    parsedData.lng = lng;
+    const parsedData = contentTranslation.value;
 
     return res.send(parsedData);
   }

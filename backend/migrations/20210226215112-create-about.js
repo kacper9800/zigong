@@ -1,24 +1,21 @@
-"use strict";
+'use strict';
+
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable("ContentTranslations", {
+    return queryInterface.createTable("Abouts", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      value: {
+      slug: {
         allowNull: false,
-        type: Sequelize.JSON,
+        type: Sequelize.STRING,
       },
-      contentId: {
-        allowNull: false,
-        type: Sequelize.INTEGER,
-      },
-      languageId: {
-        allowNull: false,
-        type: Sequelize.INTEGER,
+      deleted: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false
       },
       createdAt: {
         allowNull: false,
@@ -32,7 +29,8 @@ module.exports = {
       },
     });
   },
+
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable("ContentTranslations");
-  },
+    return queryInterface.dropTable("Abouts");
+  }
 };

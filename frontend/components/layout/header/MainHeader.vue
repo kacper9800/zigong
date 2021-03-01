@@ -91,7 +91,7 @@
                                 </ul>
                             </li>
                         </div>
-                        <li v-if="iaAdminUser" class="nav-item active">
+                        <li v-if="isAdminUser" class="nav-item active">
                             <nuxt-link to="/admin" class="nav-link dropdown-toggle"
                                 >Admin</nuxt-link
                             >
@@ -155,7 +155,8 @@ export default {
 
     computed: {
         ...mapGetters({
-            iaAdminUser: 'iaAdminUser'
+            isAdminUser: 'isAdminUser',
+            aboutSubpages: 'about/getAllData'
         }),
 
         mainBannerContent() {
