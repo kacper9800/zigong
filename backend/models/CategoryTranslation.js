@@ -6,20 +6,6 @@ module.exports = (sequelize, Sequelize) => {
       primaryKey: true,
     },
     categoryId: {
-<<<<<<< HEAD
-      type: Sequelize.INTEGER,
-    },
-    name: {
-      type: Sequelize.STRING,
-    },
-    description: {
-      type: Sequelize.TEXT,
-    },
-    homePageDescription: {
-      type: Sequelize.STRING,
-    },
-    languageId: {
-=======
       allowNull: false,
       type: Sequelize.INTEGER,
     },
@@ -37,7 +23,6 @@ module.exports = (sequelize, Sequelize) => {
     },
     languageId: {
       allowNull: false,
->>>>>>> 88a8f501652c773ad6b6d9978377808f5ff92b5f
       type: Sequelize.INTEGER,
     },
   });
