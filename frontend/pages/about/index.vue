@@ -4,7 +4,7 @@
             <div class="container" style="margin-top: 100px">
                 <div class="row align-items-center">
                     <div class="col-md-3 align-self-start">
-                        <navigator :pagesData="pagesData" />
+                        <about-navigator />
                     </div>
 
                     <div class="col-md-9 align-self-start">
@@ -13,29 +13,41 @@
                         <div v-html="content.html" />
 
                         <hr />
-                        <div class="row text-center text-lg-left">
+
+                        <div class="row text-center">
                             <div
-                                v-for="(image, imageIndex) in items"
+                                v-for="(item, imageIndex) in gallery"
                                 :key="imageIndex"
                                 @click="index = imageIndex"
-                                class="col-lg-3 col-md-4 col-6"
+                                class="col-md-4 mt-4"
                             >
-                                <img class="img-fluid img-thumbnail" :src="image" alt="" />
+                                <img
+                                    class="img-fluid img-thumbnail"
+                                    :src="baseUrl + '/thumbnails/' + item.thumbnail"
+                                    :alt="item.name"
+                                />
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <CoolLightBox :items="items" :index="index" @close="index = null" :slideshow="false" />
+            <CoolLightBox
+                v-if="gallery"
+                :items="items"
+                :index="index"
+                @close="index = null"
+                :slideshow="false"
+            />
         </section>
     </div>
 </template>
 <script>
-import navigator from '~/components/elements/navigator';
+import AboutNavigator from '~/components/elements/aboutNavigator';
+import config from '@/config';
 
 export default {
     components: {
-        navigator
+        AboutNavigator
     },
 
     async asyncData({ app, store }) {
@@ -53,33 +65,38 @@ export default {
 
     data() {
         return {
-            items: [
-                'https://pix10.agoda.net/hotelImages/1199068/-1/09cb9a2780bf41ad1e8f8a3d2e074754.jpg?s=1024x768',
-                'https://pix10.agoda.net/hotelImages/1199068/-1/09cb9a2780bf41ad1e8f8a3d2e074754.jpg?s=1024x768'
-            ],
-            index: null,
-            pagesData: [
+            gallery: [
                 {
-                    path: '/about',
-                    name: 'About',
-                    subPages: [
-                        { path: '/about/organization', name: 'Organization' },
-                        { path: '/about/who-we-are', name: 'Who We Are' },
-                        { path: '/about/our-facilities', name: 'Our Facilities' },
-                        { path: '/about/capabilities', name: 'Capabilities' },
-                        { path: '/about/credentials', name: 'Credentials' },
-                        {
-                            path: '/about/quality-certification',
-                            name: 'Quality Certification'
-                        },
-                        {
-                            path: '/about/conflict-free-minerals',
-                            name: 'Conflict-Free Minerals'
-                        }
-                    ]
+                    id: 18,
+                    file: 'nkmHixBTYe4WYWpZZwXz2lHZr.jpeg',
+                    name: 'pobrane (1).jpeg',
+                    thumbnail: 'QXNQ8G6SIONhzO6C9sQdLEPZY.png'
+                },
+                {
+                    id: 19,
+                    file: 'vBWYwZFmVkF8yuZJFYN5IYGkW.jpeg',
+                    name: 'pobrane (2).jpeg',
+                    thumbnail: '2VQFv6crxewmNG6QeahjpiiOK.png'
+                },
+                {
+                    id: 20,
+                    file: 'DsZJSqLPOBD6IpnvJQQNT9oPY.jpeg',
+                    name: 'pobrane (3).jpeg',
+                    thumbnail: 'nxuFMFi6BhGHGrQnkfX4QbO1K.png'
                 }
-            ]
+            ],
+            index: null
         };
+    },
+
+    computed: {
+        baseUrl() {
+            return config.mediaBaseUrl;
+        },
+
+        items() {
+            return this.gallery.map(({ file }) => this.baseUrl + '/s720/' + file);
+        }
     }
 };
 </script>

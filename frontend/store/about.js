@@ -20,7 +20,9 @@ export const mutations = {
     },
 
     SET_ALL_DATA(state, about) {
-        state.items = about.data;
+        state.items = about.data.map(obj => {
+            return { aboutId: obj.aboutId, name: obj.name, slug: obj.about.slug };
+        });
     }
 };
 
