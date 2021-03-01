@@ -1,7 +1,11 @@
 export const actions = {
-    nuxtServerInit({ dispatch }) {
+    nuxtServerInit({ dispatch }, { app }) {
+        const { code } = app.i18n.localeProperties;
+
         return Promise.all([
-            // dispatch('content/index'),
+            dispatch('about/getAllAboutData', {
+                lng: code
+            })
         ]);
     }
 };
@@ -10,10 +14,8 @@ export const mutations = {};
 
 export const getters = {
     loggedUser: state => state.auth.user,
-    iaAdminUser: (state, getters) =>
-        getters.loggedUser &&
-        getters.loggedUser.Roles.some(role => role.name === 'admin'),
+    isAdminUser: (state, getters) =>
+        getters.loggedUser && getters.loggedUser.Roles.some(role => role.name === 'admin'),
     isRegularUser: (state, getters) =>
-        getters.loggedUser &&
-        getters.loggedUser.Roles.some(role => role.name === 'user')
+        getters.loggedUser && getters.loggedUser.Roles.some(role => role.name === 'user')
 };

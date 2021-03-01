@@ -4,11 +4,10 @@
             <div class="container" style="margin-top: 100px">
                 <div class="row align-items-center">
                     <div class="col-md-3 align-self-start">
-                        <navigator :pagesData="pagesData" :slug="slug" />
+                        <about-navigator :slug="slug" />
                     </div>
-
                     <div class="col-md-9 align-self-start">
-                        <h1 class="text-color">{{ about.name }}</h1>
+                        <h1 class="text-color">{{ about.title }}</h1>
 
                         <div v-html="about.article" />
 
@@ -91,12 +90,12 @@
     </div>
 </template>
 <script>
-import navigator from '~/components/elements/navigator';
+import AboutNavigator from '~/components/elements/aboutNavigator';
 import config from '@/config';
 
 export default {
     components: {
-        navigator
+        AboutNavigator
     },
 
     async asyncData({ app, store, params }) {
@@ -116,28 +115,7 @@ export default {
 
     data() {
         return {
-            index: null,
-            pagesData: [
-                {
-                    path: '/about',
-                    name: 'About',
-                    subPages: [
-                        { path: '/about/organization', name: 'Organization' },
-                        { path: '/about/who-we-are', name: 'Who We Are' },
-                        { path: '/about/our-facilities', name: 'Our Facilities' },
-                        { path: '/about/capabilities', name: 'Capabilities' },
-                        { path: '/about/credentials', name: 'Credentials' },
-                        {
-                            path: '/about/quality-certification',
-                            name: 'Quality Certification'
-                        },
-                        {
-                            path: '/about/conflict-free-minerals',
-                            name: 'Conflict-Free Minerals'
-                        }
-                    ]
-                }
-            ]
+            index: null
         };
     },
 
