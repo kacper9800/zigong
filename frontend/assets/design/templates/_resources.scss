@@ -1,0 +1,16 @@
+.resources-card {
+    border-radius: 15px;
+    background: #fafafa;
+    padding: 20px;
+    h4 {
+        color: $blue;
+        text-align: center;
+    }
+    p {
+        margin: 4px;
+    }
+    .embed-responsive {
+        margin-top: 30px;
+        margin-bottom: 30px;
+    }
+}

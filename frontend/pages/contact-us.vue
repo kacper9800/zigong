@@ -31,11 +31,7 @@
                         </div>
                         <div class="row">
                             <div class="col-lg-12 col-md-12 col-sm-12">
-                                <form
-                                    id="contact-form"
-                                    class="contact__form"
-                                    method="post"
-                                >
+                                <form id="contact-form" class="contact__form" method="post">
                                     <div class="row">
                                         <div class="col-12">
                                             <div
@@ -43,8 +39,7 @@
                                                 style="display: none"
                                                 role="alert"
                                             >
-                                                Your message was sent
-                                                successfully.
+                                                Your message was sent successfully.
                                             </div>
                                         </div>
                                     </div>
@@ -57,11 +52,7 @@
                                                     id="name"
                                                     type="text"
                                                     class="form-control"
-                                                    :placeholder="
-                                                        $t(
-                                                            'global.firstNameAndLastName'
-                                                        )
-                                                    "
+                                                    :placeholder="$t('global.firstNameAndLastName')"
                                                 />
                                             </div>
                                         </div>
@@ -73,9 +64,7 @@
                                                     id="email"
                                                     type="email"
                                                     class="form-control"
-                                                    :placeholder="
-                                                        $t('global.email')
-                                                    "
+                                                    :placeholder="$t('global.email')"
                                                 />
                                             </div>
                                         </div>
@@ -86,11 +75,7 @@
                                                     id="subject"
                                                     type="text"
                                                     class="form-control"
-                                                    :placeholder="
-                                                        $t(
-                                                            'contact.messageSubject'
-                                                        )
-                                                    "
+                                                    :placeholder="$t('contact.messageSubject')"
                                                 />
                                             </div>
                                         </div>
@@ -101,9 +86,7 @@
                                                     id="phone"
                                                     type="text"
                                                     class="form-control"
-                                                    :placeholder="
-                                                        $t('global.phone')
-                                                    "
+                                                    :placeholder="$t('global.phone')"
                                                 />
                                             </div>
                                         </div>
@@ -140,12 +123,9 @@
                             <div class="section-title">
                                 <div class="wpb_wrapper">
                                     <div class="wpb_wrapper">
-                                        <h2 class="title-color text-center">
-                                            Houston
-                                        </h2>
+                                        <h2 class="title-color text-center">Houston</h2>
                                         <p class="text-justify">
-                                            16504 Aldine Westfield Rd., Bldg. A
-                                            Houston, TX 77032
+                                            16504 Aldine Westfield Rd., Bldg. A Houston, TX 77032
                                         </p>
                                         <p class="text-center">
                                             <strong>phone:</strong>
@@ -158,46 +138,35 @@
 
                                         <p class="text-center">
                                             <strong
-                                                ><a
-                                                    href="mailto:info@zim-llc.com"
+                                                ><a href="mailto:info@zim-llc.com"
                                                     >info@zim-llc.com</a
                                                 ></strong
                                             >
                                         </p>
                                     </div>
 
-                                    <div
-                                        class="wpb_text_column wpb_content_element"
-                                    >
+                                    <div class="wpb_text_column wpb_content_element">
                                         <div class="wpb_wrapper">
-                                            <h2 class="text-center">
-                                                Cleveland
-                                            </h2>
+                                            <h2 class="text-center">Cleveland</h2>
                                             <p class="text-justify">
-                                                38500 Chardon Road Willoughby
-                                                Hills, OH 44094
+                                                38500 Chardon Road Willoughby Hills, OH 44094
                                             </p>
                                             <p class="text-center">
                                                 <strong
                                                     >phone:
-                                                    <a href="tel:440-269-8160"
-                                                        >440-269-8160</a
-                                                    >
+                                                    <a href="tel:440-269-8160">440-269-8160</a>
                                                 </strong>
                                             </p>
 
                                             <p class="text-center">
                                                 <strong
                                                     >fax:
-                                                    <a href="tel:440-269-8160"
-                                                        >440-269-8174</a
-                                                    >
+                                                    <a href="tel:440-269-8160">440-269-8174</a>
                                                 </strong>
                                             </p>
                                             <p class="text-center">
                                                 <strong
-                                                    ><a
-                                                        href="mailto:info@zim-llc.com"
+                                                    ><a href="mailto:info@zim-llc.com"
                                                         >info@zim-llc.com</a
                                                     ></strong
                                                 >

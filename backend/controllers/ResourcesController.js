@@ -16,12 +16,7 @@ class ResourceController {
 
   async index(req, res) {
     const { lng } = req.query;
-    const {
-      perPage = 9,
-      page = 1,
-      sortBy = "createdAt",
-      order = "ASC",
-    } = req.query;
+    const { perPage = 9, page = 1, sortBy = "id", order = "DESC" } = req.query;
 
     const pageNumber = parseInt(page);
     const limit = parseInt(perPage);
@@ -33,10 +28,10 @@ class ResourceController {
       return res.sendStatus(HttpStatuses.NOT_FOUND);
     }
 
-    const category = await this.categoryRepository.findAndCountAll({
+    const resources = await this.categoryRepository.findAndCountAll({
       offset,
       limit,
-      // order: [[sortBy, order]],
+      order: [[sortBy, order]],
       where: {},
       attributes: {
         exclude: ["coverImageId", "homePageCoverImageId"],
@@ -46,7 +41,7 @@ class ResourceController {
           association: "resource",
           where: { languageId },
           attributes: {
-            exclude: ["id", "categoryId", "languageId", "file"],
+            exclude: ["categoryId", "languageId", "file"],
           },
           include: [
             {
@@ -71,39 +66,11 @@ class ResourceController {
       ],
     });
 
-    // const category = await this.categoryTranslationRepository.findAndCountAll({
-    //   offset,
-    //   limit,
-    //   order: [[sortBy, order]],
-    //   where: { languageId },
-    //   attributes: {
-    //     exclude: ["id", "languageId", "description", "homePageDescription"],
-    //   },
-    //   include: [
-    //     {
-    //       association: "category",
-    //       attributes: {
-    //         exclude: ["id", "homePageCoverImageId", "coverImageId"],
-    //       },
-    //     },
-    //     {
-    //       association: "resource",
-    //       where: {
-    //         languageId,
-    //       },
-    //       attributes: {
-    //         exclude: ["id", "file", "languageId", "categoryId"],
-    //       },
-    //       include: [{ model: File, as: "pdf" }],
-    //     },
-    //   ],
-    // });
-
-    const { count } = category;
+    const { count } = resources;
 
     const totalPages = Math.ceil(count / limit);
 
-    return res.send({ count, totalPages, data: category.rows });
+    return res.send({ count, totalPages, data: resources.rows });
   }
 }
 

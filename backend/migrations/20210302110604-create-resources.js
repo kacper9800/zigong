@@ -17,6 +17,10 @@ module.exports = {
       file: {
         type: Sequelize.TEXT,
       },
+      languageId: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

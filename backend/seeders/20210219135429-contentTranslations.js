@@ -18,6 +18,7 @@ module.exports = {
     const homePage = findContentId(contentSlugs, "home-page");
     const productsPage = findContentId(contentSlugs, "products-page");
     const aboutPage = findContentId(contentSlugs, "about-page");
+    const resources = findContentId(contentSlugs, "resources");
 
     const pages = {
       "home-page-pl": {
@@ -377,6 +378,31 @@ module.exports = {
           <p> ZGCC является <strong> <a href="https://zim-llc.com/about/quality-certification/"> сертифицированной компанией ISO </a> </strong> с ISO 9001, ISO 14001 и Сертификаты OHSAS-18001, обеспечивающие системы контроля качества для предоставления нашим клиентам качественных продуктов и услуг. </p>
           <p> ZIM имеет <a href="https://zim-llc.com/contact-us/"> <strong> два офиса </strong> </a> в США. Один офис находится в Хьюстоне, штат Техас, а другой в Уиллоуби-Хиллз, штат Огайо. В обоих филиалах есть склады, на которых можно обеспечить своевременную доставку. </p>
           </div>`,
+        },
+      },
+
+      "resources-pl": {
+        languageId: pl.id,
+        contentId: resources,
+        content: {
+          title: "Zasoby",
+          html: `Przeczytaj więcej o naszych produktach i usługach, które oferujemy, wraz ze szczegółowymi informacjami o produktach za pośrednictwem naszej biblioteki i plików PDF do pobrania. Zachęcamy do skorzystania z łącza do naszej sekcji Produkty, aby zapoznać się z pełną gamą produktów i usług. Broszurę dotyczącą możliwości naszej firmy można znaleźć tutaj.`,
+        },
+      },
+      "resources-en": {
+        languageId: en.id,
+        contentId: resources,
+        content: {
+          title: "Resources",
+          html: `Read more about our products and services that we offer along with specific product detailing through our library and downloadable PDF files. Feel free to follow the link to our Products section for our full range of products and services. Our company capability brochure can be Found Here.          `,
+        },
+      },
+      "resources-ru": {
+        languageId: ru.id,
+        contentId: resources,
+        content: {
+          title: "Ресурсы",
+          html: `Узнайте больше о наших продуктах и услугах, которые мы предлагаем, а также о конкретных продуктах в нашей библиотеке и загружаемых файлах PDF. Не стесняйтесь перейти по ссылке в наш раздел «Продукты», чтобы ознакомиться с полным спектром наших продуктов и услуг. Брошюру о возможностях нашей компании можно найти здесь.`,
         },
       },
     };
