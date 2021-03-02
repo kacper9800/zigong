@@ -44,7 +44,8 @@ module.exports = (container) => {
   container
     .register("controller.product", ProductController)
     .addArgument(new Reference("repositories.product"))
-    .addArgument(new Reference("repositories.productTranslation"));
+    .addArgument(new Reference("repositories.productTranslation"))
+    .addArgument(new Reference("repositories.language"));
 
   container
     .register("controller.about", AboutController)

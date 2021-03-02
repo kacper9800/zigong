@@ -28,7 +28,9 @@
       "save": "Zapisz",
       "edit": "Edytuj",
       "next": "Poprzednia",
-      "previous": "Następna"
+      "previous": "Następna",
+      "contactUs": "Kontakt",
+      "learnMore": "Więcej"
     }
   },
   "contact": {
@@ -38,6 +40,7 @@
     "meaasge": "Twoja wiadomość"
   },
   "categories": {
+    "homePageQuestionsDescription": "Masz pytania? Potrzebujesz wyceny? Posiadamy szeroką gamę rozwiązań. Skontaktuj się z nami!",
     "header": "Kategorie produktów",
     "name": "Nazwa kategorii",
     "description": "Opis",
@@ -64,6 +67,9 @@
     }
   },
   "products": {
-    "name": "Nazwa produktu"
+    "name": "Nazwa produktu",
+    "questions": "Pytania?",
+    "questionSection": "Masz pytania, potrzebujesz wyceny? Posiadamy szeroką gamę produktów, materiałów i materiałów eksploatacyjnych!",
+    "cardQuestion": "PYTANIA? POTRZEBUJESZ WYCENY?"
   }
 }

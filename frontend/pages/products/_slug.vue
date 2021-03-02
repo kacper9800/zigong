@@ -11,22 +11,45 @@
                     </div>
                     <div class="col-md-4">
                         <div class="wpb_wrapper" style="margin-top: 30px">
-                            <h2 style="text-align: center" class="title-color">Questions?</h2>
+                            <h2 style="text-align: center" class="title-color">
+                                {{ $t('products.questions') }}
+                            </h2>
                             <p style="text-align: center">
-                                Do you have questions, need a quote? We have a wide range of
-                                products, materials and supplies!
+                                {{ $t('products.questionSection') }}
                             </p>
                         </div>
                         <div class="d-flex justify-content-center">
                             <nuxt-link
-                                :to="localePath('contact-us')"
+                                :to="localePath('/contact-us')"
                                 class="btn btn-main-2 btn-round-full"
-                                >Contact US<i class="icofont-simple-right ml-2"></i
+                                >{{ $t('global.buttons.contactUs')
+                                }}<i class="icofont-simple-right ml-2"></i
                             ></nuxt-link>
                         </div>
                     </div>
                 </div>
-                <div class="row"></div>
+                <div class="row">
+                    <div
+                        v-for="item in products"
+                        :key="item.productId"
+                        class="col-md-4 col-sm-12 mt-4"
+                    >
+                        <div class="hovereffect">
+                            <img
+                                class="col-lg-12 col-md-12"
+                                :src="baseUrl + '/thumbnails/' + item.product.file.thumbnail"
+                                alt=""
+                            />
+                            <div class="overlay-img">
+                                <nuxt-link
+                                    :to="localePath('/p/' + item.product.slug)"
+                                    class="center"
+                                    ><h2>{{ item.name }}</h2></nuxt-link
+                                >
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
     </div>
@@ -44,9 +67,15 @@ export default {
         const { slug } = params;
 
         try {
-            await store.dispatch('category/getOneBySlug', {
+            const data = await store.dispatch('category/getOneBySlug', {
                 params: { lng: code, slug }
             });
+
+            await store.dispatch('products/getProducts', {
+                params: { lng: code, category: data.categoryId }
+            });
+
+            return { slug };
         } catch (error) {
             console.error(error);
         }
@@ -58,7 +87,8 @@ export default {
 
     computed: {
         ...mapGetters({
-            category: 'category/getCategory'
+            category: 'category/getCategory',
+            products: 'products/getProducts'
         }),
 
         baseUrl() {

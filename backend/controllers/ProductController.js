@@ -68,7 +68,11 @@ class ProductController {
       ],
     });
 
-    return res.send(products);
+    const { count } = products;
+
+    const totalPages = Math.ceil(count / limit);
+
+    return res.send({ count, totalPages, data: products.rows });
   }
 
   async show(req, res) {
@@ -119,7 +123,7 @@ class ProductController {
       return res.sendStatus(HttpStatuses.NOT_FOUND);
     }
 
-    const { id } = product;
+    const { id, categoryId } = product;
 
     const productTranslation = await this.productTranslationRepository.findOne({
       where: { languageId, productId: id },
@@ -134,10 +138,10 @@ class ProductController {
 
     const parsedData = JSON.parse(productTranslation.value);
 
-    parsedData.name = product.name;
     parsedData.id = id;
     parsedData.slug = slug;
-    parsedData.lng = lng;
+    parsedData.name = productTranslation.name;
+    parsedData.categoryId = categoryId;
 
     return res.send(parsedData);
   }

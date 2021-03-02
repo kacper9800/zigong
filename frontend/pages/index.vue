@@ -30,7 +30,7 @@
                                     <nuxt-link
                                         :to="localePath('/products/' + item.category.slug)"
                                         class="btn btn-main"
-                                        >Learn More</nuxt-link
+                                        >{{ $t(`global.buttons.learnMore`) }}</nuxt-link
                                     >
                                 </div>
                             </div>
@@ -52,6 +52,36 @@
                                 </div>
                                 <div style="font-size: 13px; color: #666666">
                                     {{ item.homePageDescription }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="cube">
+                            <div class="middle">
+                                <div class="center">
+                                    <nuxt-link
+                                        :to="localePath('/contact-us')"
+                                        class="btn btn-main"
+                                        >{{ $t(`global.buttons.learnMore`) }}</nuxt-link
+                                    >
+                                </div>
+                            </div>
+                            <div class="cube__face cube__face--front">
+                                <div class="vckit-trcflp-icon">
+                                    <img
+                                        src="@/assets/images/contact-us.png"
+                                        width="auto"
+                                        height="110px"
+                                    />
+                                </div>
+                                <br />
+                                <div style="font-size: 17px; color: #244a8b">
+                                    {{ $t('products.questions') }}
+                                </div>
+                                <div style="font-size: 13px; color: #666666">
+                                    {{ $t('categories.homePageQuestionsDescription') }}
                                 </div>
                             </div>
                         </div>
