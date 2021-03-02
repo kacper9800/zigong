@@ -1,5 +1,5 @@
 const HttpStatuses = require("http-status-codes");
-const { File } = require("../models");
+const { File, Resource } = require("../models");
 const { Op } = require("sequelize");
 const slugGenerator = require("../helpers/slug");
 
@@ -147,7 +147,7 @@ class ProductController {
   }
 
   async create(req, res) {
-    const { productId, categoryId, name } = req.body;
+    const { productId, name } = req.body;
     const { id: languageId } = req.language;
 
     const slug = slugGenerator(name);
@@ -175,6 +175,8 @@ class ProductController {
       const createdProduct = await this.productTranslationRepository.create({
         ...req.body,
       });
+
+      await Resource.create({ ...req.body });
 
       return res.send(createdProduct);
     } else {

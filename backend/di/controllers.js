@@ -7,6 +7,7 @@ const CategoryController = require("../controllers/CategoryController");
 const ContentController = require("../controllers/ContentController");
 const ProductController = require("../controllers/ProductController");
 const AboutController = require("../controllers/AboutController");
+const ResourcesController = require("../controllers/ResourcesController");
 
 module.exports = (container) => {
   container
@@ -51,5 +52,12 @@ module.exports = (container) => {
     .register("controller.about", AboutController)
     .addArgument(new Reference("repositories.about"))
     .addArgument(new Reference("repositories.aboutTranslation"))
+    .addArgument(new Reference("repositories.language"));
+
+  container
+    .register("controller.resource", ResourcesController)
+    .addArgument(new Reference("repositories.resource"))
+    .addArgument(new Reference("repositories.category"))
+    .addArgument(new Reference("repositories.categoryTranslation"))
     .addArgument(new Reference("repositories.language"));
 };

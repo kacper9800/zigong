@@ -16,15 +16,21 @@ module.exports = (sequelize, Sequelize) => {
     },
   });
   Category.associate = function (db) {
-    Category.belongsTo(db.ContentTranslation, {
-      as: "categoryTranslation",
-      foreignKey: "id",
-      onDelete: "cascade",
+    Category.hasMany(db.Resource, {
+      as: "resource",
+      foreignKey: "categoryId",
     });
+
+    Category.hasOne(db.CategoryTranslations, {
+      as: "categoryTranslation",
+      foreignKey: "categoryId",
+    });
+
     Category.belongsTo(db.File, {
       as: "homePageCoverImage",
       foreignKey: "homePageCoverImageId",
     });
+
     Category.belongsTo(db.File, {
       as: "coverImage",
       foreignKey: "coverImageId",

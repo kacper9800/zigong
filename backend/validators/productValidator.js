@@ -44,6 +44,20 @@ const create = [
       }
     }),
 
+  body(["file"])
+    .trim()
+    .not()
+    .isEmpty()
+    .withMessage("resources PDF should be not empty!")
+    .bail()
+    .custom(async (file, { req }) => {
+      const pdf = await File.findOne({ where: { id: file } });
+
+      if (!pdf || pdf.mimetype !== "pdf") {
+        return Promise.reject("File does not exists!");
+      }
+    }),
+
   body(["value"])
     .trim()
     .not()
