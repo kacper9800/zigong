@@ -3,7 +3,8 @@
 export const defaultState = () => {
     return {
         categories: [],
-        category: {}
+        category: {},
+        pagination: {}
     };
 };
 
@@ -11,12 +12,18 @@ export const state = () => defaultState();
 
 export const getters = {
     getCategories: state => state.categories,
-    getCategory: state => state.category
+    getCategory: state => state.category,
+    getPagination: state => state.pagination
 };
 
 export const mutations = {
     SET_CATEGORIES(state, categories) {
         state.categories = categories.data;
+        state.pagination = {
+            count: categories.count,
+            current: categories.current,
+            total: categories.totalPages
+        };
     },
 
     SET_CATEGORY(state, data) {
@@ -62,13 +69,17 @@ export const actions = {
     },
 
     async createOne({ commit }, category) {
-        await this.$axios.post('/categories', category);
+        const { data } = await this.$axios.post('/categories', category);
+
+        commit('ADD_CATEGORY', data);
 
         return data;
     },
 
     async updateOne({ commit }, category) {
         await this.$axios.put('/categories', category);
+
+        return data;
     },
 
     async deleteOne({ commit }, id) {

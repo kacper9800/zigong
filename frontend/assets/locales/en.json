@@ -48,9 +48,9 @@
     "amountOfProducts": "Amount of products",
     "modal": {
       "addNewHeader": "Adding new category",
-      "editHeaderEn": "Editing category - English",
-      "editHeaderRu": "Editing category - Russian",
-      "editHeaderPl": "Editing category - Polish",
+      "editHeader-en": "Editing category - English",
+      "editHeader-ru": "Editing category - Russian",
+      "editHeader-pl": "Editing category - Polish",
       "name": "Category name",
       "namePlaceholder": "Type category name",
       "description": "Category description",

@@ -71,7 +71,7 @@
                 />
             </div>
         </div>
-        <div class="steps-action" style="margin-top: 10px">
+        <div class="steps-action" style="margin: 20px">
             <a-button v-if="modalCurrentStep > 0" style="margin-left: 8px" @click="prev">
                 Previous
             </a-button>
@@ -84,6 +84,20 @@
                 Next
             </a-button>
         </div>
+        <template slot="footer">
+            <a-button key="back" @click="hideModal">
+                {{ $t('global.buttons.cancel') }}
+            </a-button>
+            <a-button
+                key="submit"
+                type="primary"
+                :loading="confirmLoading"
+                @click="save"
+                :disabled="modalCurrentStep !== 2"
+            >
+                {{ $t('global.buttons.save') }}
+            </a-button>
+        </template>
     </a-modal>
 </template>
 <script>
@@ -125,10 +139,10 @@ export default {
                     title: 'Basic data'
                 },
                 {
-                    title: 'Photos'
+                    title: 'Home Page Cover Image'
                 },
                 {
-                    title: 'Summary'
+                    title: 'Cover Image'
                 }
             ],
             homePageCoverImage: [],
@@ -151,16 +165,18 @@ export default {
 
         save() {
             this.confirmLoading = true;
-            setTimeout(() => {
+            setTimeout(async () => {
                 this.hideModal();
 
                 this.formData.coverImageId = this.coverImage.shift();
                 this.formData.homePageCoverImageId = this.homePageCoverImage.shift();
                 try {
-                    this.createCategory(this.formData);
+                    await this.createCategory(this.formData);
+                    await this.getAllCategories({ order: 'desc' });
                 } catch (error) {
                     console.erroe(error);
                 }
+                this.$emit('fetchData');
                 this.confirmLoading = false;
             }, 1000);
         },

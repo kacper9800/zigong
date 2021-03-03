@@ -71,7 +71,7 @@ class CategoryController {
 
     const totalPages = Math.ceil(count / limit);
 
-    return res.send({ count, totalPages, data: category.rows });
+    return res.send({ count, current: page, totalPages, data: category.rows });
   }
 
   async show(req, res) {

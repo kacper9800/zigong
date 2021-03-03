@@ -1,22 +1,32 @@
 <template>
-    <!-- @todo - fix this modal (now it doesnt work as expected) -->
     <a-modal
-        :title="$t('categories.modal.editHeader' + languageCode)"
+        :title="$t(`categories.modal.editHeader-${lng}`)"
         :visible="isVisible"
         :confirm-loading="confirmLoading"
-        @ok="save"
         @cancel="hideModal"
     >
         <a-form id="categories-form" :form="formData">
             <a-form-item :label="$t('categories.modal.name')">
-                <a-input type="text" placeholder="Category name" v-model="formData.name" required />
+                <a-input
+                    value
+                    type="text"
+                    placeholder="Category name"
+                    v-model="formData.name"
+                    :class="{
+                        'is-invalid': $v.formData.name.$error
+                    }"
+                    @blur="$v.formData.name.$touch()"
+                />
             </a-form-item>
             <a-form-item :label="$t('categories.modal.homePageDescription')">
                 <a-input
                     type="text"
                     placeholder="Description at home page"
                     v-model="formData.homePageDescription"
-                    required
+                    :class="{
+                        'is-invalid': $v.formData.homePageDescription.$error
+                    }"
+                    @blur="$v.formData.homePageDescription.$touch()"
                 />
             </a-form-item>
             <a-form-item :label="$t('categories.modal.description')">
@@ -25,15 +35,31 @@
                     type="text"
                     placeholder="Article about sth"
                     v-model="formData.description"
-                    required
+                    :class="{
+                        'is-invalid': $v.formData.description.$error
+                    }"
+                    @blur="$v.formData.description.$touch()"
                 />
             </a-form-item>
         </a-form>
+        <template slot="footer">
+            <a-button key="back" @click="hideModal"> Return </a-button>
+            <a-button
+                key="submit"
+                type="primary"
+                :disabled="$v.$invalid"
+                :loading="confirmLoading"
+                @click="save"
+            >
+                Submit
+            </a-button>
+        </template>
     </a-modal>
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
+import { minLength, required } from 'vuelidate/lib/validators';
 
 export default {
     layout: 'admin',
@@ -41,46 +67,90 @@ export default {
     props: {
         isVisible: {
             type: Boolean,
-            default: true
+            default: false
         },
-        languageCode: {
+        lng: {
             type: String,
-            default: 'En'
+            default: 'en'
         },
         categoryId: {
-            type: Number
+            type: Number,
+            default: null
+        }
+    },
+
+    validations: {
+        formData: {
+            name: { required, minLength: minLength(4) },
+            homePageDescription: { required, minLength: minLength(4) },
+            description: { required, minLength: minLength(4) }
         }
     },
 
     data() {
         return {
-            formData: {
-                coverImageId: null,
-                homePageCoverImageId: null
-            },
-            confirmLoading: false
+            confirmLoading: false,
+            formData: {},
+            categoryExist: false
         };
+    },
+
+    watch: {
+        isVisible(e) {
+            if (e) {
+                this.checkIfCategoryExist();
+            }
+        }
+    },
+
+    computed: {
+        ...mapGetters({
+            category: 'category/getCategory'
+        })
     },
 
     methods: {
         ...mapActions({
-            updateCategory: 'category/createOne',
-            getAllCategories: 'category/getAllCategories'
+            getCategoryById: 'category/getOneById',
+            createCategory: 'category/createOne',
+            updateCategory: 'category/updateOne'
         }),
+
+        async checkIfCategoryExist() {
+            try {
+                this.formData = await this.getCategoryById({
+                    params: { lng: this.lng, id: this.categoryId }
+                });
+
+                this.categoryExist = true;
+            } catch (error) {
+                this.formData = {
+                    lng: this.lng,
+                    categoryId: this.categoryId
+                };
+            }
+        },
 
         hideModal() {
             this.$emit('toggleEditModal');
         },
 
         save() {
+            if (this.$v.$invalid) {
+                this.hideModal();
+                return 0;
+            }
+            console.log(this.categoryExist);
             this.confirmLoading = true;
             setTimeout(() => {
                 this.hideModal();
-
-                this.formData.coverImageId = this.coverImage.shift();
-                this.formData.homePageCoverImageId = this.homePageCoverImage.shift();
                 try {
-                    this.createCategory(this.formData);
+                    if (this.categoryExist) {
+                        this.updateCategory(this.formData);
+                    } else {
+                        this.createCategory(this.formData);
+                    }
+                    this.hideModal();
                 } catch (error) {
                     console.error(error);
                 }
