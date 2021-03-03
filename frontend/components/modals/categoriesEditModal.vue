@@ -1,6 +1,6 @@
 <template>
     <a-modal
-        :title="$t('categories.modal.editHeader' + languageCode)"
+        :title="$t(`categories.modal.editHeader-${lng}`)"
         :visible="isVisible"
         :confirm-loading="confirmLoading"
         @ok="save"
@@ -13,7 +13,10 @@
                     type="text"
                     placeholder="Category name"
                     v-model="formData.name"
-                    required
+                    :class="{
+                        'is-invalid': $v.formData.name.$error
+                    }"
+                    @blur="$v.formData.name.$touch()"
                 />
             </a-form-item>
             <a-form-item :label="$t('categories.modal.homePageDescription')">
@@ -21,7 +24,10 @@
                     type="text"
                     placeholder="Description at home page"
                     v-model="formData.homePageDescription"
-                    required
+                    :class="{
+                        'is-invalid': $v.formData.homePageDescription.$error
+                    }"
+                    @blur="$v.formData.homePageDescription.$touch()"
                 />
             </a-form-item>
             <a-form-item :label="$t('categories.modal.description')">
@@ -30,7 +36,10 @@
                     type="text"
                     placeholder="Article about sth"
                     v-model="formData.description"
-                    required
+                    :class="{
+                        'is-invalid': $v.formData.description.$error
+                    }"
+                    @blur="$v.formData.description.$touch()"
                 />
             </a-form-item>
         </a-form>
@@ -49,16 +58,13 @@ export default {
             type: Boolean,
             default: false
         },
-        isTranslationCreated: {
-            type: Boolean,
-            default: false
-        },
-        languageCode: {
+        lng: {
             type: String,
-            default: 'En'
+            default: 'en'
         },
         categoryId: {
-            type: Number
+            type: Number,
+            default: null
         }
     },
 
@@ -73,71 +79,66 @@ export default {
     data() {
         return {
             confirmLoading: false,
-            formData: {
-              categoryId: null,
-              name: null,
-              homePageDescription: null,
-              description: null
-            }
+            formData: {},
+            categoryExist: false
         };
     },
-    watch: {
-        isVisible() {
-            this.$emit('input', this.isVisible);
-        },
 
-        async isVisible(data) {
-            try {
-                if (data && this.categoryId && this.languageCode) {
-                    this.categoryToEdit = await this.getCategoryById({
-                        params: { lng: this.languageCode, id: this.categoryId }
-                    });
-                }
-            } catch (error) {
-                console.log(error);
-            } finally {
-              this.formData = {
-                categoryId: this.categoryToEdit ? this.categoryToEdit.categoryId : null,
-                name: this.categoryToEdit ? this.categoryToEdit.name : null,
-                homePageDescription: this.categoryToEdit ? this.categoryToEdit.homePageDescription : null,
-                description: this.categoryToEdit ? this.categoryToEdit.description : null
-              };
+    watch: {
+        isVisible(e) {
+            if (e) {
+                this.checkIfCategoryExist();
             }
         }
     },
+
     computed: {
         ...mapGetters({
             category: 'category/getCategory'
-        }),
-
-        baseUrl() {
-            return config.mediaBaseUrl;
-        },
-        availableLocales() {
-            return this.$i18n.locale;
-        }
+        })
     },
+
     methods: {
         ...mapActions({
             getCategoryById: 'category/getOneById',
             createCategory: 'category/createOne',
             updateCategory: 'category/updateOne'
         }),
-        showModal() {
-            console.log('showModal');
+
+        async checkIfCategoryExist() {
+            try {
+                this.formData = await this.getCategoryById({
+                    params: { lng: this.lng, id: this.categoryId }
+                });
+
+                this.categoryExist = true;
+            } catch (error) {
+                this.formData = {
+                    lng: this.lng,
+                    categoryId: this.categoryId
+                };
+            }
         },
-        hideModal(e) {
+
+        hideModal() {
             this.$emit('toggleEditModal');
         },
-        save(e) {
+
+        save() {
+            if (this.$v.$invalid) {
+                this.hideModal();
+                return 0;
+            }
+
             this.confirmLoading = true;
             setTimeout(() => {
                 this.hideModal();
+                console.log(this.formData);
                 try {
-                    if(this.isTranslationCreated) {
-                      this.updateCategory(this.formData);
+                    if (this.categoryExist) {
+                        this.updateCategory(this.formData);
                     } else {
-                      this.createCategory(this.formData);
+                        this.createCategory(this.formData);
                     }
                 } catch (error) {
                     console.error(error);
