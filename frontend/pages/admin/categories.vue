@@ -149,7 +149,7 @@ export default {
         async onDelete(id) {
             try {
                 await this.delete(id);
-                await this.getAllCategories({ page, perPage: 5, order: 'desc' });
+                await this.getAllCategories({ perPage: 5, order: 'desc' });
             } catch (e) {
                 console.error(e);
             }

@@ -155,10 +155,13 @@ export default {
                 } catch (error) {
                     console.error(error);
                 }
-                this.hideModal();
+
                 this.formData = {};
+                this.categoryExist = false;
                 this.confirmLoading = false;
             }, 1000);
+
+            this.hideModal();
         }
     }
 };
