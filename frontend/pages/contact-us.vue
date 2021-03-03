@@ -31,20 +31,23 @@
                         </div>
                         <div class="row">
                             <div class="col-lg-12 col-md-12 col-sm-12">
-                                <form
-                                    id="contact-form"
-                                    class="contact__form"
-                                    method="post"
-                                >
+                                <form id="contact-form" class="contact__form">
                                     <div class="row">
                                         <div class="col-12">
                                             <div
+                                                v-if="showSuccessMessage"
                                                 class="alert alert-success contact__msg"
-                                                style="display: none"
                                                 role="alert"
                                             >
-                                                Your message was sent
-                                                successfully.
+                                                {{ $t('global.messageSent') }}
+                                            </div>
+
+                                            <div
+                                                v-if="showErrorMessage"
+                                                class="alert alert-danger contact__msg"
+                                                role="alert"
+                                            >
+                                                {{ message }}
                                             </div>
                                         </div>
                                     </div>
@@ -53,15 +56,15 @@
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <input
-                                                    name="name"
-                                                    id="name"
+                                                    v-model="formData.firstAndLastName"
                                                     type="text"
                                                     class="form-control"
-                                                    :placeholder="
-                                                        $t(
-                                                            'global.firstNameAndLastName'
-                                                        )
-                                                    "
+                                                    :placeholder="$t('global.firstNameAndLastName')"
+                                                    :class="{
+                                                        'is-invalid':
+                                                            $v.formData.firstAndLastName.$error
+                                                    }"
+                                                    @blur="$v.formData.firstAndLastName.$touch()"
                                                 />
                                             </div>
                                         </div>
@@ -69,41 +72,55 @@
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <input
-                                                    name="email"
-                                                    id="email"
+                                                    v-model="formData.email"
                                                     type="email"
                                                     class="form-control"
-                                                    :placeholder="
-                                                        $t('global.email')
-                                                    "
+                                                    :placeholder="$t('global.email')"
+                                                    :class="{
+                                                        'is-invalid': $v.formData.email.$error
+                                                    }"
+                                                    @blur="$v.formData.email.$touch()"
                                                 />
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <input
-                                                    name="subject"
-                                                    id="subject"
+                                                    v-model="formData.topic"
                                                     type="text"
                                                     class="form-control"
-                                                    :placeholder="
-                                                        $t(
-                                                            'contact.messageSubject'
-                                                        )
-                                                    "
+                                                    :placeholder="$t('contact.messageSubject')"
+                                                    :class="{
+                                                        'is-invalid': $v.formData.topic.$error
+                                                    }"
+                                                    @blur="$v.formData.topic.$touch()"
                                                 />
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <input
-                                                    name="phone"
-                                                    id="phone"
-                                                    type="text"
+                                                <masked-input
+                                                    v-model="formData.phone"
+                                                    :mask="[
+                                                        /\d/,
+                                                        /\d/,
+                                                        /\d/,
+                                                        '-',
+                                                        /\d/,
+                                                        /\d/,
+                                                        /\d/,
+                                                        '-',
+                                                        /\d/,
+                                                        /\d/,
+                                                        /\d/
+                                                    ]"
                                                     class="form-control"
-                                                    :placeholder="
-                                                        $t('global.phone')
-                                                    "
+                                                    type="tel"
+                                                    :placeholder="$t('global.phone')"
+                                                    :class="{
+                                                        'is-invalid': $v.formData.phone.$error
+                                                    }"
+                                                    @blur="$v.formData.phone.$touch()"
                                                 />
                                             </div>
                                         </div>
@@ -111,11 +128,14 @@
 
                                     <div class="form-group-2 mb-4">
                                         <textarea
-                                            name="message"
-                                            id="message"
+                                            v-model="formData.message"
                                             class="form-control"
                                             rows="8"
                                             :placeholder="$t('contact.meaasge')"
+                                            :class="{
+                                                'is-invalid': $v.formData.message.$error
+                                            }"
+                                            @blur="$v.formData.message.$touch()"
                                         />
                                     </div>
 
@@ -123,8 +143,10 @@
                                         <input
                                             class="btn btn-main btn-round-full"
                                             name="submit"
-                                            type="submit"
+                                            type="button"
                                             :value="$t('global.buttons.send')"
+                                            @click="sendMessage()"
+                                            :disabled="$v.$invalid"
                                         />
                                     </div>
                                 </form>
@@ -140,12 +162,9 @@
                             <div class="section-title">
                                 <div class="wpb_wrapper">
                                     <div class="wpb_wrapper">
-                                        <h2 class="title-color text-center">
-                                            Houston
-                                        </h2>
+                                        <h2 class="title-color text-center">Houston</h2>
                                         <p class="text-justify">
-                                            16504 Aldine Westfield Rd., Bldg. A
-                                            Houston, TX 77032
+                                            16504 Aldine Westfield Rd., Bldg. A Houston, TX 77032
                                         </p>
                                         <p class="text-center">
                                             <strong>phone:</strong>
@@ -158,46 +177,35 @@
 
                                         <p class="text-center">
                                             <strong
-                                                ><a
-                                                    href="mailto:info@zim-llc.com"
+                                                ><a href="mailto:info@zim-llc.com"
                                                     >info@zim-llc.com</a
                                                 ></strong
                                             >
                                         </p>
                                     </div>
 
-                                    <div
-                                        class="wpb_text_column wpb_content_element"
-                                    >
+                                    <div class="wpb_text_column wpb_content_element">
                                         <div class="wpb_wrapper">
-                                            <h2 class="text-center">
-                                                Cleveland
-                                            </h2>
+                                            <h2 class="text-center">Cleveland</h2>
                                             <p class="text-justify">
-                                                38500 Chardon Road Willoughby
-                                                Hills, OH 44094
+                                                38500 Chardon Road Willoughby Hills, OH 44094
                                             </p>
                                             <p class="text-center">
                                                 <strong
                                                     >phone:
-                                                    <a href="tel:440-269-8160"
-                                                        >440-269-8160</a
-                                                    >
+                                                    <a href="tel:440-269-8160">440-269-8160</a>
                                                 </strong>
                                             </p>
 
                                             <p class="text-center">
                                                 <strong
                                                     >fax:
-                                                    <a href="tel:440-269-8160"
-                                                        >440-269-8174</a
-                                                    >
+                                                    <a href="tel:440-269-8160">440-269-8174</a>
                                                 </strong>
                                             </p>
                                             <p class="text-center">
                                                 <strong
-                                                    ><a
-                                                        href="mailto:info@zim-llc.com"
+                                                    ><a href="mailto:info@zim-llc.com"
                                                         >info@zim-llc.com</a
                                                     ></strong
                                                 >
@@ -214,9 +222,49 @@
     </div>
 </template>
 <script>
+import { required, minLength, email } from 'vuelidate/lib/validators';
+import MaskedInput from 'vue-text-mask';
+import { mapActions } from 'vuex';
+
 export default {
+    components: {
+        MaskedInput
+    },
+
+    validations: {
+        formData: {
+            firstAndLastName: { required, minLength: minLength(4) },
+            email: { required, email },
+            topic: { required, minLength: minLength(4) },
+            phone: { required },
+            message: { required, minLength: minLength(10) }
+        }
+    },
+
     data() {
-        return {};
+        return {
+            formData: {},
+            showSuccessMessage: false,
+            showErrorMessage: false,
+            message: ''
+        };
+    },
+
+    methods: {
+        ...mapActions({
+            send: 'contact/sendMessage'
+        }),
+
+        async sendMessage() {
+            try {
+                await this.send(this.formData);
+                this.showSuccessMessage = true;
+            } catch (error) {
+                this.showErrorMessage = true;
+                this.message = error;
+                console.error(error);
+            }
+        }
     }
 };
 </script>

@@ -72,7 +72,6 @@ export const actions = {
     },
 
     async deleteOne({ commit }, id) {
-        console.log(id);
         await this.$axios.delete(`/categories/${id}`);
     }
 };

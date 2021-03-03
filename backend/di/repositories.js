@@ -8,8 +8,11 @@ const CategoryRepository = require("../repositories/CategoryRepository");
 const CategoryTranslationRepository = require("../repositories/CategoryTranslationRepository");
 const ContentRepository = require("../repositories/ContentRepository");
 const ContentTranslationRepository = require("../repositories/ContentTranslationRepository");
+const ProductRepository = require("../repositories/ProductRepository");
+const ProductTranslationRepository = require("../repositories/ProductTranslationRepository");
 const AboutRepository = require("../repositories/AboutRepository");
 const AboutTranslationRepository = require("../repositories/AboutTranslationRepository");
+const ResourceRepository = require("../repositories/ResourceRepository");
 
 module.exports = (container) => {
   container.register("repositories.user", UserRepository);
@@ -26,13 +29,36 @@ module.exports = (container) => {
 
   container.register("repositories.category", CategoryRepository);
 
-  container.register("repositories.categoryTranslation", CategoryTranslationRepository);
+  container.register(
+    "repositories.categoryTranslation",
+    CategoryTranslationRepository
+  );
 
   container.register("repositories.content", ContentRepository);
 
-  container.register("repositories.contentTranslation", ContentTranslationRepository);
+  container.register(
+    "repositories.contentTranslation",
+    ContentTranslationRepository
+  );
+
+  container.register("repositories.product", ProductRepository);
+
+  container.register(
+    "repositories.productTranslation",
+    ProductTranslationRepository
+  );
+
+  container.register(
+    "repositories.contentTranslation",
+    ContentTranslationRepository
+  );
 
   container.register("repositories.about", AboutRepository);
 
-  container.register("repositories.aboutTranslation", AboutTranslationRepository);
+  container.register(
+    "repositories.aboutTranslation",
+    AboutTranslationRepository
+  );
+
+  container.register("repositories.resource", ResourceRepository);
 };

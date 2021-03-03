@@ -8,6 +8,9 @@
             width: 100%;
             background: #f4f9fc;
         }
+        .is-invalid {
+            border: 1px solid red;
+        }
     }
     .form-group-2 {
         margin-bottom: 13px;

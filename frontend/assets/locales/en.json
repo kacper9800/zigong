@@ -14,6 +14,7 @@
     "powders": "powders"
   },
   "global": {
+    "messageSent": "Your message was sent successfully.",
     "firstName": "First Name",
     "lastName": "Last Name",
     "email": "E-mail address",
@@ -28,7 +29,9 @@
       "save": "Save",
       "edit": "Edit",
       "next": "Next",
-      "previous": "Previous"
+      "previous": "Previous",
+      "contactUs": "Contact US",
+      "learnMore": "Learn More"
     }
   },
   "contact": {
@@ -38,6 +41,7 @@
     "meaasge": "Your message"
   },
   "categories": {
+    "homePageQuestionsDescription": "Have Questions? Need a Quote? We have a wide range of solutions. Contact us!",
     "header": "Products categories",
     "name": "Category name",
     "description": "Description",
@@ -64,6 +68,9 @@
     }
   },
   "products": {
-    "name": "Product name"
+    "name": "Product name",
+    "questions": "Questions?",
+    "questionSection": "Do you have questions, need a quote? We have a wide range of products, materials and supplies!",
+    "cardQuestion": "QUESTIONS? NEED A QUOTE?"
   }
 }

@@ -5,7 +5,10 @@ const LabguageController = require("../controllers/LanguageController");
 const FileController = require("../controllers/FileController");
 const CategoryController = require("../controllers/CategoryController");
 const ContentController = require("../controllers/ContentController");
+const ProductController = require("../controllers/ProductController");
 const AboutController = require("../controllers/AboutController");
+const ResourcesController = require("../controllers/ResourcesController");
+const ContactController = require("../controllers/ContactController");
 
 module.exports = (container) => {
   container
@@ -41,8 +44,25 @@ module.exports = (container) => {
     .addArgument(new Reference("repositories.language"));
 
   container
+    .register("controller.product", ProductController)
+    .addArgument(new Reference("repositories.product"))
+    .addArgument(new Reference("repositories.productTranslation"))
+    .addArgument(new Reference("repositories.language"));
+
+  container
     .register("controller.about", AboutController)
     .addArgument(new Reference("repositories.about"))
     .addArgument(new Reference("repositories.aboutTranslation"))
     .addArgument(new Reference("repositories.language"));
+
+  container
+    .register("controller.resource", ResourcesController)
+    .addArgument(new Reference("repositories.resource"))
+    .addArgument(new Reference("repositories.category"))
+    .addArgument(new Reference("repositories.categoryTranslation"))
+    .addArgument(new Reference("repositories.language"));
+
+  container
+    .register("controller.contact", ContactController)
+    .addArgument(new Reference("services.SendEmailFromContactFormHandler"));
 };
