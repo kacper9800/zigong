@@ -57,7 +57,6 @@
         <categories-add-modal :isVisible="isAddModalVisible" @toggleAddModal="toggleAddModal" />
         <categories-edit-modal
             :isVisible="isEditModalVisible"
-            :isTranslationCreated="isTranslationCreated"
             :languageCode="languageCode"
             :categoryId="categoryIdToEdit"
             @toggleEditModal="toggleEditModal"
@@ -170,12 +169,6 @@ export default {
         },
         toggleEditModal(id, code) {
             this.isEditModalVisible = !this.isEditModalVisible;
-            if (this.isEditModalVisible) {
-                // this.categoryToEdit = this.getCategoryById({ lng: code, id: id });
-                this.categoryToEdit
-                    ? (this.isTranslationCreated = true)
-                    : (this.isTranslationCreated = false);
-            }
             this.languageCode = code;
             this.categoryIdToEdit = id;
             this.$emit('showModal');

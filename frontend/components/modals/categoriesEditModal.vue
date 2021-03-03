@@ -3,8 +3,6 @@
         :title="$t('categories.modal.editHeader' + languageCode)"
         :visible="isVisible"
         :confirm-loading="confirmLoading"
-        @ok="save"
-        @cancel="hideModal"
     >
         <a-form id="categories-form" :form="formData">
             <a-form-item :label="$t('categories.modal.name')">
@@ -13,6 +11,10 @@
                     type="text"
                     placeholder="Category name"
                     v-model="formData.name"
+                    :class="{
+                        'is-invalid': $v.formData.name.$error
+                    }"
+                    @blur="$v.formData.name.$touch()"
                     required
                 />
             </a-form-item>
@@ -21,6 +23,10 @@
                     type="text"
                     placeholder="Description at home page"
                     v-model="formData.homePageDescription"
+                    :class="{
+                        'is-invalid': $v.formData.homePageDescription.$error
+                    }"
+                    @blur="$v.formData.homePageDescription.$touch()"
                     required
                 />
             </a-form-item>
@@ -30,10 +36,28 @@
                     type="text"
                     placeholder="Article about sth"
                     v-model="formData.description"
+                    :class="{
+                        'is-invalid': $v.formData.description.$error
+                    }"
+                    @blur="$v.formData.description.$touch()"
                     required
                 />
             </a-form-item>
         </a-form>
+        <template slot="footer">
+            <a-button key="back" @click="hideModal">
+                Return
+            </a-button>
+            <a-button
+                key="submit"
+                type="primary"
+                :disabled="$v.$invalid"
+                :loading="confirmLoading"
+                @click="save"
+              >
+                Submit
+            </a-button>
+        </template>
     </a-modal>
 </template>
 
@@ -46,10 +70,6 @@ export default {
 
     props: {
         isVisible: {
-            type: Boolean,
-            default: false
-        },
-        isTranslationCreated: {
             type: Boolean,
             default: false
         },
@@ -74,11 +94,12 @@ export default {
         return {
             confirmLoading: false,
             formData: {
-              categoryId: null,
-              name: null,
-              homePageDescription: null,
-              description: null
-            }
+                categoryId: null,
+                name: null,
+                homePageDescription: null,
+                description: null
+            },
+            isTranslationCreated: null
         };
     },
     watch: {
@@ -89,6 +110,7 @@ export default {
         async isVisible(data) {
             try {
                 if (data && this.categoryId && this.languageCode) {
+                    this.categoryToEdit = null;
                     this.categoryToEdit = await this.getCategoryById({
                         params: { lng: this.languageCode, id: this.categoryId }
                     });
@@ -96,12 +118,18 @@ export default {
             } catch (error) {
                 console.log(error);
             } finally {
-              this.formData = {
-                categoryId: this.categoryToEdit ? this.categoryToEdit.categoryId : null,
-                name: this.categoryToEdit ? this.categoryToEdit.name : null,
-                homePageDescription: this.categoryToEdit ? this.categoryToEdit.homePageDescription : null,
-                description: this.categoryToEdit ? this.categoryToEdit.description : null
-              };
+                this.formData = {
+                    categoryId: this.categoryId ? this.categoryId : null,
+                    name: this.categoryToEdit ? this.categoryToEdit.name : null,
+                    homePageDescription: this.categoryToEdit
+                        ? this.categoryToEdit.homePageDescription
+                        : null,
+                    description: this.categoryToEdit ? this.categoryToEdit.description : null,
+                    lng: this.languageCode
+                };
+                this.categoryToEdit
+                    ? (this.isTranslationCreated = true)
+                    : (this.isTranslationCreated = false);
             }
         }
     },
@@ -123,22 +151,19 @@ export default {
             createCategory: 'category/createOne',
             updateCategory: 'category/updateOne'
         }),
-        showModal() {
-            console.log('showModal');
-        },
         hideModal(e) {
             this.$emit('toggleEditModal');
         },
         save(e) {
             this.confirmLoading = true;
             setTimeout(() => {
-                this.hideModal();
                 try {
-                    if(this.isTranslationCreated) {
-                      this.updateCategory(this.formData);
+                    if (this.isTranslationCreated) {
+                        this.updateCategory(this.formData);
                     } else {
-                      this.createCategory(this.formData);
+                        this.createCategory(this.formData);
                     }
+                    this.hideModal();
                 } catch (error) {
                     console.error(error);
                 }
