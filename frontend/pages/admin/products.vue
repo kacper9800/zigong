@@ -1,96 +1,163 @@
 <template>
-    <div class="page">
-        <h1>Products</h1>
-        <a-table :columns="columns" :data-source="dataa">
-            <a slot="name" slot-scope="text">{{ text }}</a>
-            <span slot="customTitle">Name</span>
-            <span slot="tags" slot-scope="tags">
-                <a-tag
-                    v-for="tag in tags"
-                    :key="tag"
-                    :color="
-                        tag === 'loser'
-                            ? 'volcano'
-                            : tag.length > 5
-                            ? 'geekblue'
-                            : 'green'
-                    "
+    <div>
+        <h1 class="page-header" style="color: #9e9e9e;">
+            {{ $t('products.header') }}
+        </h1>
+        <br />
+        <a-table
+            :columns="columns"
+            :data-source="products"
+            rowKey="name"
+            bordered
+            :pagination="{
+                defaultPageSize: 10,
+                showLessItems: true,
+                showSizeChanger: true,
+                showTitle: true,
+            }"
+        >
+            <template slot="title" slot-scope="currentPageData">
+                <a-button
+                    class="editable-add-btn ant-btn-primary"
+                    icon="plus"
+                    @click="toggleAddModal()"
                 >
-                    {{ tag.toUpperCase() }}
-                </a-tag>
-            </span>
-            <span slot="action" slot-scope="text, record">
-                <a>Invite 一 {{ record.name }}</a>
-                <a-divider type="vertical" />
-                <a>Delete</a>
-                <a-divider type="vertical" />
-                <a class="ant-dropdown-link">
-                    More actions <a-icon type="down" />
-                </a>
-            </span>
+                    {{ $t('global.buttons.addNew') }}
+                </a-button>
+            </template>
+            <a slot="name" slot-scope="text">{{ text }}</a>
+            <span slot="nameCustomTitle">{{ $t(`products.name`) }}</span>
+            <a slot="homePageDescription" slot-scope="text">{{ text }}</a>
+            <span slot="homePageDescriptionCustomTitle">{{
+                $t(`products.modal.homePageDescription`)
+            }}</span>
+            <a slot="actions" slot-scope="text, record">
+                <img
+                    :src="require('../../assets/images/flags/en.png')"
+                    @click="toggleEditModal(record.productId, 'En')"
+                />
+                <img
+                    :src="require('../../assets/images/flags/ru.png')"
+                    @click="toggleEditModal(record.productId, 'Ru')"
+                />
+                <img
+                    :src="require('../../assets/images/flags/pl.png')"
+                    @click="toggleEditModal(record.productId, 'Pl')"
+                />
+                <a-popconfirm
+                    v-if="prodcuts.length"
+                    :title="$t('global.deleteActionQuestion')"
+                    @confirm="() => onDelete(record.productId)"
+                >
+                    <a-button type="danger">Delete</a-button>
+                </a-popconfirm>
+            </a>
+            <span slot="actionsCustomTitle">{{ $t(`global.actions`) }}</span>
         </a-table>
-      <NuxtChild  />
+        <products-add-modal
+          :isVisible="isAddModalVisible"
+          @toggleAddModal="toggleAddModal"
+        />
+        <products-edit-modal
+            :isVisible="isEditModalVisible"
+            :languageCode="languageCode"
+            :productId="productIdToEdit"
+            @toggleEditModal="toggleEditModal"
+        />
     </div>
 </template>
 <script>
+import { mapActions, mapGetters } from 'vuex';
+import config from '~/config';
+import ProductsAddModal from '~/components/modals/productsAddModal';
+import ProductsEditModal from '~/components/modals/productsEditModal';
+
 export default {
     layout: 'admin',
+    middleware: 'admin',
+
+    components: {
+        ProductsAddModal,
+        ProductsEditModal
+    },
+
+    // async asyncData({ app, store }) {
+    //     const { code } = app.i18n.localeProperties;
+    //     console.log(code);
+    //     try {
+    //         await store.dispatch('products/getProducts', {
+    //             lng: code
+    //         });
+    //     } catch (error) {
+    //         console.error(error);
+    //     }
+    // },
 
     data() {
         return {
-            dataa: [
-                {
-                    key: '1',
-                    name: 'John Brown',
-                    age: 32,
-                    address: 'New York No. 1 Lake Park',
-                    tags: ['nice', 'developer']
-                },
-                {
-                    key: '2',
-                    name: 'Jim Green',
-                    age: 42,
-                    address: 'London No. 1 Lake Park',
-                    tags: ['loser']
-                },
-                {
-                    key: '3',
-                    name: 'Joe Black',
-                    age: 32,
-                    address: 'Sidney No. 1 Lake Park',
-                    tags: ['cool', 'teacher']
-                }
-            ],
+            isAddModalVisible: false,
+            isEditModalVisible: false,
+            isTranslationCreated: false,
+            productIdToEdit: null,
+            productToEdit: null,
+            languageCode: 'En',
             columns: [
                 {
                     dataIndex: 'name',
                     key: 'name',
-                    slots: { title: 'customTitle' },
+                    width: '30%',
+                    slots: { title: 'nameCustomTitle' },
                     scopedSlots: { customRender: 'name' }
                 },
                 {
-                    title: 'Age',
-                    dataIndex: 'age',
-                    key: 'age'
-                },
-                {
-                    title: 'Address',
-                    dataIndex: 'address',
-                    key: 'address'
-                },
-                {
-                    title: 'Tags',
-                    key: 'tags',
-                    dataIndex: 'tags',
-                    scopedSlots: { customRender: 'tags' }
-                },
-                {
-                    title: 'Action',
-                    key: 'action',
-                    scopedSlots: { customRender: 'action' }
+                    key: 'actions',
+                    dataIndex: 'actions',
+                    slots: { title: 'actionsCustomTitle' },
+                    scopedSlots: { customRender: 'actions' }
                 }
             ]
         };
+    },
+
+    computed: {
+        ...mapGetters({
+            products: 'products/getProducts',
+            product: 'products/getProduct'
+        }),
+
+        baseUrl() {
+            return config.mediaBaseUrl;
+        },
+
+        availableLocales() {
+            return this.$i18n.locale;
+        }
+    },
+
+    methods: {
+        ...mapActions({
+            delete: 'products/deleteOne',
+            getAllProducts: 'products/getAllProducts',
+            getOneById: 'products/getOneById'
+        }),
+        async onDelete(id) {
+            try {
+                await this.delete(id);
+                await this.getAllProducts('En');
+            } catch (e) {
+                console.error(e);
+            }
+        },
+        async toggleAddModal() {
+            this.isAddModalVisible = !this.isAddModalVisible;
+            await this.getAllProducts('En');
+        },
+        toggleEditModal(id, code) {
+            this.isEditModalVisible = !this.isEditModalVisible;
+            this.languageCode = code;
+            this.productIdToEdit = id;
+            this.$emit('showModal');
+        }
     }
 };
 </script>

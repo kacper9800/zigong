@@ -68,7 +68,28 @@
     }
   },
   "products": {
+    "header": "товары",
     "name": "Наименование товара",
+    "modal": {
+      "addNewHeader": "Adding new product",
+      "editHeaderEn": "Editing product - English",
+      "editHeaderRu": "Editing product - Russian",
+      "editHeaderPl": "Editing product - Polish",
+      "name": "Product name",
+      "namePlaceholder": "Type product name",
+      "description": "Product description",
+      "descriptionPlaceholder": "Type product description",
+      "homePageDescription": "Description at home page",
+      "homePageDescriptionPlaceholder": "Type product home page description",
+      "photosDropdown": {
+        "chooseOption": "Choose option",
+        "existingPhoto": "Existing photo",
+        "newPhoto": "New photo from disc"
+      },
+      "photoUpload": {
+        "choosePhoto": "Choose photo"
+      }
+    },
     "questions": "Питания?",
     "questionSection": "У вас есть вопросы, нужна цитата? У нас широкий ассортимент товаров, материалов и расходных материалов!",
     "cardQuestion": "ВОПРОСОВ? НУЖНА ЦИТАТА?"

@@ -68,7 +68,28 @@
     }
   },
   "products": {
+    "header": "Products",
     "name": "Product name",
+    "modal": {
+      "addNewHeader": "Adding new product",
+      "editHeaderEn": "Editing product - English",
+      "editHeaderRu": "Editing product - Russian",
+      "editHeaderPl": "Editing product - Polish",
+      "name": "Product name",
+      "namePlaceholder": "Type product name",
+      "description": "Product description",
+      "descriptionPlaceholder": "Type product description",
+      "homePageDescription": "Description at home page",
+      "homePageDescriptionPlaceholder": "Type product home page description",
+      "photosDropdown": {
+        "chooseOption": "Choose option",
+        "existingPhoto": "Existing photo",
+        "newPhoto": "New photo from disc"
+      },
+      "photoUpload": {
+        "choosePhoto": "Choose photo"
+      }
+    },
     "questions": "Questions?",
     "questionSection": "Do you have questions, need a quote? We have a wide range of products, materials and supplies!",
     "cardQuestion": "QUESTIONS? NEED A QUOTE?"
