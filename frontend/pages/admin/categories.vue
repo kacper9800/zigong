@@ -1,5 +1,5 @@
 <template>
-    <div style="overflow: hidden; height: 81vh;">
+    <div>
         <h1 class="page-header" style="color: #9e9e9e;">
             {{ $t('categories.header') }}
         </h1>
