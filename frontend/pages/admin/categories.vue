@@ -1,22 +1,25 @@
 <template>
     <div>
-        <h1 class="page-header" style="color: #9e9e9e;">
+        <h1 class="page-header" style="color: #9e9e9e">
             {{ $t('categories.header') }}
         </h1>
         <br />
+        <!-- @toto - pagination -->
         <a-table
             :columns="columns"
             :data-source="categories"
             rowKey="name"
             bordered
+            @change="handleTableChange"
             :pagination="{
-                defaultPageSize: 10,
-                showLessItems: true,
+                defaultPageSize: 5,
+                page: 1,
+                showLessItems: false,
                 showSizeChanger: true,
                 showTitle: true
             }"
         >
-            <template slot="title" slot-scope="currentPageData">
+            <template slot="title">
                 <a-button
                     class="editable-add-btn ant-btn-primary"
                     icon="plus"
@@ -33,21 +36,21 @@
             }}</span>
             <a slot="actions" slot-scope="text, record">
                 <img
-                    :src="require('../../assets/images/flags/en.png')"
-                    @click="toggleEditModal(record.categoryId, 'En')"
+                    src="~/assets/images/flags/en.png"
+                    @click="toggleEditModal(record.categoryId, 'en')"
                 />
                 <img
-                    :src="require('../../assets/images/flags/ru.png')"
-                    @click="toggleEditModal(record.categoryId, 'Ru')"
+                    src="~/assets/images/flags/pl.png"
+                    @click="toggleEditModal(record.categoryId, 'pl')"
                 />
                 <img
-                    :src="require('../../assets/images/flags/pl.png')"
-                    @click="toggleEditModal(record.categoryId, 'Pl')"
+                    src="~/assets/images/flags/ru.png"
+                    @click="toggleEditModal(record.categoryId, 'ru')"
                 />
                 <a-popconfirm
                     v-if="categories.length"
                     :title="$t('global.deleteActionQuestion')"
-                    @confirm="() => onDelete(record.categoryId)"
+                    @confirm="onDelete(record.categoryId)"
                 >
                     <a-button type="danger">Delete</a-button>
                 </a-popconfirm>
@@ -57,8 +60,8 @@
         <categories-add-modal :isVisible="isAddModalVisible" @toggleAddModal="toggleAddModal" />
         <categories-edit-modal
             :isVisible="isEditModalVisible"
-            :languageCode="languageCode"
-            :categoryId="categoryIdToEdit"
+            :lng="lng"
+            :categoryId="categoryId"
             @toggleEditModal="toggleEditModal"
         />
     </div>
@@ -66,7 +69,6 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
-import config from '~/config';
 import CategoriesAddModal from '~/components/modals/categoriesAddModal.vue';
 import CategoriesEditModal from '~/components/modals/categoriesEditModal';
 
@@ -83,30 +85,21 @@ export default {
         const { code } = app.i18n.localeProperties;
         try {
             await store.dispatch('category/getAllCategories', {
-                lng: code
+                lng: code,
+                order: 'desc',
+                perPage: 5
             });
         } catch (error) {
             console.error(error);
         }
     },
-    async fetch({ app, store }) {
-        const { code } = app.i18n.localeProperties;
-        try {
-            await store.dispatch('category/getAllCategories', {
-                lng: code
-            });
-        } catch (error) {
-            console.error(error);
-        }
-    },
+
     data() {
         return {
             isAddModalVisible: false,
             isEditModalVisible: false,
-            isTranslationCreated: false,
-            categoryIdToEdit: null,
-            categoryToEdit: null,
-            languageCode: 'En',
+            categoryId: null,
+            lng: null,
             columns: [
                 {
                     dataIndex: 'name',
@@ -135,16 +128,9 @@ export default {
     computed: {
         ...mapGetters({
             categories: 'category/getCategories',
-            category: 'category/getCategory'
-        }),
-
-        baseUrl() {
-            return config.mediaBaseUrl;
-        },
-
-        availableLocales() {
-            return this.$i18n.locale;
-        }
+            category: 'category/getCategory',
+            pagination: 'category/getPagination'
+        })
     },
 
     methods: {
@@ -153,25 +139,29 @@ export default {
             getAllCategories: 'category/getAllCategories',
             getOneById: 'category/getOneById'
         }),
+
+        async handleTableChange(pagination) {
+            const { page } = pagination;
+            await this.getAllCategories({ page, perPage: 5 });
+        },
+
         async onDelete(id) {
             try {
                 await this.delete(id);
-                await this.getAllCategories('En');
+                await this.getAllCategories({ order: 'desc' });
             } catch (e) {
                 console.error(e);
             }
         },
-        toggleAddModal() {
+
+        async toggleAddModal() {
             this.isAddModalVisible = !this.isAddModalVisible;
-            if (!this.isAddModalVisible) {
-                this.$fetch;
-            }
         },
-        toggleEditModal(id, code) {
+
+        toggleEditModal(categoryId, lng) {
             this.isEditModalVisible = !this.isEditModalVisible;
-            this.languageCode = code;
-            this.categoryIdToEdit = id;
-            this.$emit('showModal');
+            this.lng = lng;
+            this.categoryId = categoryId;
         }
     }
 };

@@ -1,8 +1,9 @@
 <template>
     <a-modal
-        :title="$t('categories.modal.editHeader' + languageCode)"
+        :title="$t(`categories.modal.editHeader-${lng}`)"
         :visible="isVisible"
         :confirm-loading="confirmLoading"
+        @cancel="hideModal"
     >
         <a-form id="categories-form" :form="formData">
             <a-form-item :label="$t('categories.modal.name')">
@@ -15,7 +16,6 @@
                         'is-invalid': $v.formData.name.$error
                     }"
                     @blur="$v.formData.name.$touch()"
-                    required
                 />
             </a-form-item>
             <a-form-item :label="$t('categories.modal.homePageDescription')">
@@ -27,7 +27,6 @@
                         'is-invalid': $v.formData.homePageDescription.$error
                     }"
                     @blur="$v.formData.homePageDescription.$touch()"
-                    required
                 />
             </a-form-item>
             <a-form-item :label="$t('categories.modal.description')">
@@ -40,21 +39,18 @@
                         'is-invalid': $v.formData.description.$error
                     }"
                     @blur="$v.formData.description.$touch()"
-                    required
                 />
             </a-form-item>
         </a-form>
         <template slot="footer">
-            <a-button key="back" @click="hideModal">
-                Return
-            </a-button>
+            <a-button key="back" @click="hideModal"> Return </a-button>
             <a-button
                 key="submit"
                 type="primary"
                 :disabled="$v.$invalid"
                 :loading="confirmLoading"
                 @click="save"
-              >
+            >
                 Submit
             </a-button>
         </template>
@@ -73,12 +69,13 @@ export default {
             type: Boolean,
             default: false
         },
-        languageCode: {
+        lng: {
             type: String,
-            default: 'En'
+            default: 'en'
         },
         categoryId: {
-            type: Number
+            type: Number,
+            default: null
         }
     },
 
@@ -93,72 +90,62 @@ export default {
     data() {
         return {
             confirmLoading: false,
-            formData: {
-                categoryId: null,
-                name: null,
-                homePageDescription: null,
-                description: null
-            },
-            isTranslationCreated: null
+            formData: {},
+            categoryExist: false
         };
     },
-    watch: {
-        isVisible() {
-            this.$emit('input', this.isVisible);
-        },
 
-        async isVisible(data) {
-            try {
-                if (data && this.categoryId && this.languageCode) {
-                    this.categoryToEdit = null;
-                    this.categoryToEdit = await this.getCategoryById({
-                        params: { lng: this.languageCode, id: this.categoryId }
-                    });
-                }
-            } catch (error) {
-                console.log(error);
-            } finally {
-                this.formData = {
-                    categoryId: this.categoryId ? this.categoryId : null,
-                    name: this.categoryToEdit ? this.categoryToEdit.name : null,
-                    homePageDescription: this.categoryToEdit
-                        ? this.categoryToEdit.homePageDescription
-                        : null,
-                    description: this.categoryToEdit ? this.categoryToEdit.description : null,
-                    lng: this.languageCode
-                };
-                this.categoryToEdit
-                    ? (this.isTranslationCreated = true)
-                    : (this.isTranslationCreated = false);
+    watch: {
+        isVisible(e) {
+            if (e) {
+                this.checkIfCategoryExist();
             }
         }
     },
+
     computed: {
         ...mapGetters({
             category: 'category/getCategory'
-        }),
-
-        baseUrl() {
-            return config.mediaBaseUrl;
-        },
-        availableLocales() {
-            return this.$i18n.locale;
-        }
+        })
     },
+
     methods: {
         ...mapActions({
             getCategoryById: 'category/getOneById',
             createCategory: 'category/createOne',
             updateCategory: 'category/updateOne'
         }),
-        hideModal(e) {
+
+        async checkIfCategoryExist() {
+            try {
+                this.formData = await this.getCategoryById({
+                    params: { lng: this.lng, id: this.categoryId }
+                });
+
+                this.categoryExist = true;
+            } catch (error) {
+                this.formData = {
+                    lng: this.lng,
+                    categoryId: this.categoryId
+                };
+            }
+        },
+
+        hideModal() {
             this.$emit('toggleEditModal');
         },
-        save(e) {
+
+        save() {
+            if (this.$v.$invalid) {
+                this.hideModal();
+                return 0;
+            }
+            console.log(this.categoryExist);
             this.confirmLoading = true;
             setTimeout(() => {
+                this.hideModal();
                 try {
-                    if (this.isTranslationCreated) {
+                    if (this.categoryExist) {
                         this.updateCategory(this.formData);
                     } else {
                         this.createCategory(this.formData);
