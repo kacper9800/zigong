@@ -3,7 +3,6 @@
         :title="$t(`categories.modal.editHeader-${lng}`)"
         :visible="isVisible"
         :confirm-loading="confirmLoading"
-        @ok="save"
         @cancel="hideModal"
     >
         <a-form id="categories-form" :form="formData">
@@ -43,6 +42,18 @@
                 />
             </a-form-item>
         </a-form>
+        <template slot="footer">
+            <a-button key="back" @click="hideModal"> Return </a-button>
+            <a-button
+                key="submit"
+                type="primary"
+                :disabled="$v.$invalid"
+                :loading="confirmLoading"
+                @click="save"
+            >
+                Submit
+            </a-button>
+        </template>
     </a-modal>
 </template>
 
@@ -129,17 +140,17 @@ export default {
                 this.hideModal();
                 return 0;
             }
-
+            console.log(this.categoryExist);
             this.confirmLoading = true;
             setTimeout(() => {
                 this.hideModal();
-                console.log(this.formData);
                 try {
                     if (this.categoryExist) {
                         this.updateCategory(this.formData);
                     } else {
                         this.createCategory(this.formData);
                     }
+                    this.hideModal();
                 } catch (error) {
                     console.error(error);
                 }
