@@ -39,7 +39,7 @@ class CategoryController {
       order: [[sortBy, order]],
       where: { languageId },
       attributes: {
-        exclude: ["id", "languageId"],
+        exclude: ["languageId"],
       },
       include: [
         {
@@ -88,7 +88,7 @@ class CategoryController {
       {
         where: { languageId, categoryId: id },
         attributes: {
-          exclude: ["id", "languageId"],
+          exclude: ["id"],
         },
         include: [
           {
@@ -195,7 +195,28 @@ class CategoryController {
     }
   }
 
-  // @todo - update method
+  async update(req, res) {
+    const { id: categoryId } = req.params;
+    const { id: languageId } = req.language;
+
+    const category = await this.categoryTranslationRepository.findOne({
+      where: {
+        categoryId,
+        languageId,
+      },
+    });
+
+    if (!category) {
+      return res.sendStatus(HttpStatuses.NOT_FOUND);
+    }
+
+    req.body.categoryId = categoryId;
+
+    category.update(req.body);
+    category.categoryId = parseInt(categoryId);
+
+    return res.send(category);
+  }
 
   async delete(req, res) {
     const { id } = req.params;

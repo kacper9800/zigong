@@ -2,7 +2,48 @@ const { body } = require("express-validator");
 const { Op } = require("sequelize");
 const { Language, Category } = require("../models");
 
-const update = [];
+const update = [
+  body(["lng"])
+    .trim()
+    .not()
+    .isEmpty()
+    .withMessage("should be not empty")
+    .bail()
+    .custom(async (lng, { req }) => {
+      const language = await Language.findOne({
+        where: {
+          [Op.or]: [{ code: lng }, { name: lng }, { id: lng }],
+        },
+      });
+
+      if (!language) {
+        return Promise.reject("Language does not exists!");
+      }
+
+      req.language = language;
+    }),
+
+  body(["description"])
+    .trim()
+    .not()
+    .isEmpty()
+    .withMessage("should be not empty")
+    .bail(),
+
+  body(["homePageDescription"])
+    .trim()
+    .not()
+    .isEmpty()
+    .withMessage("should be not empty")
+    .bail(),
+
+  body(["name"])
+    .trim()
+    .not()
+    .isEmpty()
+    .withMessage("should be not empty")
+    .bail(),
+];
 
 const create = [
   body(["name"])

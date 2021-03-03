@@ -87,7 +87,8 @@ export default {
             await store.dispatch('category/getAllCategories', {
                 lng: code,
                 order: 'desc',
-                perPage: 5
+                perPage: 5,
+                page: 1
             });
         } catch (error) {
             console.error(error);
@@ -99,7 +100,7 @@ export default {
             isAddModalVisible: false,
             isEditModalVisible: false,
             categoryId: null,
-            lng: null,
+            lng: 'en',
             columns: [
                 {
                     dataIndex: 'name',
@@ -142,13 +143,13 @@ export default {
 
         async handleTableChange(pagination) {
             const { page } = pagination;
-            await this.getAllCategories({ page, perPage: 5 });
+            await this.getAllCategories({ page, perPage: 5, order: 'desc' });
         },
 
         async onDelete(id) {
             try {
                 await this.delete(id);
-                await this.getAllCategories({ order: 'desc' });
+                await this.getAllCategories({ perPage: 5, order: 'desc' });
             } catch (e) {
                 console.error(e);
             }
