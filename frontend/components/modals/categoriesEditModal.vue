@@ -1,5 +1,4 @@
 <template>
-    <!-- @todo - fix this modal (now it doesnt work as expected) -->
     <a-modal
         :title="$t('categories.modal.editHeader' + languageCode)"
         :visible="isVisible"
@@ -9,7 +8,13 @@
     >
         <a-form id="categories-form" :form="formData">
             <a-form-item :label="$t('categories.modal.name')">
-                <a-input type="text" placeholder="Category name" v-model="formData.name" required />
+                <a-input
+                    value
+                    type="text"
+                    placeholder="Category name"
+                    v-model="formData.name"
+                    required
+                />
             </a-form-item>
             <a-form-item :label="$t('categories.modal.homePageDescription')">
                 <a-input
@@ -33,7 +38,8 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
+import { minLength, required } from 'vuelidate/lib/validators';
 
 export default {
     layout: 'admin',
@@ -41,7 +47,11 @@ export default {
     props: {
         isVisible: {
             type: Boolean,
-            default: true
+            default: false
+        },
+        isTranslationCreated: {
+            type: Boolean,
+            default: false
         },
         languageCode: {
             type: String,
@@ -52,35 +62,83 @@ export default {
         }
     },
 
-    data() {
-        return {
-            formData: {
-                coverImageId: null,
-                homePageCoverImageId: null
-            },
-            confirmLoading: false
-        };
+    validations: {
+        formData: {
+            name: { required, minLength: minLength(4) },
+            homePageDescription: { required, minLength: minLength(4) },
+            description: { required, minLength: minLength(4) }
+        }
     },
 
-    methods: {
-        ...mapActions({
-            updateCategory: 'category/createOne',
-            getAllCategories: 'category/getAllCategories'
-        }),
-
-        hideModal() {
-            this.$emit('toggleEditModal');
+    data() {
+        return {
+            confirmLoading: false,
+            formData: {
+              categoryId: null,
+              name: null,
+              homePageDescription: null,
+              description: null
+            }
+        };
+    },
+    watch: {
+        isVisible() {
+            this.$emit('input', this.isVisible);
         },
 
-        save() {
+        async isVisible(data) {
+            try {
+                if (data && this.categoryId && this.languageCode) {
+                    this.categoryToEdit = await this.getCategoryById({
+                        params: { lng: this.languageCode, id: this.categoryId }
+                    });
+                }
+            } catch (error) {
+                console.log(error);
+            } finally {
+              this.formData = {
+                categoryId: this.categoryToEdit ? this.categoryToEdit.categoryId : null,
+                name: this.categoryToEdit ? this.categoryToEdit.name : null,
+                homePageDescription: this.categoryToEdit ? this.categoryToEdit.homePageDescription : null,
+                description: this.categoryToEdit ? this.categoryToEdit.description : null
+              };
+            }
+        }
+    },
+    computed: {
+        ...mapGetters({
+            category: 'category/getCategory'
+        }),
+
+        baseUrl() {
+            return config.mediaBaseUrl;
+        },
+        availableLocales() {
+            return this.$i18n.locale;
+        }
+    },
+    methods: {
+        ...mapActions({
+            getCategoryById: 'category/getOneById',
+            createCategory: 'category/createOne',
+            updateCategory: 'category/updateOne'
+        }),
+        showModal() {
+            console.log('showModal');
+        },
+        hideModal(e) {
+            this.$emit('toggleEditModal');
+        },
+        save(e) {
             this.confirmLoading = true;
             setTimeout(() => {
                 this.hideModal();
-
-                this.formData.coverImageId = this.coverImage.shift();
-                this.formData.homePageCoverImageId = this.homePageCoverImage.shift();
                 try {
-                    this.createCategory(this.formData);
+                    if(this.isTranslationCreated) {
+                      this.updateCategory(this.formData);
+                    } else {
+                      this.createCategory(this.formData);
+                    }
                 } catch (error) {
                     console.error(error);
                 }

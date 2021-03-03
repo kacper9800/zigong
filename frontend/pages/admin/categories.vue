@@ -1,6 +1,6 @@
 <template>
-    <div style="overflow: hidden; height: 81vh">
-        <h1 class="page-header" style="color: #9e9e9e">
+    <div style="overflow: hidden; height: 81vh;">
+        <h1 class="page-header" style="color: #9e9e9e;">
             {{ $t('categories.header') }}
         </h1>
         <br />
@@ -16,7 +16,7 @@
                 showTitle: true
             }"
         >
-            <template slot="title">
+            <template slot="title" slot-scope="currentPageData">
                 <a-button
                     class="editable-add-btn ant-btn-primary"
                     icon="plus"
@@ -33,15 +33,15 @@
             }}</span>
             <a slot="actions" slot-scope="text, record">
                 <img
-                    src="~/assets/images/flags/en.png"
+                    :src="require('../../assets/images/flags/en.png')"
                     @click="toggleEditModal(record.categoryId, 'En')"
                 />
                 <img
-                    src="~/assets/images/flags/ru.png"
+                    :src="require('../../assets/images/flags/ru.png')"
                     @click="toggleEditModal(record.categoryId, 'Ru')"
                 />
                 <img
-                    src="~/assets/images/flags/pl.png"
+                    :src="require('../../assets/images/flags/pl.png')"
                     @click="toggleEditModal(record.categoryId, 'Pl')"
                 />
                 <a-popconfirm
@@ -57,6 +57,7 @@
         <categories-add-modal :isVisible="isAddModalVisible" @toggleAddModal="toggleAddModal" />
         <categories-edit-modal
             :isVisible="isEditModalVisible"
+            :isTranslationCreated="isTranslationCreated"
             :languageCode="languageCode"
             :categoryId="categoryIdToEdit"
             @toggleEditModal="toggleEditModal"
@@ -89,12 +90,23 @@ export default {
             console.error(error);
         }
     },
-
+    async fetch({ app, store }) {
+        const { code } = app.i18n.localeProperties;
+        try {
+            await store.dispatch('category/getAllCategories', {
+                lng: code
+            });
+        } catch (error) {
+            console.error(error);
+        }
+    },
     data() {
         return {
             isAddModalVisible: false,
             isEditModalVisible: false,
+            isTranslationCreated: false,
             categoryIdToEdit: null,
+            categoryToEdit: null,
             languageCode: 'En',
             columns: [
                 {
@@ -123,7 +135,8 @@ export default {
 
     computed: {
         ...mapGetters({
-            categories: 'category/getCategories'
+            categories: 'category/getCategories',
+            category: 'category/getCategory'
         }),
 
         baseUrl() {
@@ -138,28 +151,35 @@ export default {
     methods: {
         ...mapActions({
             delete: 'category/deleteOne',
-            allCategories: 'category/getAllCategories'
+            getAllCategories: 'category/getAllCategories',
+            getOneById: 'category/getOneById'
         }),
         async onDelete(id) {
             try {
                 await this.delete(id);
-                await this.allCategories('En');
+                await this.getAllCategories('En');
             } catch (e) {
                 console.error(e);
             }
         },
         toggleAddModal() {
             this.isAddModalVisible = !this.isAddModalVisible;
+            if (!this.isAddModalVisible) {
+                this.$fetch;
+            }
         },
         toggleEditModal(id, code) {
             this.isEditModalVisible = !this.isEditModalVisible;
-            this.categoryIdToEdit = id;
+            if (this.isEditModalVisible) {
+                // this.categoryToEdit = this.getCategoryById({ lng: code, id: id });
+                this.categoryToEdit
+                    ? (this.isTranslationCreated = true)
+                    : (this.isTranslationCreated = false);
+            }
             this.languageCode = code;
+            this.categoryIdToEdit = id;
+            this.$emit('showModal');
         }
-
-        // openEditModalWithTranslations(code) {
-        //     this.editModal = true;
-        // }
     }
 };
 </script>
