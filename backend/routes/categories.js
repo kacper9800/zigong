@@ -22,7 +22,11 @@ module.exports = (di) => {
     (...args) => CategoryController.create(...args)
   );
 
-  //   @todo UPDATE(PUT) method
+  router.put(
+    "/categories/:id",
+    [isLoggedIn, isAdmin, categoryValidator.update, validate],
+    (...args) => CategoryController.update(...args)
+  );
 
   router.delete("/categories/:id", [isLoggedIn, isAdmin], (...args) =>
     CategoryController.delete(...args)
