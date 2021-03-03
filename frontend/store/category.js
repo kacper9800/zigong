@@ -19,11 +19,6 @@ export const getters = {
 export const mutations = {
     SET_CATEGORIES(state, categories) {
         state.categories = categories.data;
-        state.pagination = {
-            count: categories.count,
-            current: categories.current,
-            total: categories.totalPages
-        };
     },
 
     SET_CATEGORY(state, data) {
@@ -32,6 +27,11 @@ export const mutations = {
 
     ADD_CATEGORY(state, data) {
         state.category = data;
+    },
+
+    UPDATE_CATEGORY(state, data) {
+        const index = state.categories.findIndex(element => element.id == data.id);
+        state.categories.splice(index, 1, data);
     }
 };
 
@@ -77,7 +77,10 @@ export const actions = {
     },
 
     async updateOne({ commit }, category) {
-        await this.$axios.put('/categories', category);
+        const { categoryId } = category;
+        const { data } = await this.$axios.put(`/categories/${categoryId}`, category);
+
+        commit('UPDATE_CATEGORY', data);
 
         return data;
     },

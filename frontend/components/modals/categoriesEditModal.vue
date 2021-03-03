@@ -113,15 +113,18 @@ export default {
         ...mapActions({
             getCategoryById: 'category/getOneById',
             createCategory: 'category/createOne',
-            updateCategory: 'category/updateOne'
+            updateCategory: 'category/updateOne',
+            getAllCategories: 'category/getAllCategories'
         }),
 
         async checkIfCategoryExist() {
             try {
-                this.formData = await this.getCategoryById({
+                const data = await this.getCategoryById({
                     params: { lng: this.lng, id: this.categoryId }
                 });
 
+                this.formData = { ...data };
+                this.formData.lng = this.formData.languageId;
                 this.categoryExist = true;
             } catch (error) {
                 this.formData = {
@@ -135,27 +138,30 @@ export default {
             this.$emit('toggleEditModal');
         },
 
-        save() {
+        async save() {
             if (this.$v.$invalid) {
                 this.hideModal();
                 return 0;
             }
-            console.log(this.categoryExist);
+
             this.confirmLoading = true;
-            setTimeout(() => {
-                this.hideModal();
+            setTimeout(async () => {
                 try {
                     if (this.categoryExist) {
-                        this.updateCategory(this.formData);
+                        await this.updateCategory(this.formData);
                     } else {
-                        this.createCategory(this.formData);
+                        await this.createCategory(this.formData);
                     }
-                    this.hideModal();
                 } catch (error) {
                     console.error(error);
                 }
+
+                this.formData = {};
+                this.categoryExist = false;
                 this.confirmLoading = false;
             }, 1000);
+
+            this.hideModal();
         }
     }
 };
