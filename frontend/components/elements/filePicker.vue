@@ -24,20 +24,16 @@
                 <input
                     type="checkbox"
                     :id="item.id"
-                    :value="item.id"
+                    :value="returnObject ? item : item.id"
                     v-model="checkedItemsCoppy"
-                    :disabled="disabledCheckbox(item.id)"
+                    :disabled="returnObject ? checkbox(item.id) : disabledCheckbox(item.id)"
                 />
                 <label :for="item.id"
-                    ><img :src="baseUrl + '/thumbnails/' + item.thumbnail"
+                    ><img loading="lazy" :src="baseUrl + '/thumbnails/' + item.thumbnail"
                 /></label>
             </li>
 
-            <infinite-loading
-                class="spiner"
-                pinner="spiral"
-                @infinite="infiniteScroll"
-            >
+            <infinite-loading class="spiner" pinner="spiral" @infinite="infiniteScroll">
                 <span slot="no-more"></span>
                 <span slot="no-results"></span>
             </infinite-loading>
@@ -59,6 +55,11 @@ export default {
         checkedItems: {
             type: Array,
             default: () => []
+        },
+
+        returnObject: {
+            type: Boolean,
+            default: false
         }
     },
 
@@ -118,6 +119,16 @@ export default {
             }
         },
 
+        checkbox(id) {
+            const found = this.checkedItemsCoppy.find(element => element.id == id);
+
+            if (found) {
+                return false;
+            } else if (this.checkedItemsCoppy.length >= this.quantity) {
+                return true;
+            }
+        },
+
         infiniteScroll($state) {
             setTimeout(() => {
                 $state.loaded();
@@ -158,7 +169,7 @@ export default {
             if (!isAcceptedFile) {
                 this.$message.error('You can only upload JPG file!');
             }
-            const isToBig = file.size / 1024 / 1024 < 2;
+            const isToBig = file.size / 1024 / 1024 < 4;
 
             if (!isToBig) {
                 this.$message.error('Image must smaller than 2MB!');

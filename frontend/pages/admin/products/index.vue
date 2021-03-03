@@ -20,7 +20,7 @@
                 <a-button
                     class="editable-add-btn ant-btn-primary"
                     icon="plus"
-                    @click="toggleAddModal()"
+                    @click="$router.push('/admin/products/create')"
                 >
                     {{ $t('global.buttons.addNew') }}
                 </a-button>
@@ -33,17 +33,18 @@
             }}</span>
             <a slot="actions" slot-scope="text, record">
                 <img
-                    :src="require('../../assets/images/flags/en.png')"
+                    src="~/assets/images/flags/en.png"
                     @click="toggleEditModal(record.productId, 'En')"
                 />
                 <img
-                    :src="require('../../assets/images/flags/ru.png')"
-                    @click="toggleEditModal(record.productId, 'Ru')"
-                />
-                <img
-                    :src="require('../../assets/images/flags/pl.png')"
+                    src="~/assets/images/flags/pl.png"
                     @click="toggleEditModal(record.productId, 'Pl')"
                 />
+                <img
+                    src="~/assets/images/flags/ru.png"
+                    @click="toggleEditModal(record.productId, 'Ru')"
+                />
+
                 <a-popconfirm
                     v-if="prodcuts.length"
                     :title="$t('global.deleteActionQuestion')"
@@ -54,50 +55,17 @@
             </a>
             <span slot="actionsCustomTitle">{{ $t(`global.actions`) }}</span>
         </a-table>
-        <products-add-modal :isVisible="isAddModalVisible" @toggleAddModal="toggleAddModal" />
-        <products-edit-modal
-            :isVisible="isEditModalVisible"
-            :languageCode="languageCode"
-            :productId="productIdToEdit"
-            @toggleEditModal="toggleEditModal"
-        />
     </div>
 </template>
 <script>
 import { mapActions, mapGetters } from 'vuex';
-import config from '~/config';
-import ProductsAddModal from '~/components/modals/productsAddModal';
-import ProductsEditModal from '~/components/modals/productsEditModal';
 
 export default {
     layout: 'admin',
     middleware: 'admin',
 
-    components: {
-        ProductsAddModal,
-        ProductsEditModal
-    },
-
-    // async asyncData({ app, store }) {
-    //     const { code } = app.i18n.localeProperties;
-    //     console.log(code);
-    //     try {
-    //         await store.dispatch('products/getProducts', {
-    //             lng: code
-    //         });
-    //     } catch (error) {
-    //         console.error(error);
-    //     }
-    // },
-
     data() {
         return {
-            isAddModalVisible: false,
-            isEditModalVisible: false,
-            isTranslationCreated: false,
-            productIdToEdit: null,
-            productToEdit: null,
-            languageCode: 'En',
             columns: [
                 {
                     dataIndex: 'name',
@@ -120,15 +88,7 @@ export default {
         ...mapGetters({
             products: 'products/getProducts',
             product: 'products/getProduct'
-        }),
-
-        baseUrl() {
-            return config.mediaBaseUrl;
-        },
-
-        availableLocales() {
-            return this.$i18n.locale;
-        }
+        })
     },
 
     methods: {
@@ -137,6 +97,7 @@ export default {
             getAllProducts: 'products/getAllProducts',
             getOneById: 'products/getOneById'
         }),
+
         async onDelete(id) {
             try {
                 await this.delete(id);
@@ -144,16 +105,6 @@ export default {
             } catch (e) {
                 console.error(e);
             }
-        },
-        async toggleAddModal() {
-            this.isAddModalVisible = !this.isAddModalVisible;
-            await this.getAllProducts('En');
-        },
-        toggleEditModal(id, code) {
-            this.isEditModalVisible = !this.isEditModalVisible;
-            this.languageCode = code;
-            this.productIdToEdit = id;
-            this.$emit('showModal');
         }
     }
 };
