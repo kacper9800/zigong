@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1 class="page-header" style="color: #9e9e9e;">
+        <h1 class="page-header" style="color: #9e9e9e">
             {{ $t('products.header') }}
         </h1>
         <br />
@@ -13,10 +13,10 @@
                 defaultPageSize: 10,
                 showLessItems: true,
                 showSizeChanger: true,
-                showTitle: true,
+                showTitle: true
             }"
         >
-            <template slot="title" slot-scope="currentPageData">
+            <template slot="title">
                 <a-button
                     class="editable-add-btn ant-btn-primary"
                     icon="plus"
@@ -54,10 +54,7 @@
             </a>
             <span slot="actionsCustomTitle">{{ $t(`global.actions`) }}</span>
         </a-table>
-        <products-add-modal
-          :isVisible="isAddModalVisible"
-          @toggleAddModal="toggleAddModal"
-        />
+        <products-add-modal :isVisible="isAddModalVisible" @toggleAddModal="toggleAddModal" />
         <products-edit-modal
             :isVisible="isEditModalVisible"
             :languageCode="languageCode"
