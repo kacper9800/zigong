@@ -8,6 +8,7 @@ const ContentController = require("../controllers/ContentController");
 const ProductController = require("../controllers/ProductController");
 const AboutController = require("../controllers/AboutController");
 const ResourcesController = require("../controllers/ResourcesController");
+const ContactController = require("../controllers/ContactController");
 
 module.exports = (container) => {
   container
@@ -60,4 +61,8 @@ module.exports = (container) => {
     .addArgument(new Reference("repositories.category"))
     .addArgument(new Reference("repositories.categoryTranslation"))
     .addArgument(new Reference("repositories.language"));
+
+  container
+    .register("controller.contact", ContactController)
+    .addArgument(new Reference("services.SendEmailFromContactFormHandler"));
 };

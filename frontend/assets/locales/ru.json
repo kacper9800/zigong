@@ -14,6 +14,7 @@
     "powders": "powders"
   },
   "global": {
+    "messageSent": "Ваше сообщение было успешно отправлено.",
     "firstName": "имя",
     "lastName": "имя",
     "email": "Электронный адрес",

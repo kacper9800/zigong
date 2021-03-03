@@ -23,6 +23,7 @@
     "vue": "^2.6.12",
     "vue-cool-lightbox": "^2.7.1",
     "vue-infinite-loading": "^2.4.5",
+    "vue-text-mask": "^6.1.2",
     "vuelidate": "^0.7.6"
   },
   "devDependencies": {
