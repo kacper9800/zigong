@@ -25,9 +25,9 @@ module.exports = {
         allowNull: false,
         type: Sequelize.INTEGER,
       },
-      deleted: {
-        type: Sequelize.BOOLEAN,
-        defaultValue: false,
+      deletedAt: {
+        allowNull: true,
+        type: Sequelize.DATE,
       },
       createdAt: {
         allowNull: false,

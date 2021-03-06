@@ -13,10 +13,6 @@ module.exports = (sequelize, Sequelize) => {
         unique: true,
         allowNull: false,
       },
-      dayOfBirth: {
-        type: Sequelize.DATEONLY,
-        allowNull: false,
-      },
       password: {
         type: Sequelize.STRING,
         allowNull: false,
@@ -29,16 +25,17 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      availableDays: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        defaultValue: 0,
+      deletedAt: {
+        allowNull: true,
+        type: Sequelize.DATE,
       },
     },
     {
+      timestamps: true,
+      paranoid: true,
       defaultScope: {
         attributes: {
-          exclude: ["password", "dayOfBirth"],
+          exclude: ["password", "dayOfBirth", "deletedAt"],
         },
       },
     }

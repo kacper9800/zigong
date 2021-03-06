@@ -1,20 +1,35 @@
 module.exports = (sequelize, Sequelize) => {
-  const Category = sequelize.define("Category", {
-    id: {
-      type: Sequelize.INTEGER,
-      autoIncrement: true,
-      primaryKey: true,
+  const Category = sequelize.define(
+    "Category",
+    {
+      id: {
+        type: Sequelize.INTEGER,
+        autoIncrement: true,
+        primaryKey: true,
+      },
+      slug: {
+        type: Sequelize.STRING,
+      },
+      homePageCoverImageId: {
+        type: Sequelize.INTEGER,
+      },
+      coverImageId: {
+        type: Sequelize.INTEGER,
+      },
+      deletedAt: {
+        allowNull: true,
+        type: Sequelize.DATE,
+      },
     },
-    slug: {
-      type: Sequelize.STRING,
-    },
-    homePageCoverImageId: {
-      type: Sequelize.INTEGER,
-    },
-    coverImageId: {
-      type: Sequelize.INTEGER,
-    },
-  });
+    {
+      timestamps: true,
+      paranoid: true,
+      defaultScope: {
+        attributes: { exclude: ["deletedAt"] },
+      },
+    }
+  );
+
   Category.associate = function (db) {
     Category.hasMany(db.Resource, {
       as: "resource",

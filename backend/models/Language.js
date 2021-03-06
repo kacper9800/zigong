@@ -15,8 +15,18 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.STRING,
         allowNull: false,
       },
+      deletedAt: {
+        allowNull: true,
+        type: Sequelize.DATE,
+      },
     },
-    {}
+    {
+      timestamps: true,
+      paranoid: true,
+      defaultScope: {
+        attributes: { exclude: ["deletedAt"] },
+      },
+    }
   );
   Language.associate = function (db) {};
 

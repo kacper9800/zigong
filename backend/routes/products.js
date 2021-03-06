@@ -20,7 +20,11 @@ module.exports = (di) => {
     (...args) => productController.create(...args)
   );
 
-  // @todo - update method
+  router.put(
+    "/products/:id",
+    [isLoggedIn, isAdmin, productValidator.update, validate],
+    (...args) => productController.update(...args)
+  );
 
   router.delete("/products/:id", [isLoggedIn, isAdmin], (...args) =>
     productController.delete(...args)

@@ -13,7 +13,6 @@
     "@nuxtjs/axios": "^5.12.2",
     "@nuxtjs/pwa": "^3.0.2",
     "@nuxtjs/style-resources": "^1.0.0",
-    "@tinymce/tinymce-vue": "^3.2.8",
     "ant-design-vue": "^1.7.2",
     "bootstrap": "^4.6.0",
     "bootstrap-vue": "^2.21.2",
@@ -25,6 +24,7 @@
     "vue-cool-lightbox": "^2.7.1",
     "vue-infinite-loading": "^2.4.5",
     "vue-text-mask": "^6.1.2",
+    "vueditor": "^0.3.1",
     "vuelidate": "^0.7.6"
   },
   "devDependencies": {

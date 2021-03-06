@@ -11,6 +11,7 @@ class FileController {
       page = 1,
       sortBy = "createdAt",
       order = "desc",
+      mimetype = "",
     } = req.query;
 
     const pageNumber = parseInt(page);
@@ -18,6 +19,10 @@ class FileController {
     const offset = (pageNumber - 1) * limit;
 
     const where = {};
+
+    if (mimetype) {
+      where.mimetype = mimetype;
+    }
 
     const users = await this.fileRepository.findAndCountAll({
       offset,

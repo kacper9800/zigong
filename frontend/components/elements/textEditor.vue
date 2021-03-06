@@ -2,22 +2,18 @@
     <div :class="{ 'error-border-containter': errorBorder }">
         <label v-if="label">{{ label }}</label>
 
-        <editor
+        <!-- <editor
             :api-key="apiKey"
             :init="initEditorSettings"
             :value="value"
             @input="$emit('input', $event)"
-        />
+        /> -->
     </div>
 </template>
 
 <script>
-import Editor from '@tinymce/tinymce-vue';
-
 export default {
-    components: {
-        Editor
-    },
+    components: {},
 
     props: {
         value: {

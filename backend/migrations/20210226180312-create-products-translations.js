@@ -17,7 +17,7 @@ module.exports = {
         type: Sequelize.STRING,
       },
       value: {
-        type: Sequelize.TEXT,
+        type: Sequelize.JSON,
       },
       categoryId: {
         type: Sequelize.INTEGER,
@@ -25,6 +25,10 @@ module.exports = {
       languageId: {
         allowNull: false,
         type: Sequelize.INTEGER,
+      },
+      deletedAt: {
+        allowNull: true,
+        type: Sequelize.DATE,
       },
       createdAt: {
         allowNull: false,
