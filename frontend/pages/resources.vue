@@ -31,7 +31,7 @@
                                 <div
                                     v-for="item in resources.data"
                                     :key="item.id"
-                                    class="col-md-4 col-sm-12"
+                                    class="col-md-4 col-sm-12 mt-5"
                                 >
                                     <div class="resources-card card-body h-100">
                                         <h4>&nbsp;{{ item.categoryTranslation.name }}</h4>
@@ -51,7 +51,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-4 col-sm-12">
+                                <div class="col-md-4 col-sm-12 mt-5">
                                     <div class="resources-card card-body h-100">
                                         <h4>&nbsp;Media</h4>
 

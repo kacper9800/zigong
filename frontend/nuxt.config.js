@@ -32,16 +32,14 @@ export default {
     },
 
     // Global CSS (https://go.nuxtjs.dev/config-css)
-    css: ['@/assets/design/main.scss', '@/assets/fonts/iconFonts.css'],
+    css: [
+        '@/assets/styles/bootstrap.main.scss',
+        '@/assets/design/main.scss',
+        '@/assets/fonts/iconFonts.css'
+    ],
 
     // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
-    plugins: [
-        '@/plugins/antd-ui',
-        '@/plugins/bootstrap',
-        '@/plugins/vue-infinite-scroll',
-        '@/plugins/vuelidate',
-        '@/plugins/vue-cool-lightbox'
-    ],
+    plugins: ['@/plugins/antd-ui', '@/plugins/vuelidate', '@/plugins/vue-cool-lightbox'],
 
     // Auto import components (https://go.nuxtjs.dev/config-components)
     components: true,
