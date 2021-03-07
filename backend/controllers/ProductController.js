@@ -186,7 +186,7 @@ class ProductController {
       categoryId: product.categoryId,
     };
 
-    return res.send({ ...respons, ...parsedData });
+    return res.send(productTranslation.value);
   }
 
   async create(req, res) {
