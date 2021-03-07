@@ -2,22 +2,21 @@
     <div>
         <section class="section service-2">
             <div class="container" style="margin-top: 100px">
-                <a-carousel autoplay v-if="show">
-                    <div v-for="item in content.promotionalImages" :key="item.file">
-                        <nuxt-link :to="localePath('/' + item.redirectTo)"
-                            ><img
-                                loading="lazy"
-                                :src="baseUrl + '/s1440/' + item.file"
-                                class="img-fluid"
-                                alt="image"
-                        /></nuxt-link>
-                    </div>
-                </a-carousel>
-                <div v-else class="d-flex justify-content-center">
-                    <a-spin>
-                        <a-icon slot="indicator" type="loading" style="font-size: 50px" spin />
-                    </a-spin>
-                </div>
+                <client-only>
+                    <swiper class="swiper" :options="swiperOption">
+                        <swiper-slide v-for="item in content.promotionalImages" :key="item.file"
+                            ><nuxt-link :to="localePath('/' + item.redirectTo)"
+                                ><img
+                                    loading="lazy"
+                                    :src="baseUrl + '/s1440/' + item.file"
+                                    class="img-fluid"
+                                    alt="image" /></nuxt-link
+                        ></swiper-slide>
+                        <div class="swiper-pagination" slot="pagination" />
+                        <div class="swiper-button-prev" slot="button-prev" />
+                        <div class="swiper-button-next" slot="button-next" />
+                    </swiper>
+                </client-only>
             </div>
         </section>
 
@@ -160,11 +159,21 @@
 </template>
 
 <script>
+import { Swiper, SwiperSlide, directive } from 'vue-awesome-swiper';
 import { mapGetters } from 'vuex';
 import config from '@/config';
 
 export default {
     name: 'home',
+
+    components: {
+        Swiper,
+        SwiperSlide
+    },
+
+    directives: {
+        swiper: directive
+    },
 
     async asyncData({ app, store }) {
         const { code } = app.i18n.localeProperties;
@@ -186,7 +195,37 @@ export default {
     data() {
         return {
             show: false,
-            lng: this.$i18n.locale
+            lng: this.$i18n.locale,
+            swiperOption: {
+                loop: true,
+                spaceBetween: 30,
+                centeredSlides: true,
+                autoplay: {
+                    delay: 2500,
+                    disableOnInteraction: false
+                },
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true
+                },
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev'
+                }
+            }
+        };
+    },
+
+    head() {
+        return {
+            title: `Zigong - ${this.$t('mainMenu.home')}`,
+            meta: [
+                {
+                    hid: 'description',
+                    name: 'description',
+                    content: 'Description need to be updated'
+                }
+            ]
         };
     },
 
