@@ -134,16 +134,16 @@ class ProductController {
 
     const parsedData = JSON.parse(productTranslation.value);
 
-    const respons = {
-      id,
-      lng,
-      name: productTranslation.name,
-      coverImage: product.file,
-      categoryId: product.categoryId,
-      file: resource.pdf,
-    };
+    // const respons = {
+    //   id,
+    //   lng,
+    //   name: productTranslation.name,
+    //   coverImage: product.file,
+    //   categoryId: product.categoryId,
+    //   file: resource.pdf,
+    // };
 
-    return res.send({ ...respons, ...parsedData });
+    return res.send(productTranslation.value);
   }
 
   async showBySlug(req, res) {
