@@ -147,8 +147,7 @@ const create = [
     .bail()
     .custom(async (value, { req }) => {
       try {
-        JSON.stringify(value);
-        req.body.value = value;
+        req.body.value = JSON.parse(value);
       } catch (e) {
         return Promise.reject("incorrect JSON");
       }
