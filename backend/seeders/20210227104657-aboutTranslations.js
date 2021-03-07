@@ -359,10 +359,10 @@ module.exports = {
               files: [
                 {
                   id: 1,
-                  thumbnail: "G1ASjM2JelgQhfROKB6yJTkNj.png",
+                  thumbnail: "G1ASjM2JelgQhfROKB6yJTkNj.webp",
                   name: "zigong-texas-1.png",
                   description: null,
-                  file: "seya9EDRNFuyrMfid1TQ7ZsuS.png",
+                  file: "seya9EDRNFuyrMfid1TQ7ZsuS.webp",
                   mimetype: "png",
                 },
               ],
