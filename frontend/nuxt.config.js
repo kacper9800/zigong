@@ -44,7 +44,7 @@ export default {
     ],
 
     // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
-    plugins: ['@/plugins/antd-ui', '@/plugins/vuelidate', '@/plugins/vue-cool-lightbox'],
+    plugins: ['@/plugins/vuelidate', '@/plugins/vue-cool-lightbox'],
 
     // Auto import components (https://go.nuxtjs.dev/config-components)
     components: true,
