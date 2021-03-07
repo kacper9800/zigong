@@ -229,6 +229,19 @@ export default {
         };
     },
 
+    head() {
+        return {
+            title: `Zigong - ${this.$t('mainMenu.home')}`,
+            meta: [
+                {
+                    hid: 'description',
+                    name: 'description',
+                    content: 'Description need to be updated'
+                }
+            ]
+        };
+    },
+
     computed: {
         ...mapGetters({
             categories: 'category/getCategories'
