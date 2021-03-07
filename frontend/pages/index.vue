@@ -8,7 +8,7 @@
                             ><img
                                 :src="baseUrl + '/s1440/' + item.file"
                                 class="img-fluid"
-                                alt="Responsive image"
+                                alt="image"
                         /></nuxt-link>
                     </div>
                 </a-carousel>
@@ -42,15 +42,16 @@
                                             '/thumbnails/' +
                                             item.category.homePageCoverImage.thumbnail
                                         "
+                                        alt="image"
                                         width="auto"
                                         height="110px"
                                     />
                                 </div>
                                 <br />
-                                <div style="font-size: 17px; color: #244a8b">
+                                <div class="cube-item-name">
                                     {{ item.name }}
                                 </div>
-                                <div style="font-size: 13px; color: #666666">
+                                <div class="cube-item-description">
                                     {{ item.homePageDescription }}
                                 </div>
                             </div>
@@ -74,6 +75,7 @@
                                         src="@/assets/images/contact-us.png"
                                         width="auto"
                                         height="110px"
+                                        alt="contact-us"
                                     />
                                 </div>
                                 <br />
@@ -124,7 +126,7 @@
         <section class="section about">
             <div class="container">
                 <div class="row align-items-center">
-                    <div class="col-md-6 col-sm-12 align-self-start">
+                    <div class="col-md-6 align-self-start d-none d-sm-block">
                         <div class="embed-responsive embed-responsive-16by9">
                             <iframe
                                 class="embed-responsive-item"
@@ -142,7 +144,7 @@
                             <img
                                 class="card-img-top"
                                 :src="baseUrl + '/s720/' + content.news.image.file"
-                                alt="Card image cap"
+                                alt="image"
                             />
                             <div class="card-body">
                                 <div v-html="content.news.html" />
@@ -183,6 +185,19 @@ export default {
         return {
             show: false,
             lng: this.$i18n.locale
+        };
+    },
+
+    head() {
+        return {
+            title: `Zigong - ${this.$t('mainMenu.home')}`,
+            meta: [
+                {
+                    hid: 'description',
+                    name: 'description',
+                    content: 'Description need to be updated'
+                }
+            ]
         };
     },
 

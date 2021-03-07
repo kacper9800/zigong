@@ -38,7 +38,7 @@
                             <img
                                 class="col-lg-12 col-md-12"
                                 :src="baseUrl + '/thumbnails/' + item.product.file.thumbnail"
-                                alt=""
+                                alt="image"
                             />
                             <div class="overlay-img">
                                 <nuxt-link
@@ -60,8 +60,6 @@ import { mapGetters } from 'vuex';
 import config from '@/config';
 
 export default {
-    name: 'products',
-
     async asyncData({ app, store, params }) {
         const { code } = app.i18n.localeProperties;
         const { slug } = params;
@@ -83,6 +81,19 @@ export default {
 
     data() {
         return {};
+    },
+
+    head() {
+        return {
+            title: `Zigong - ${this.category.name}`,
+            meta: [
+                {
+                    hid: 'description',
+                    name: 'description',
+                    content: 'My custom description'
+                }
+            ]
+        };
     },
 
     computed: {

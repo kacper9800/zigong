@@ -89,6 +89,19 @@ export default {
         };
     },
 
+    head() {
+        return {
+            title: `Zigong - ${this.content.title}`,
+            meta: [
+                {
+                    hid: 'description',
+                    name: 'description',
+                    content: 'About'
+                }
+            ]
+        };
+    },
+
     computed: {
         baseUrl() {
             return config.mediaBaseUrl;

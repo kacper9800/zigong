@@ -14,7 +14,12 @@ export default {
                 name: 'viewport',
                 content: 'width=device-width, initial-scale=1'
             },
-            { hid: 'description', name: 'description', content: '' }
+            {
+                hid: 'description',
+                name: 'description',
+                content:
+                    'ZGCC is one of the largest producers of Cemented Carbide, Tungsten and Molybdenum products in China. The company is in the top ten of the world as a producer of these products. With over 50 years of experience, we have built complete production lines from raw materials to downstream products as well as have provided our customers with a full range of materials.'
+            }
         ],
         link: [
             {
@@ -118,7 +123,11 @@ export default {
 
     // Build Configuration (https://go.nuxtjs.dev/config-build)
     build: {
-        extend(config, ctx) {},
+        extend(config, { isClient }) {
+            if (isClient) {
+                config.devtool = '#source-map';
+            }
+        },
         extractCSS: {
             ignoreOrder: false
         },

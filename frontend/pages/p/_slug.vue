@@ -33,7 +33,7 @@
                                                             '/thumbnails/' +
                                                             file.thumbnail
                                                         "
-                                                        alt="Responsive image"
+                                                        alt="image"
                                                 /></nuxt-link>
                                             </div>
                                         </div>
@@ -53,7 +53,7 @@
                                 <img
                                     class="img-fluid img-thumbnail"
                                     :src="baseUrl + '/thumbnails/' + item.thumbnail"
-                                    alt=""
+                                    alt="image"
                                 />
                             </div>
                         </div>

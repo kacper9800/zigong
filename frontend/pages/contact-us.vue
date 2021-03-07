@@ -250,6 +250,19 @@ export default {
         };
     },
 
+    head() {
+        return {
+            title: `Zigong - ${this.$t('contact.heading')}`,
+            meta: [
+                {
+                    hid: 'description',
+                    name: 'description',
+                    content: this.$t('contact.tip')
+                }
+            ]
+        };
+    },
+
     methods: {
         ...mapActions({
             send: 'contact/sendMessage'

@@ -32,6 +32,7 @@
                     ><img
                         loading="lazy"
                         :src="baseUrl + '/thumbnails/' + item.thumbnail"
+                        alt="image"
                 /></label>
             </li>
 
