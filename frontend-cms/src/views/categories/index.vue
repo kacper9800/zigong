@@ -36,15 +36,15 @@
             >
             <a slot="actions" slot-scope="text, record">
                 <img
-                    src="../../assets/images/flags/en.png"
+                    src="@assets/images/flags/en.png"
                     @click="toggleEditModal(record.categoryId, 'en')"
                 />
                 <img
-                    src="../../assets/images/flags/pl.png"
+                    src="@assets/images/flags/pl.png"
                     @click="toggleEditModal(record.categoryId, 'pl')"
                 />
                 <img
-                    src="../../assets/images/flags/ru.png"
+                    src="@assets/images/flags/ru.png"
                     @click="toggleEditModal(record.categoryId, 'ru')"
                 />
                 <a-popconfirm
@@ -72,8 +72,8 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
-import CategoriesAddModal from '../../components/modals/categoriesAddModal';
-import CategoriesEditModal from '../../components/modals/categoriesEditModal';
+import CategoriesAddModal from '@components/modals/categoriesAddModal';
+import CategoriesEditModal from '@components/modals/categoriesEditModal';
 
 export default {
     components: {

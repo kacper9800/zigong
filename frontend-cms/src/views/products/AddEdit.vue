@@ -170,11 +170,11 @@
 <script>
 import { mapActions, mapGetters } from 'vuex';
 import { required, minLength } from 'vuelidate/lib/validators';
-import TextEditor from '../../components/elements/textEditor';
-import ProductsAddModal from '../../components/modals/productsAddModal';
-import ProductsEditModal from '../../components/modals/productsEditModal';
-import FilePickerModal from '../../components/modals/filePickerModal';
-import config from '../../config';
+import TextEditor from '@components/elements/textEditor';
+import ProductsAddModal from '@components/modals/productsAddModal';
+import ProductsEditModal from '@components/modals/productsEditModal';
+import FilePickerModal from '@components/modals/filePickerModal';
+import config from '@config';
 
 export default {
     components: {
@@ -194,7 +194,7 @@ export default {
 
     data() {
         return {
-            defaultImage: require('../../assets/images/default.png'),
+            defaultImage: require('@assets/images/default.png'),
             formData: {
                 name: '',
                 PDFfile: { id: null, thumbnail: null },

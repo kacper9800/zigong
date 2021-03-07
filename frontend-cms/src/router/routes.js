@@ -1,4 +1,4 @@
-import store from '../state/store';
+import store from '@state/store';
 
 let crudRoutes = ['products'];
 
@@ -8,7 +8,7 @@ crudRoutes = crudRoutes.flatMap(route => [
     {
         path: `/${route}`,
         name: route,
-        component: () => import(`../views/${route}/`),
+        component: () => import(`@views/${route}/`),
         meta: {
             authRequired: true
         }
@@ -16,7 +16,7 @@ crudRoutes = crudRoutes.flatMap(route => [
     {
         path: `/${route}/add`,
         name: `${route}Add`,
-        component: () => import(`../views/${route}/AddEdit`),
+        component: () => import(`@views/${route}/AddEdit`),
         meta: {
             authRequired: true
         }
@@ -24,7 +24,7 @@ crudRoutes = crudRoutes.flatMap(route => [
     {
         path: `/${route}/:id/:lng/edit`,
         name: `${route}Edit`,
-        component: () => import(`../views/${route}/AddEdit`),
+        component: () => import(`@views/${route}/AddEdit`),
         meta: {
             authRequired: true
         }
@@ -37,7 +37,7 @@ export default [
     {
         path: '/login',
         name: 'login',
-        component: () => lazyLoadView(import('../views/auth/Login')),
+        component: () => lazyLoadView(import('@views/auth/Login')),
         props: { layout: 'auth' },
         meta: {
             beforeResolve(routeTo, routeFrom, next) {
@@ -75,7 +75,7 @@ export default [
     {
         path: '/reset-password/:token',
         name: 'reset-password',
-        component: () => lazyLoadView(import('../views/auth/ResetPassword')),
+        component: () => lazyLoadView(import('@views/auth/ResetPassword')),
         props: route => ({ token: route.params.token }),
         meta: {
             beforeResolve(routeTo, routeFrom, next) {
@@ -90,7 +90,7 @@ export default [
     {
         path: '/reset-password',
         name: 'reset-password',
-        component: () => lazyLoadView(import('../views/auth/ForgetPassword')),
+        component: () => lazyLoadView(import('@views/auth/ForgetPassword')),
         meta: {
             beforeResolve(routeTo, routeFrom, next) {
                 // If the user is already logged in
@@ -107,7 +107,7 @@ export default [
     {
         path: '/',
         name: 'dashboard',
-        component: () => import('../views/Dashboard'),
+        component: () => import('@views/Dashboard'),
         meta: {
             authRequired: true
         }
@@ -115,7 +115,7 @@ export default [
     {
         path: '/categories',
         name: 'categories',
-        component: () => import('../views/categories/'),
+        component: () => import('@views/categories/'),
         meta: {
             authRequired: true
         }

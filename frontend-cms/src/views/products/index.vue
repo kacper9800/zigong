@@ -33,20 +33,20 @@
             >
             <a slot="actions" slot-scope="text, record">
                 <img
-                    src="../../assets/images/flags/en.png"
+                    src="@assets/images/flags/en.png"
                     @click="
                         $router.push(`/products/${record.productId}/en/edit`)
                     "
                     class="px-2"
                 />
                 <img
-                    src="../../assets/images/flags/pl.png"
+                    src="@assets/images/flags/pl.png"
                     @click="
                         $router.push(`/products/${record.productId}/pl/edit`)
                     "
                 />
                 <img
-                    src="../../assets/images/flags/ru.png"
+                    src="@assets/images/flags/ru.png"
                     @click="
                         $router.push(`/products/${record.productId}/ru/edit`)
                     "

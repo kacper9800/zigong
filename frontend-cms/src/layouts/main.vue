@@ -23,9 +23,9 @@
 </template>
 
 <script>
-import AdminHeader from '../components/layout/header/AdminHeader';
-import AdminSider from '../components/layout/sider/AdminSider';
-import AdminFooter from '../components/layout/footer/AdminFooter';
+import AdminHeader from '@components/layout/header/AdminHeader';
+import AdminSider from '@components/layout/sider/AdminSider';
+import AdminFooter from '@components/layout/footer/AdminFooter';
 
 export default {
     data() {
