@@ -4,6 +4,7 @@ const MailerFactory = require("../services/MailerFactory");
 const SendEmailToRecoverPasswordHandler = require("../services/mailer/SendEmailToRecoverPasswordHandler");
 const SendEmailToNewUserHandler = require("../services/mailer/SendEmailToNewUserHandler");
 const SendEmailFromContactForm = require("../services/mailer/SendEmailFromContactForm");
+const Translator = require("../services/TranslatorHandler");
 const config = require("../config");
 const { User, Role } = require("../models");
 
@@ -39,4 +40,6 @@ module.exports = (container) => {
     )
     .addArgument(new Reference("services.mailerFactory"))
     .addArgument(config);
+
+  container.register("services.TranslatorHandler", Translator);
 };

@@ -13,10 +13,6 @@ module.exports = {
         unique: true,
         allowNull: false,
       },
-      dayOfBirth: {
-        type: Sequelize.DATEONLY,
-        allowNull: false,
-      },
       password: {
         type: Sequelize.STRING,
         allowNull: false,
@@ -29,10 +25,9 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      availableDays: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        defaultValue: 0,
+      deletedAt: {
+        allowNull: true,
+        type: Sequelize.DATE,
       },
       createdAt: {
         allowNull: false,

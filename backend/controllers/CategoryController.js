@@ -39,13 +39,18 @@ class CategoryController {
       order: [[sortBy, order]],
       where: { languageId },
       attributes: {
-        exclude: ["languageId"],
+        exclude: ["languageId", "deletedAt"],
       },
       include: [
         {
           association: "category",
           attributes: {
-            exclude: ["id", "homePageCoverImageId", "coverImageId"],
+            exclude: [
+              "id",
+              "homePageCoverImageId",
+              "coverImageId",
+              "deletedAt",
+            ],
           },
           include: [
             {
@@ -88,13 +93,18 @@ class CategoryController {
       {
         where: { languageId, categoryId: id },
         attributes: {
-          exclude: ["id"],
+          exclude: ["id", "deletedAt"],
         },
         include: [
           {
             association: "category",
             attributes: {
-              exclude: ["id", "homePageCoverImageId", "coverImageId"],
+              exclude: [
+                "id",
+                "homePageCoverImageId",
+                "coverImageId",
+                "deletedAt",
+              ],
             },
             include: [
               { model: File, as: "coverImage" },

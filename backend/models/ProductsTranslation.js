@@ -1,35 +1,49 @@
 "use strict";
 module.exports = (sequelize, Sequelize) => {
-  const ProductsTranslation = sequelize.define("ProductsTranslation", {
-    id: {
-      type: Sequelize.INTEGER,
-      autoIncrement: true,
-      primaryKey: true,
+  const ProductsTranslation = sequelize.define(
+    "ProductsTranslation",
+    {
+      id: {
+        type: Sequelize.INTEGER,
+        autoIncrement: true,
+        primaryKey: true,
+      },
+      productId: {
+        allowNull: false,
+        type: Sequelize.TEXT,
+      },
+      categoryId: {
+        type: Sequelize.INTEGER,
+      },
+      languageId: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+      },
+      name: {
+        allowNull: false,
+        type: Sequelize.STRING,
+      },
+      value: {
+        allowNull: false,
+        type: Sequelize.JSON,
+      },
+      deletedAt: {
+        allowNull: true,
+        type: Sequelize.DATE,
+      },
     },
-    productId: {
-      allowNull: false,
-      type: Sequelize.TEXT,
-    },
-    categoryId: {
-      type: Sequelize.INTEGER,
-    },
-    languageId: {
-      allowNull: false,
-      type: Sequelize.INTEGER,
-    },
-    name: {
-      allowNull: false,
-      type: Sequelize.STRING,
-    },
-    value: {
-      allowNull: false,
-      type: Sequelize.TEXT,
-    },
-  });
+    {
+      timestamps: true,
+      paranoid: true,
+      defaultScope: {
+        attributes: { exclude: ["deletedAt", "createdAt", "updatedAt"] },
+      },
+    }
+  );
   ProductsTranslation.associate = function (db) {
     ProductsTranslation.belongsTo(db.Product, {
       as: "product",
-      foreignKey: "categoryId",
+      foreignKey: "productId",
     });
 
     ProductsTranslation.belongsTo(db.Language, {

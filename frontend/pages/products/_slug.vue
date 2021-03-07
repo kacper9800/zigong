@@ -34,7 +34,7 @@
                         :key="item.productId"
                         class="col-md-4 col-sm-12 mt-4"
                     >
-                        <div class="hovereffect">
+                        <div v-if="item.product" class="hovereffect">
                             <img
                                 class="col-lg-12 col-md-12"
                                 :src="baseUrl + '/thumbnails/' + item.product.file.thumbnail"

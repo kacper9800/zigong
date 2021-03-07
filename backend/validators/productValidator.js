@@ -1,8 +1,89 @@
-const { body } = require("express-validator");
+const { body, param } = require("express-validator");
 const { Op } = require("sequelize");
 const { Language, Category, Product, File } = require("../models");
 
-const update = [];
+const update = [
+  body(["name"])
+    .trim()
+    .not()
+    .isEmpty()
+    .withMessage("should be not empty")
+    .bail(),
+
+  body(["lng"])
+    .trim()
+    .not()
+    .isEmpty()
+    .withMessage("should be not empty")
+    .bail()
+    .custom(async (lng, { req }) => {
+      const language = await Language.findOne({
+        where: {
+          [Op.or]: [{ code: lng }, { name: lng }],
+        },
+      });
+
+      if (!language) {
+        return Promise.reject("Language does not exists!");
+      }
+
+      req.language = language;
+    }),
+
+  body(["coverImageId"])
+    .trim()
+    .not()
+    .isEmpty()
+    .withMessage("should be not empty")
+    .bail()
+    .custom(async (coverImageId, { req }) => {
+      const file = await File.findOne({ where: { id: coverImageId } });
+
+      if (!file) {
+        return Promise.reject("File does not exists!");
+      }
+    }),
+
+  body(["file"])
+    .trim()
+    .not()
+    .isEmpty()
+    .withMessage("resources PDF should be not empty!")
+    .bail()
+    .custom(async (file, { req }) => {
+      const pdf = await File.findOne({ where: { id: file } });
+
+      if (!pdf || pdf.mimetype !== "pdf") {
+        return Promise.reject("File does not exists!");
+      }
+    }),
+
+  body(["value"])
+    .trim()
+    .not()
+    .isEmpty()
+    .withMessage("should be not empty")
+    .bail()
+    .custom(async (value, { req }) => {
+      try {
+        req.body.value = JSON.stringify(value);
+      } catch (e) {
+        return Promise.reject("incorrect JSON");
+      }
+    }),
+
+  param(["id"]).custom(async (id, { req }) => {
+    const product = await Product.findOne({
+      where: {
+        id,
+      },
+    });
+
+    if (!product) {
+      return Promise.reject("Product does not exists!");
+    }
+  }),
+];
 
 const create = [
   body(["name"])
@@ -66,7 +147,7 @@ const create = [
     .bail()
     .custom(async (value, { req }) => {
       try {
-        JSON.parse(value);
+        req.body.value = JSON.stringify(value);
       } catch (e) {
         return Promise.reject("incorrect JSON");
       }

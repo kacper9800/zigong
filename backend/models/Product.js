@@ -1,24 +1,38 @@
 "use strict";
 module.exports = (sequelize, Sequelize) => {
-  const Product = sequelize.define("Product", {
-    id: {
-      type: Sequelize.INTEGER,
-      autoIncrement: true,
-      primaryKey: true,
+  const Product = sequelize.define(
+    "Product",
+    {
+      id: {
+        type: Sequelize.INTEGER,
+        autoIncrement: true,
+        primaryKey: true,
+      },
+      slug: {
+        allowNull: false,
+        type: Sequelize.TEXT,
+      },
+      coverImageId: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+      },
+      categoryId: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      deletedAt: {
+        allowNull: true,
+        type: Sequelize.DATE,
+      },
     },
-    slug: {
-      allowNull: false,
-      type: Sequelize.TEXT,
-    },
-    coverImageId: {
-      allowNull: false,
-      type: Sequelize.INTEGER,
-    },
-    categoryId: {
-      type: Sequelize.STRING,
-      allowNull: false,
-    },
-  });
+    {
+      timestamps: true,
+      paranoid: true,
+      defaultScope: {
+        attributes: { exclude: ["deletedAt", "createdAt", "updatedAt"] },
+      },
+    }
+  );
   Product.associate = function (db) {
     Product.belongsTo(db.ProductsTranslation, {
       as: "productsTranslation",

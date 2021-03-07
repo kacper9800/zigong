@@ -1,31 +1,46 @@
 module.exports = (sequelize, Sequelize) => {
-  const CategoryTranslation = sequelize.define("CategoryTranslations", {
-    id: {
-      type: Sequelize.INTEGER,
-      autoIncrement: true,
-      primaryKey: true,
+  const CategoryTranslation = sequelize.define(
+    "CategoryTranslations",
+    {
+      id: {
+        type: Sequelize.INTEGER,
+        autoIncrement: true,
+        primaryKey: true,
+      },
+      categoryId: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+      },
+      name: {
+        allowNull: false,
+        type: Sequelize.STRING,
+      },
+      description: {
+        allowNull: false,
+        type: Sequelize.JSON,
+      },
+      homePageDescription: {
+        allowNull: false,
+        type: Sequelize.STRING,
+      },
+      languageId: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+      },
+      deletedAt: {
+        allowNull: true,
+        type: Sequelize.DATE,
+      },
     },
-    categoryId: {
-      allowNull: false,
-      type: Sequelize.INTEGER,
-    },
-    name: {
-      allowNull: false,
-      type: Sequelize.STRING,
-    },
-    description: {
-      allowNull: false,
-      type: Sequelize.JSON,
-    },
-    homePageDescription: {
-      allowNull: false,
-      type: Sequelize.STRING,
-    },
-    languageId: {
-      allowNull: false,
-      type: Sequelize.INTEGER,
-    },
-  });
+    {
+      timestamps: true,
+      paranoid: true,
+      defaultScope: {
+        attributes: { exclude: ["deletedAt"] },
+      },
+    }
+  );
+
   CategoryTranslation.associate = function (db) {
     CategoryTranslation.belongsTo(db.Category, {
       as: "category",

@@ -68,7 +68,28 @@
     }
   },
   "products": {
+    "header": "Produkty",
     "name": "Nazwa produktu",
+    "modal": {
+      "addNewHeader": "Dodawanie nowego produktu",
+      "editHeaderEn": "Edycja produktu - Angielski",
+      "editHeaderRu": "Edycja produktu - Rosyjski",
+      "editHeaderPl": "Edycja produktu - Polski",
+      "name": "Nazwa produktu",
+      "namePlaceholder": "Wpisz nazwę produktu",
+      "description": "Opis produktu",
+      "descriptionPlaceholder": "Wpisz opis produktu",
+      "homePageDescription": "Opis na stronie produktu",
+      "homePageDescriptionPlaceholder": "Wpisz opis produktu ze strony głównej",
+      "photosDropdown": {
+        "chooseOption": "Wybierz opcje",
+        "existingPhoto": "Istniejące zdjęcie",
+        "newPhoto": "Nowe zdjęcie z dysku"
+      },
+      "photoUpload": {
+        "choosePhoto": "Wybierz zdjęcie"
+      }
+    },
     "questions": "Pytania?",
     "questionSection": "Masz pytania, potrzebujesz wyceny? Posiadamy szeroką gamę produktów, materiałów i materiałów eksploatacyjnych!",
     "cardQuestion": "PYTANIA? POTRZEBUJESZ WYCENY?"

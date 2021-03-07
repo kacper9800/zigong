@@ -19,8 +19,18 @@ module.exports = (sequelize, Sequelize) => {
         allowNull: false,
         type: Sequelize.INTEGER,
       },
+      deletedAt: {
+        allowNull: true,
+        type: Sequelize.DATE,
+      },
     },
-    {}
+    {
+      timestamps: true,
+      paranoid: true,
+      defaultScope: {
+        attributes: { exclude: ["deletedAt"] },
+      },
+    }
   );
   ContentTranslation.associate = function (db) {
     ContentTranslation.belongsTo(db.Content, {

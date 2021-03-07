@@ -1,7 +1,4 @@
 const HttpStatuses = require("http-status-codes");
-const { Op } = require("sequelize");
-const { File } = require("../models");
-const slugGenerator = require("../helpers/slug");
 
 class ContactController {
   constructor(sendEmailFromContactFormHandler) {

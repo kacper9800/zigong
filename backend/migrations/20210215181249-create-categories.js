@@ -18,6 +18,10 @@ module.exports = {
       coverImageId: {
         type: Sequelize.INTEGER,
       },
+      deletedAt: {
+        allowNull: true,
+        type: Sequelize.DATE,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

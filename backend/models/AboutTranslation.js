@@ -23,12 +23,18 @@ module.exports = (sequelize, Sequelize) => {
         allowNull: false,
         type: Sequelize.INTEGER,
       },
-      deleted: {
-        type: Sequelize.BOOLEAN,
-        defaultValue: false,
+      deletedAt: {
+        allowNull: true,
+        type: Sequelize.DATE,
       },
     },
-    {}
+    {
+      timestamps: true,
+      paranoid: true,
+      defaultScope: {
+        attributes: { exclude: ["deletedAt"] },
+      },
+    }
   );
   AboutTranslations.associate = function (db) {
     AboutTranslations.belongsTo(db.About, {

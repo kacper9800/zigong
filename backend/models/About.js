@@ -10,11 +10,18 @@ module.exports = (sequelize, Sequelize) => {
       slug: {
         type: Sequelize.STRING,
       },
-      deleted: {
-        type: Sequelize.BOOLEAN,
+      deletedAt: {
+        allowNull: true,
+        type: Sequelize.DATE,
       },
     },
-    {}
+    {
+      timestamps: true,
+      paranoid: true,
+      defaultScope: {
+        attributes: { exclude: ["deletedAt"] },
+      },
+    }
   );
   About.associate = function (db) {
     About.belongsTo(db.AboutTranslations, {

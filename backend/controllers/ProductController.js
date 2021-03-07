@@ -7,11 +7,13 @@ class ProductController {
   constructor(
     productRepository,
     productTranslationRepository,
-    languageRepository
+    languageRepository,
+    resourcesRepository
   ) {
     this.productRepository = productRepository;
     this.productTranslationRepository = productTranslationRepository;
     this.languageRepository = languageRepository;
+    this.resourcesRepository = resourcesRepository;
   }
 
   async index(req, res) {
@@ -85,22 +87,59 @@ class ProductController {
       return res.sendStatus(HttpStatuses.NOT_FOUND);
     }
 
-    const product = await this.productTranslationRepository.findOne({
+    const productTranslation = await this.productTranslationRepository.findOne({
       where: { languageId, productId: id },
+      attributes: {
+        exclude: ["id", "slug"],
+      },
+    });
+
+    if (!productTranslation) {
+      return res.sendStatus(HttpStatuses.NOT_FOUND);
+    }
+
+    const product = await this.productRepository.findOne({
+      where: { id },
       attributes: {
         exclude: ["id", "languageId"],
       },
+      include: [
+        {
+          model: File,
+          as: "file",
+          attributes: {
+            exclude: ["name", "description"],
+          },
+        },
+      ],
     });
 
     if (!product) {
       return res.sendStatus(HttpStatuses.NOT_FOUND);
     }
 
-    const parsedData = JSON.parse(product.value);
+    const resource = await this.resourcesRepository.findOne({
+      where: { productId: id, languageId },
+      include: [
+        {
+          model: File,
+          as: "pdf",
+        },
+      ],
+    });
 
-    parsedData.name = product.name;
+    if (!resource) {
+      return res.sendStatus(HttpStatuses.NOT_FOUND);
+    }
+
+    const parsedData = JSON.parse(productTranslation.value);
+
+    parsedData.name = productTranslation.name;
     parsedData.id = id;
     parsedData.lng = lng;
+    parsedData.coverImage = product.file;
+    parsedData.categoryId = product.categoryId;
+    parsedData.file = resource.pdf;
 
     return res.send(parsedData);
   }
@@ -147,7 +186,7 @@ class ProductController {
   }
 
   async create(req, res) {
-    const { productId, name } = req.body;
+    const { productId, name, value } = req.body;
     const { id: languageId } = req.language;
 
     const slug = slugGenerator(name);
@@ -164,35 +203,78 @@ class ProductController {
       });
     }
 
+    req.body.productId = existProduct.id;
+
     const productTranslation = await this.productTranslationRepository.findOne({
       where: { languageId, productId: existProduct.id },
     });
 
+    if (productTranslation) {
+      return res.sendStatus(HttpStatuses.NOT_ACCEPTABLE);
+    }
+
+    await this.productTranslationRepository.translateAndCreate(
+      { ...req.body },
+      languageId
+    );
+
     req.body.productId = existProduct.id;
     req.body.languageId = languageId;
 
-    if (!productTranslation) {
-      const createdProduct = await this.productTranslationRepository.create({
-        ...req.body,
-      });
+    const createdProduct = await this.productTranslationRepository.create({
+      ...req.body,
+    });
 
-      await Resource.create({ ...req.body });
+    await this.resourcesRepository.create({ ...req.body });
 
-      return res.send(createdProduct);
-    } else {
-      return res.sendStatus(HttpStatuses.NOT_ACCEPTABLE);
-    }
+    return res.send(createdProduct);
   }
 
-  // @todo - update
-  async update(req, res) {}
+  async update(req, res) {
+    const { id: productId } = req.params;
+    const { id: languageId } = req.language;
+
+    const productTranslation = await this.productTranslationRepository.findOne({
+      where: {
+        productId,
+        languageId,
+      },
+    });
+
+    if (!productTranslation) {
+      return res.sendStatus(HttpStatuses.NOT_FOUND);
+    }
+
+    const product = await this.productRepository.findOne({
+      where: {
+        id: productId,
+      },
+    });
+
+    if (!product) {
+      return res.sendStatus(HttpStatuses.NOT_FOUND);
+    }
+
+    req.body.languageId = languageId;
+
+    productTranslation.update(req.body);
+    product.update(req.body);
+
+    return res.send(product);
+  }
 
   async delete(req, res) {
     const { id } = req.params;
 
+    await this.productRepository.delete({
+      where: { id },
+    });
+
     await this.productTranslationRepository.delete({
       where: { productId: id },
     });
+
+    await this.resourcesRepository.delete({ where: { productId: id } });
 
     return res.sendStatus(HttpStatuses.NO_CONTENT);
   }

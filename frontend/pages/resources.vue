@@ -31,7 +31,7 @@
                                 <div
                                     v-for="item in resources.data"
                                     :key="item.id"
-                                    class="col-md-4 col-sm-12"
+                                    class="col-md-4 col-sm-12 mt-4"
                                 >
                                     <div class="resources-card card-body h-100">
                                         <h4>&nbsp;{{ item.categoryTranslation.name }}</h4>
@@ -45,13 +45,13 @@
 
                                         <nuxt-link
                                             :to="localePath('/products/' + item.slug)"
-                                            class="btn"
+                                            class="btn btn-main center"
                                             >{{ $t(`global.buttons.learnMore`) }}</nuxt-link
                                         >
                                     </div>
                                 </div>
 
-                                <div class="col-md-4 col-sm-12">
+                                <div class="col-md-4 col-sm-12 mt-4">
                                     <div class="resources-card card-body h-100">
                                         <h4>&nbsp;Media</h4>
 
