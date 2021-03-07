@@ -41,12 +41,14 @@ class FileRepository extends AbstractRepository {
     }
 
     const fileExtension = mime.extension(file.mimetype);
-    const fileName = this.makeid(25) + "." + fileExtension;
-    const thumbnail = this.makeid(25) + ".png";
+    let fileName = this.makeid(25);
+    const thumbnail = this.makeid(25) + ".webp";
 
     var dir = "./public";
 
     if (file.mimetype == "application/pdf") {
+      fileName = fileName + "." + fileExtension;
+
       await file.mv(`${dir}/files/${fileName}`);
 
       const pdfBuffer = fs.readFileSync(`${dir}/files/${fileName}`);
@@ -60,6 +62,8 @@ class FileRepository extends AbstractRepository {
           return false;
         });
     } else {
+      fileName = fileName + ".webp";
+
       versions.map(async (size) => {
         await sharp(file.data)
           .resize({ width: size })

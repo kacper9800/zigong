@@ -42,7 +42,7 @@
         <nav class="navbar navbar-expand-lg navigation" id="navbar">
             <div class="container">
                 <nuxt-link :to="localePath('/')" class="navbar-brand">
-                    <img class="img-fluid" src="@/assets/images/logo.png" />
+                    <img class="img-fluid" src="@/assets/images/logo.png" alt="logo" />
                 </nuxt-link>
 
                 <button

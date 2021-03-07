@@ -25,7 +25,7 @@
                                     <img
                                         :src="baseUrl + '/thumbnails/' + item.thumbnail"
                                         class="figure-img img-fluid rounded"
-                                        alt=""
+                                        alt="image"
                                     />
                                 </a>
                             </div>
@@ -52,7 +52,7 @@
                                                             '/thumbnails/' +
                                                             file.thumbnail
                                                         "
-                                                        alt="Responsive image"
+                                                        alt="image"
                                                 /></nuxt-link>
                                             </div>
                                         </div>
@@ -72,7 +72,7 @@
                                 <img
                                     class="img-fluid img-thumbnail"
                                     :src="baseUrl + '/thumbnails/' + item.thumbnail"
-                                    alt=""
+                                    alt="image"
                                 />
                             </div>
                         </div>
@@ -116,6 +116,19 @@ export default {
     data() {
         return {
             index: null
+        };
+    },
+
+    head() {
+        return {
+            title: `Zigong - ${this.about.title}`,
+            meta: [
+                {
+                    hid: 'description',
+                    name: 'description',
+                    content: 'About - need to be updated'
+                }
+            ]
         };
     },
 

@@ -30,7 +30,7 @@
             </template>
             <a slot="name" slot-scope="text">{{ text }}</a>
             <span slot="nameCustomTitle">Category name</span>
-            <a slot="homePageDescription" slot-scope="text">{{ text }}</a>
+            <a slot="coverImage" slot-scope="text">{{ text }}</a>
             <span slot="homePageDescriptionCustomTitle"
                 >Description at home page</span
             >

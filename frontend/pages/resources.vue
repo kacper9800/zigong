@@ -97,6 +97,19 @@ export default {
         return {};
     },
 
+    head() {
+        return {
+            title: `Zigong - ${this.$t('mainMenu.resources')}`,
+            meta: [
+                {
+                    hid: 'description',
+                    name: 'description',
+                    content: 'Description need to be updated'
+                }
+            ]
+        };
+    },
+
     computed: {
         baseUrl() {
             return config.mediaBaseUrl;

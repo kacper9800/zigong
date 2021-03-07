@@ -38,7 +38,7 @@
                             <img
                                 class="col-lg-12 col-md-12"
                                 :src="baseUrl + '/thumbnails/' + item.category.coverImage.thumbnail"
-                                alt=""
+                                alt="image"
                             />
                             <div class="overlay-img">
                                 <nuxt-link
@@ -54,7 +54,7 @@
                             <img
                                 class="col-lg-12 col-md-12"
                                 src="@/assets/images/contact-us.png"
-                                alt=""
+                                alt="image"
                             />
                             <div class="overlay-img">
                                 <nuxt-link :to="localePath('/contact-us')" class="center"
@@ -94,6 +94,19 @@ export default {
 
     data() {
         return {};
+    },
+
+    head() {
+        return {
+            title: `Zigong - ${this.content.title}`,
+            meta: [
+                {
+                    hid: 'description',
+                    name: 'description',
+                    content: 'My custom description'
+                }
+            ]
+        };
     },
 
     computed: {
