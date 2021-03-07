@@ -6,11 +6,17 @@
             :default-selected-keys="['2']"
             :style="{ lineHeight: '64px' }"
         >
-            <a-menu-item v-for="page in pagesData" :key="page.name">
-                <router-link :to="page.path">
-                    <a-icon :type="page.icon" />
-                    <span class="nav-text"> {{ page.name }}</span>
+            <a-menu-item>
+                <router-link to="/">
+                    <a-icon type="home" />
+                    <span class="nav-text">Back to Home Page</span>
                 </router-link>
+            </a-menu-item>
+            <a-menu-item>
+                <div @click="$router.push('/logout')">
+                    <a-icon type="logout" />
+                    <span class="nav-text">Logout</span>
+                </div>
             </a-menu-item>
         </a-menu>
     </a-layout-header>
@@ -18,14 +24,8 @@
 
 <script>
 export default {
-    layout: 'admin',
     data() {
-        return {
-            pagesData: [
-                { path: '/', name: 'Back to Home Page', icon: 'home' },
-                { path: '/logout', name: 'Logout', icon: 'logout' }
-            ]
-        };
+        return {};
     }
 };
 </script>

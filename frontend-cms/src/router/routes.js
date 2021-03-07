@@ -72,38 +72,38 @@ export default [
             }
         }
     },
-    //   {
-    //     path: "/reset-password/:token",
-    //     name: "reset-password",
-    //     component: () => lazyLoadView(import("@views/auth/ResetPassword")),
-    //     props: (route) => ({ token: route.params.token }),
-    //     meta: {
-    //       beforeResolve(routeTo, routeFrom, next) {
-    //         if (store.getters["auth/loggedIn"]) {
-    //           next({ name: "dashboard" });
-    //         } else {
-    //           next();
-    //         }
-    //       },
-    //     },
-    //   },
-    //   {
-    //     path: "/reset-password",
-    //     name: "reset-password",
-    //     component: () => lazyLoadView(import("@views/auth/ForgetPassword")),
-    //     meta: {
-    //       beforeResolve(routeTo, routeFrom, next) {
-    //         // If the user is already logged in
-    //         if (store.getters["auth/loggedIn"]) {
-    //           // Redirect to the home page instead
-    //           next({ name: "dashboard" });
-    //         } else {
-    //           // Continue to the login page
-    //           next();
-    //         }
-    //       },
-    //     },
-    //   },
+    {
+        path: '/reset-password/:token',
+        name: 'reset-password',
+        component: () => lazyLoadView(import('../views/auth/ResetPassword')),
+        props: route => ({ token: route.params.token }),
+        meta: {
+            beforeResolve(routeTo, routeFrom, next) {
+                if (store.getters['auth/loggedIn']) {
+                    next({ name: 'dashboard' });
+                } else {
+                    next();
+                }
+            }
+        }
+    },
+    {
+        path: '/reset-password',
+        name: 'reset-password',
+        component: () => lazyLoadView(import('../views/auth/ForgetPassword')),
+        meta: {
+            beforeResolve(routeTo, routeFrom, next) {
+                // If the user is already logged in
+                if (store.getters['auth/loggedIn']) {
+                    // Redirect to the home page instead
+                    next({ name: 'dashboard' });
+                } else {
+                    // Continue to the login page
+                    next();
+                }
+            }
+        }
+    },
     {
         path: '/',
         name: 'dashboard',

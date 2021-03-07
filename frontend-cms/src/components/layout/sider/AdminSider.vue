@@ -8,12 +8,12 @@
         }"
     >
         <div class="logo">
-            <!-- <img
+            <img
                 class="img-fluid"
-                src="@/assets/images/logo.png"
+                src=""
                 width="120"
                 style="margin: 20px 0px 10px 30px"
-            /> -->
+            />
         </div>
 
         <a-menu

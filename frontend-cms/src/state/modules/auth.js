@@ -15,17 +15,16 @@ export const getters = {
 };
 
 export const mutations = {
-    SET_CURRENT_USER(state, newValue) {
-        state.currentUser = newValue;
-        saveState('user', newValue.user);
-        saveState('token', newValue.token);
-        saveState('refreshToken', newValue.refreshToken);
+    SET_CURRENT_USER(state, data) {
+        saveState('refreshToken', data.refreshToken);
+        saveState('user', data.user);
+        saveState('token', data.token);
+        state.currentUser = data;
     },
 
     LOGOUT(state, newValue) {
-        saveState('user', newValue);
-        saveState('token', newValue);
-        saveState('refreshToken', newValue);
+        localStorage.user = JSON.stringify({});
+        localStorage.token = JSON.stringify({});
     }
 };
 
@@ -44,14 +43,14 @@ export const actions = {
         }
 
         try {
-            const { data: user = null } = await axios.post('/login', {
+            const { data } = await axios.post('/login', {
                 email,
                 password
             });
 
-            commit('SET_CURRENT_USER', user);
+            commit('SET_CURRENT_USER', data);
 
-            return user;
+            return data;
         } catch (error) {
             console.error(error);
 
@@ -60,7 +59,10 @@ export const actions = {
     },
 
     async validate({ commit, state }) {
-        const token = getSavedState('token');
+        if (localStorage.token) {
+            axios.defaults.headers.common['Authorization'] =
+                'Bearer ' + JSON.parse(localStorage.token);
+        }
 
         try {
             const { data } = await axios.get('/me');
@@ -73,6 +75,20 @@ export const actions = {
 
             return null;
         }
+    },
+
+    async recoverPassword({ commit, state }, { email }) {
+        await axios.post('/recover-password', { email });
+    },
+
+    async resetPassword(
+        { commit, state },
+        { token, password, passwordRepeat }
+    ) {
+        await axios.post(`/recover-password/${token}`, {
+            password,
+            passwordRepeat
+        });
     }
 };
 

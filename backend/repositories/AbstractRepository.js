@@ -55,9 +55,7 @@ class AbstractRepository {
       {
         deletedAt: new Date(),
       },
-      {
-        ...options,
-      }
+      { ...options }
     );
   }
 

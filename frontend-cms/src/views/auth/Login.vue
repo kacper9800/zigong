@@ -1,31 +1,64 @@
 <template>
-    <a-form :label-col="{ span: 5 }" :wrapper-col="{ span: 12 }">
-        <a-form-item label="email">
-            <a-input v-model="email" />
-        </a-form-item>
-        <a-form-item label="password">
-            <a-input v-model="password" />
-        </a-form-item>
-
-        <a-form-item :wrapper-col="{ span: 12, offset: 5 }">
-            <a-button
+    <div>
+        <p class="login-card-description">Sign into your account</p>
+        <form @keyup.enter="submitLoginForm">
+            <div class="form-group">
+                <label for="email" class="sr-only">Email</label>
+                <input
+                    type="email"
+                    name="email"
+                    id="email"
+                    v-model="email"
+                    class="form-control"
+                    placeholder="Email address"
+                    :class="{
+                        'is-invalid': $v.email.$error
+                    }"
+                    @blur="$v.email.$touch()"
+                />
+            </div>
+            <div class="form-group mb-4">
+                <label for="password" class="sr-only">Password</label>
+                <input
+                    type="password"
+                    name="password"
+                    id="password"
+                    v-model="password"
+                    class="form-control"
+                    placeholder="password"
+                    :class="{
+                        'is-invalid': $v.password.$error
+                    }"
+                    @blur="$v.password.$touch()"
+                />
+            </div>
+            <input
+                name="login"
+                id="login"
+                class="btn btn-block login-btn mb-4"
+                type="button"
+                value="Login"
                 v-on:click="submitLoginForm"
-                type="primary"
-                html-type="button"
-            >
-                Submit
-            </a-button>
-        </a-form-item>
-    </a-form>
+            />
+        </form>
+        <router-link to="/reset-password" class="forgot-password-link"
+            >Forgot password?</router-link
+        >
+        <!-- <p class="login-card-footer-text">
+            Don't have an account?
+            <a href="#!" class="text-reset">Register here</a>
+        </p> -->
+    </div>
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex';
+import { mapActions } from 'vuex';
+import { required } from 'vuelidate/lib/validators';
 
 export default {
-    page: {
-        title: 'Log in',
-        meta: [{ name: 'description', content: `Log in to zigong` }]
+    validations: {
+        email: { required },
+        password: { required }
     },
 
     data() {
@@ -45,6 +78,7 @@ export default {
                     email: this.email,
                     password: this.password
                 });
+                this.$toast.success('Logged in');
 
                 const redirectRoute =
                     this.$route.query.redirectFrom &&
@@ -54,7 +88,7 @@ export default {
 
                 this.$router.push(redirectRoute);
             } catch (error) {
-                console.error(error);
+                this.$toast.error(error);
             }
         }
     }

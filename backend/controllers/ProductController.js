@@ -7,11 +7,13 @@ class ProductController {
   constructor(
     productRepository,
     productTranslationRepository,
-    languageRepository
+    languageRepository,
+    resourcesRepository
   ) {
     this.productRepository = productRepository;
     this.productTranslationRepository = productTranslationRepository;
     this.languageRepository = languageRepository;
+    this.resourcesRepository = resourcesRepository;
   }
 
   async index(req, res) {
@@ -116,7 +118,7 @@ class ProductController {
       return res.sendStatus(HttpStatuses.NOT_FOUND);
     }
 
-    const resource = await Resource.findOne({
+    const resource = await this.resourcesRepository.findOne({
       where: { productId: id, languageId },
       include: [
         {
@@ -223,7 +225,7 @@ class ProductController {
       ...req.body,
     });
 
-    await Resource.create({ ...req.body });
+    await this.resourcesRepository.create({ ...req.body });
 
     return res.send(createdProduct);
   }
@@ -272,7 +274,7 @@ class ProductController {
       where: { productId: id },
     });
 
-    await Resource.delete({ where: { productId: id } });
+    await this.resourcesRepository.delete({ where: { productId: id } });
 
     return res.sendStatus(HttpStatuses.NO_CONTENT);
   }

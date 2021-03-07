@@ -14,17 +14,16 @@ axios.interceptors.response.use(
     },
     error => {
         const err = error.response.request.responseURL;
+        console.log(err);
         const fromUrl = err.split('/').pop();
         const nonRedirectUrls = ['login', 'forgot-password', 'reset-password'];
-
-        console.warn('Error status', error.response.status);
 
         if (
             error.response.status === 401 &&
             !nonRedirectUrls.includes(fromUrl)
         ) {
-            // location.href = config.publicPath + 'login';
-            // localStorage.clear();
+            location.href = config.publicPath + 'login';
+            localStorage.clear();
         }
 
         throw error;
