@@ -194,10 +194,14 @@ export default {
             if (!isAcceptedFile) {
                 this.$message.error('You can only upload JPG file!');
             }
-            const isToBig = file.size / 1024 / 1024 < 4;
+            let isToBig = file.size / 1024 / 1024 < 4;
+
+            if (file.type === 'application/pdf') {
+                isToBig = file.size / 1024 / 1024 < 10;
+            }
 
             if (!isToBig) {
-                this.$message.error('Image must smaller than 2MB!');
+                this.$message.error('Image must smaller than 4MB!');
             }
 
             return isAcceptedFile && isToBig;

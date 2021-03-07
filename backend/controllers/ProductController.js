@@ -134,14 +134,16 @@ class ProductController {
 
     const parsedData = JSON.parse(productTranslation.value);
 
-    parsedData.name = productTranslation.name;
-    parsedData.id = id;
-    parsedData.lng = lng;
-    parsedData.coverImage = product.file;
-    parsedData.categoryId = product.categoryId;
-    parsedData.file = resource.pdf;
+    const respons = {
+      id,
+      lng,
+      name: productTranslation.name,
+      coverImage: product.file,
+      categoryId: product.categoryId,
+      file: resource.pdf,
+    };
 
-    return res.send(parsedData);
+    return res.send({ ...respons, ...parsedData });
   }
 
   async showBySlug(req, res) {
@@ -177,12 +179,14 @@ class ProductController {
 
     const parsedData = JSON.parse(productTranslation.value);
 
-    parsedData.id = id;
-    parsedData.slug = slug;
-    parsedData.name = productTranslation.name;
-    parsedData.categoryId = categoryId;
+    const respons = {
+      id,
+      slug,
+      name: productTranslation.name,
+      categoryId: product.categoryId,
+    };
 
-    return res.send(parsedData);
+    return res.send({ ...respons, ...parsedData });
   }
 
   async create(req, res) {
