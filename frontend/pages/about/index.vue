@@ -68,21 +68,21 @@ export default {
             gallery: [
                 {
                     id: 18,
-                    file: 'nkmHixBTYe4WYWpZZwXz2lHZr.jpeg',
+                    file: 'nkmHixBTYe4WYWpZZwXz2lHZr.webp',
                     name: 'pobrane (1).jpeg',
-                    thumbnail: 'QXNQ8G6SIONhzO6C9sQdLEPZY.png'
+                    thumbnail: 'QXNQ8G6SIONhzO6C9sQdLEPZY.webp'
                 },
                 {
                     id: 19,
-                    file: 'vBWYwZFmVkF8yuZJFYN5IYGkW.jpeg',
+                    file: 'vBWYwZFmVkF8yuZJFYN5IYGkW.webp',
                     name: 'pobrane (2).jpeg',
-                    thumbnail: '2VQFv6crxewmNG6QeahjpiiOK.png'
+                    thumbnail: '2VQFv6crxewmNG6QeahjpiiOK.webp'
                 },
                 {
                     id: 20,
-                    file: 'DsZJSqLPOBD6IpnvJQQNT9oPY.jpeg',
+                    file: 'DsZJSqLPOBD6IpnvJQQNT9oPY.webp',
                     name: 'pobrane (3).jpeg',
-                    thumbnail: 'nxuFMFi6BhGHGrQnkfX4QbO1K.png'
+                    thumbnail: 'nxuFMFi6BhGHGrQnkfX4QbO1K.webp'
                 }
             ],
             index: null

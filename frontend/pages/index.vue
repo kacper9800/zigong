@@ -6,6 +6,7 @@
                     <div v-for="item in content.promotionalImages" :key="item.file">
                         <nuxt-link :to="localePath('/' + item.redirectTo)"
                             ><img
+                                loading="lazy"
                                 :src="baseUrl + '/s1440/' + item.file"
                                 class="img-fluid"
                                 alt="image"
@@ -142,6 +143,7 @@
                         </h4>
                         <div class="card">
                             <img
+                                loading="lazy"
                                 class="card-img-top"
                                 :src="baseUrl + '/s720/' + content.news.image.file"
                                 alt="image"

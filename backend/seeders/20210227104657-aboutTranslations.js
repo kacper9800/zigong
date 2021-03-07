@@ -26,23 +26,23 @@ module.exports = {
     const gallery1 = [
       {
         id: 18,
-        thumbnail: "QXNQ8G6SIONhzO6C9sQdLEPZY.png",
+        thumbnail: "QXNQ8G6SIONhzO6C9sQdLEPZY.webp",
         name: "pobrane (1).jpeg",
-        file: "nkmHixBTYe4WYWpZZwXz2lHZr.jpeg",
+        file: "nkmHixBTYe4WYWpZZwXz2lHZr.webp",
         mimetype: "jpeg",
       },
       {
         id: 19,
-        thumbnail: "2VQFv6crxewmNG6QeahjpiiOK.png",
+        thumbnail: "2VQFv6crxewmNG6QeahjpiiOK.webp",
         name: "pobrane (2).jpeg",
-        file: "vBWYwZFmVkF8yuZJFYN5IYGkW.jpeg",
+        file: "vBWYwZFmVkF8yuZJFYN5IYGkW.webp",
         mimetype: "jpeg",
       },
       {
         id: 20,
-        thumbnail: "nxuFMFi6BhGHGrQnkfX4QbO1K.png",
+        thumbnail: "nxuFMFi6BhGHGrQnkfX4QbO1K.webp",
         name: "pobrane (3).jpeg",
-        file: "DsZJSqLPOBD6IpnvJQQNT9oPY.jpeg",
+        file: "DsZJSqLPOBD6IpnvJQQNT9oPY.webp",
         mimetype: "jpeg",
       },
     ];
@@ -50,65 +50,65 @@ module.exports = {
     const gallery2 = [
       {
         id: 21,
-        thumbnail: "0eD2nz5MGIOwCIJTs8iBbZnNZ.png",
+        thumbnail: "0eD2nz5MGIOwCIJTs8iBbZnNZ.webp",
         name: "pobrane (1).jpeg",
-        file: "MaC2A5L4WSK1vkxXHfXyyTOvg.jpeg",
+        file: "MaC2A5L4WSK1vkxXHfXyyTOvg.webp",
         mimetype: "jpeg",
       },
       {
         id: 22,
-        thumbnail: "iCYM2zE9Gf2wYANU0QBRZwvIF.png",
+        thumbnail: "iCYM2zE9Gf2wYANU0QBRZwvIF.webp",
         name: "pobrane (2).jpeg",
-        file: "0NeOUqAQtHXaIh19hTF15myzO.jpeg",
+        file: "0NeOUqAQtHXaIh19hTF15myzO.webp",
         mimetype: "jpeg",
       },
       {
         id: 23,
-        thumbnail: "sNXEkQrEZcWhowYhJ3wD3Q0sj.png",
+        thumbnail: "sNXEkQrEZcWhowYhJ3wD3Q0sj.webp",
         name: "pobrane (3).jpeg",
-        file: "Oi27eIf51BD1yJerU6XV9pF8d.jpeg",
+        file: "Oi27eIf51BD1yJerU6XV9pF8d.webp",
         mimetype: "jpeg",
       },
       {
         id: 26,
-        thumbnail: "FGgbwsGiTqIF5G5iUrXmcoRN2.png",
+        thumbnail: "FGgbwsGiTqIF5G5iUrXmcoRN2.webp",
         name: "pobrane (4).jpeg",
-        file: "wm282jpArZmFBR1rOay701gXj.jpeg",
+        file: "wm282jpArZmFBR1rOay701gXj.webp",
         mimetype: "jpeg",
       },
       {
         id: 27,
-        thumbnail: "hs4ytt8R4yZWhwenA8fEw3rBS.png",
+        thumbnail: "hs4ytt8R4yZWhwenA8fEw3rBS.webp",
         name: "pobrane (5).jpeg",
-        file: "9USPWJ0fLoTVXjylQUN8ec8Hh.jpeg",
+        file: "9USPWJ0fLoTVXjylQUN8ec8Hh.webp",
         mimetype: "jpeg",
       },
       {
         id: 24,
-        thumbnail: "i2Udl04q0Gxi9rT6xVyahGZhV.png",
+        thumbnail: "i2Udl04q0Gxi9rT6xVyahGZhV.webp",
         name: "pobrane (6).jpeg",
-        file: "SM7MiX1jvqdClyll5HWZ9Eo3k.jpeg",
+        file: "SM7MiX1jvqdClyll5HWZ9Eo3k.webp",
         mimetype: "jpeg",
       },
       {
         id: 29,
-        thumbnail: "eWcvUuZ7Ck5nYcTwTjo54IoNt.png",
+        thumbnail: "eWcvUuZ7Ck5nYcTwTjo54IoNt.webp",
         name: "pobrane (7).jpeg",
-        file: "7kuZrYN2ZJa3zv8ArnebP0YjH.jpeg",
+        file: "7kuZrYN2ZJa3zv8ArnebP0YjH.webp",
         mimetype: "jpeg",
       },
       {
         id: 25,
-        thumbnail: "IpLQaObCrXBZJ34vrqN9aZfbW.png",
+        thumbnail: "IpLQaObCrXBZJ34vrqN9aZfbW.webp",
         name: "pobrane (8).jpeg",
-        file: "rCrTtH00o7jX9z33ZJknJRcfD.jpeg",
+        file: "rCrTtH00o7jX9z33ZJknJRcfD.webp",
         mimetype: "jpeg",
       },
       {
         id: 28,
-        thumbnail: "EYWpzlJo6tK6cN3RcakpWk0br.png",
+        thumbnail: "EYWpzlJo6tK6cN3RcakpWk0br.webp",
         name: "pobrane.jpeg",
-        file: "uXAHiYZlEnjOwiNUC5FE4wBYX.jpeg",
+        file: "uXAHiYZlEnjOwiNUC5FE4wBYX.webp",
         mimetype: "jpeg",
       },
     ];
@@ -116,7 +116,7 @@ module.exports = {
     const certifications = [
       {
         id: 31,
-        thumbnail: "hnJbTg33RBpgMhtQ5qd4YpiYl.png",
+        thumbnail: "hnJbTg33RBpgMhtQ5qd4YpiYl.webp",
         name: "CNAS-1-1.pdf",
         description: "CNAS",
         file: "JGzM98fs0qrxXItGTcpnLFpng.pdf",
@@ -124,7 +124,7 @@ module.exports = {
       },
       {
         id: 30,
-        thumbnail: "gZruu7TmZgpBEXfX5eHiW7aJj.png",
+        thumbnail: "gZruu7TmZgpBEXfX5eHiW7aJj.webp",
         name: "ISO-9001-1.pdf",
         description: "ISO-9001",
         file: "M3bSlHoZ1fqOzpppIiVrv7fro.pdf",
@@ -132,7 +132,7 @@ module.exports = {
       },
       {
         id: 33,
-        thumbnail: "Y1ehJrAY4BWnwFKogsOh9l2tF.png",
+        thumbnail: "Y1ehJrAY4BWnwFKogsOh9l2tF.webp",
         name: "ISO-14001-2.pdf",
         description: "ISO-14001",
         file: "tLRAJWlqmzOXYsGi6wETDZF2Q.pdf",
@@ -140,7 +140,7 @@ module.exports = {
       },
       {
         id: 32,
-        thumbnail: "gIdWVSS72WuU2qyHlZfN04pda.png",
+        thumbnail: "gIdWVSS72WuU2qyHlZfN04pda.webp",
         name: "ISO-45001-1.pdf",
         description: "ISO-45001",
         file: "5I3mLvVmTDx5MO52vQ1F9ptzi.pdf",
@@ -156,7 +156,7 @@ module.exports = {
         jsonData: {
           title: "Nasza organizacja",
           article:
-            '<img class="img-fluid" src="http://localhost:3001/s720/muXYiOSIFbnGOplvHROGE0WVF.jpeg">',
+            '<img class="img-fluid" src="http://localhost:3001/s720/muXYiOSIFbnGOplvHROGE0WVF.webp">',
         },
       },
       "organization-en": {
@@ -166,7 +166,7 @@ module.exports = {
         jsonData: {
           title: "Our Organization",
           article:
-            '<img class="img-fluid" src="http://localhost:3001/s720/muXYiOSIFbnGOplvHROGE0WVF.jpeg">',
+            '<img class="img-fluid" src="http://localhost:3001/s720/muXYiOSIFbnGOplvHROGE0WVF.webp">',
         },
       },
       "organization-ru": {
@@ -176,7 +176,7 @@ module.exports = {
         jsonData: {
           title: "Наша организация",
           article:
-            '<img class="img-fluid" src="http://localhost:3001/s720/muXYiOSIFbnGOplvHROGE0WVF.jpeg">',
+            '<img class="img-fluid" src="http://localhost:3001/s720/muXYiOSIFbnGOplvHROGE0WVF.webp">',
         },
       },
 
@@ -384,10 +384,10 @@ module.exports = {
               files: [
                 {
                   id: 1,
-                  thumbnail: "G1ASjM2JelgQhfROKB6yJTkNj.png",
+                  thumbnail: "G1ASjM2JelgQhfROKB6yJTkNj.webp",
                   name: "zigong-texas-1.png",
                   description: null,
-                  file: "seya9EDRNFuyrMfid1TQ7ZsuS.png",
+                  file: "seya9EDRNFuyrMfid1TQ7ZsuS.webp",
                   mimetype: "png",
                 },
               ],
@@ -409,10 +409,10 @@ module.exports = {
               files: [
                 {
                   id: 1,
-                  thumbnail: "G1ASjM2JelgQhfROKB6yJTkNj.png",
+                  thumbnail: "G1ASjM2JelgQhfROKB6yJTkNj.webp",
                   name: "zigong-texas-1.png",
                   description: null,
-                  file: "seya9EDRNFuyrMfid1TQ7ZsuS.png",
+                  file: "seya9EDRNFuyrMfid1TQ7ZsuS.webp",
                   mimetype: "png",
                 },
               ],
