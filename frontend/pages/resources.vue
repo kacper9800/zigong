@@ -45,7 +45,7 @@
 
                                         <nuxt-link
                                             :to="localePath('/products/' + item.slug)"
-                                            class="btn"
+                                            class="btn btn-main center"
                                             >{{ $t(`global.buttons.learnMore`) }}</nuxt-link
                                         >
                                     </div>
