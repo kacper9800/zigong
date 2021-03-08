@@ -1,7 +1,7 @@
 .idea
 **/.DS_Store
 frontend/releases
-# frontend/
 db-backup/
 **/.env
 scratch/
+/frontend-cms/package-lock.json
