@@ -197,7 +197,7 @@ export default {
             let isToBig = file.size / 1024 / 1024 < 4;
 
             if (file.type === 'application/pdf') {
-                isToBig = file.size / 1024 / 1024 < 10;
+                isToBig = file.size / 1024 / 1024 < 50;
             }
 
             if (!isToBig) {
