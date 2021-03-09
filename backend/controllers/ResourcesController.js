@@ -28,21 +28,32 @@ class ResourceController {
       return res.sendStatus(HttpStatuses.NOT_FOUND);
     }
 
+    const exclude = [
+      "id",
+      "categoryId",
+      "languageId",
+      "homePageDescription",
+      "description",
+      "languageId",
+      "file",
+      "coverImageId",
+      "homePageCoverImageId",
+      "deletedAt",
+      "createdAt",
+      "updatedAt",
+    ];
+
     const resources = await this.categoryRepository.findAndCountAll({
       offset,
       limit,
       order: [[sortBy, order]],
       where: {},
-      attributes: {
-        exclude: ["coverImageId", "homePageCoverImageId"],
-      },
+      attributes: { exclude },
       include: [
         {
           association: "resource",
           where: { languageId },
-          attributes: {
-            exclude: ["categoryId", "languageId", "file"],
-          },
+          attributes: { exclude },
           include: [
             {
               model: File,
@@ -53,15 +64,7 @@ class ResourceController {
         {
           association: "categoryTranslation",
           where: { languageId },
-          attributes: {
-            exclude: [
-              "id",
-              "categoryId",
-              "languageId",
-              "homePageDescription",
-              "description",
-            ],
-          },
+          attributes: { exclude },
         },
       ],
     });

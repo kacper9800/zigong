@@ -9,7 +9,7 @@ export const defaultState = () => {
 export const state = () => defaultState();
 
 export const getters = {
-    getResources: state => state.products
+    getResources: state => state.resources
 };
 
 export const mutations = {

@@ -259,6 +259,19 @@ class ProductController {
       return res.sendStatus(HttpStatuses.NOT_FOUND);
     }
 
+    const resources = await this.resourcesRepository.findOne({
+      where: {
+        languageId,
+        productId,
+      },
+    });
+
+    if (!resources) {
+      return res.sendStatus(HttpStatuses.NOT_FOUND);
+    }
+
+    resources.update(req.body);
+
     req.body.languageId = languageId;
 
     productTranslation.update(req.body);

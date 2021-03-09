@@ -64,36 +64,71 @@
                     v-bind:class="{ show: showMobileMenu }"
                 >
                     <ul class="navbar-nav ml-auto">
-                        <div v-for="page in pagesData" :key="page.name">
-                            <li v-if="!page.subPages" class="nav-item active">
-                                <nuxt-link
-                                    :to="localePath(page.path)"
-                                    class="nav-link dropdown-toggle"
-                                    >{{ $t(`mainMenu.${page.name}`) }}</nuxt-link
-                                >
-                            </li>
+                        <li class="nav-item active">
+                            <nuxt-link :to="localePath('/')" class="nav-link dropdown-toggle">{{
+                                $t(`mainMenu.home`)
+                            }}</nuxt-link>
+                        </li>
 
-                            <li v-else class="nav-item dropdown">
-                                <nuxt-link
-                                    :to="localePath(page.path)"
-                                    class="nav-link dropdown-toggle"
-                                    >{{ $t(`mainMenu.${page.name}`) }} <i class="icofont-thin-down"
-                                /></nuxt-link>
-                                <ul class="dropdown-menu" aria-labelledby="dropdown05">
-                                    <li v-for="subpage in page.subPages" :key="subpage.name">
+                        <li class="nav-item dropdown">
+                            <nuxt-link :to="localePath('/about')" class="nav-link dropdown-toggle"
+                                >{{ $t(`mainMenu.about`) }} <i class="icofont-thin-down"
+                            /></nuxt-link>
+                            <ul class="dropdown-menu" aria-labelledby="dropdown05">
+                                <li v-for="subpage in aboutSubpagesConvert" :key="subpage.name">
+                                    <nuxt-link
+                                        :to="localePath('/about/' + subpage.path)"
+                                        class="dropdown-item"
+                                    >
+                                        {{ subpage.name }}
+                                    </nuxt-link>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item dropdown products-dropdown" style="position: initial">
+                            <nuxt-link
+                                :to="localePath('/products')"
+                                class="nav-link dropdown-toggle"
+                                >{{ $t(`mainMenu.products`) }} <i class="icofont-thin-down"
+                            /></nuxt-link>
+
+                            <div class="mega-sub-menu">
+                                <div class="container-fluid d-flex justify-content-center">
+                                    <ul v-for="page in resources" :key="page.name">
                                         <nuxt-link
-                                            :to="localePath(page.path + subpage.path)"
-                                            class="dropdown-item"
+                                            :to="localePath('/products/' + page.slug)"
+                                            class="col text-justify"
                                         >
-                                            {{ $t(`mainMenu.${subpage.name}`) }}
+                                            {{ page.categoryTranslation.name }}
                                         </nuxt-link>
-                                    </li>
-                                </ul>
-                            </li>
-                        </div>
-                        <li v-if="isAdminUser" class="nav-item active">
-                            <nuxt-link to="/admin" class="nav-link dropdown-toggle"
-                                >Admin</nuxt-link
+                                        <li
+                                            v-for="subPage in page.resource"
+                                            :key="subPage.id"
+                                            class=""
+                                        >
+                                            <nuxt-link :to="localePath('/p/' + subPage.slug)">
+                                                {{ subPage.name }}
+                                            </nuxt-link>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li class="nav-item active">
+                            <nuxt-link
+                                :to="localePath('/resources')"
+                                class="nav-link dropdown-toggle"
+                                >{{ $t(`mainMenu.resources`) }}</nuxt-link
+                            >
+                        </li>
+
+                        <li class="nav-item active">
+                            <nuxt-link
+                                :to="localePath('/contact-us')"
+                                class="nav-link dropdown-toggle"
+                                >{{ $t(`mainMenu.contactUs`) }}</nuxt-link
                             >
                         </li>
                     </ul>
@@ -118,30 +153,35 @@ export default {
                 { name: 'PL', flag: '', path: 'pl' },
                 { name: 'RU', flag: '', path: 'ru' }
             ],
-            pagesData: [
-                { path: '/', name: 'home' },
+            products: [
                 {
-                    path: '/about',
-                    name: 'about',
+                    name: 'Powders',
+                    path: '/',
                     subPages: [
-                        { path: '/organization', name: 'organization' },
-                        { path: '/who-we-are', name: 'whoWeAre' },
-                        { path: '/our-facilities', name: 'ourFacilities' },
-                        { path: '/capabilities', name: 'capabilities' },
-                        { path: '/credentials', name: 'credentials' },
-                        {
-                            path: '/quality-certification',
-                            name: 'qualityCertification'
-                        }
+                        { name: 'Ammonium Metatungstate (AMT)', path: '/' },
+                        { name: 'Tungsten Oxide', path: '/' },
+                        { name: 'Tungsten Metal Powders', path: '/' },
+                        { name: 'Tungsten Carbide Powder', path: '/' },
+                        { name: 'Ready to Press Powder', path: '/' },
+                        { name: 'Powder Production of Tungsten', path: '/' }
                     ]
                 },
                 {
-                    path: '/products',
-                    name: 'products',
-                    subPages: [{ path: '/powders', name: 'powders' }]
+                    name: 'Cemented Carbides',
+                    path: '/',
+                    subPages: [
+                        { name: 'Carbide Inserts', path: '/' },
+                        { name: 'Carbide Wear Parts', path: '/' },
+                        { name: 'Carbide Precision Parts', path: '/' },
+                        { name: 'Cemented Carbide for Mining', path: '/' },
+                        { name: 'Carbide Rods and Bars', path: '/' },
+                        { name: 'Solid Carbide Tools', path: '/' },
+                        { name: 'Mining & Construction Tools', path: '/' }
+                    ]
                 },
-                { path: '/resources', name: 'resources' },
-                { path: '/contact-us/', name: 'contactUs' }
+                { name: 'Hardfacing Materials', path: '/' },
+                { name: 'W & Mo Products', path: '/' },
+                { name: 'Equipment for Carbide Production', path: '/' }
             ]
         };
     },
@@ -156,13 +196,20 @@ export default {
     computed: {
         ...mapGetters({
             isAdminUser: 'isAdminUser',
-            aboutSubpages: 'about/getAllData'
+            aboutSubpages: 'about/getAllData',
+            resources: 'resources/getResources'
         }),
 
         mainBannerContent() {
             const { mainBanner } = this.getContent('home-page');
 
             return mainBanner;
+        },
+
+        aboutSubpagesConvert() {
+            return this.aboutSubpages.map(item => {
+                return { path: item.slug, name: item.name };
+            });
         }
     },
 
