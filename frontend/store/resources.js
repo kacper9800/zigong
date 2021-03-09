@@ -19,7 +19,7 @@ export const mutations = {
 };
 
 export const actions = {
-    async getResources({ commit }, { params }) {
+    async getResources({ commit }, params) {
         const { data } = await this.$axios.get(`/resources`, { params });
 
         commit('SET_RESOURCES', data);

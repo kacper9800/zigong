@@ -123,7 +123,9 @@ export default {
 
     // Build Configuration (https://go.nuxtjs.dev/config-build)
     build: {
+        vendor: ['vue-pdf'],
         extend(config, { isClient }) {
+            config.output.globalObject = 'this';
             if (isClient) {
                 config.devtool = '#source-map';
             }

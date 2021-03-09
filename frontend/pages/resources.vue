@@ -37,17 +37,19 @@
                                         <h4>&nbsp;{{ item.categoryTranslation.name }}</h4>
                                         <div class="links">
                                             <p v-for="element in item.resource" :key="element.id">
-                                                <a :href="baseUrl + '/files/' + element.pdf.file"
-                                                    >→ {{ element.name }}</a
+                                                <nuxt-link
+                                                    :to="localePath('/file/' + element.pdf.file)"
+                                                    >→ {{ element.name }}</nuxt-link
                                                 >
                                             </p>
                                         </div>
-
-                                        <nuxt-link
-                                            :to="localePath('/products/' + item.slug)"
-                                            class="btn btn-main center"
-                                            >{{ $t(`global.buttons.learnMore`) }}</nuxt-link
-                                        >
+                                        <div class="d-flex justify-content-center mt-3">
+                                            <nuxt-link
+                                                :to="localePath('/products/' + item.slug)"
+                                                class="btn btn-main"
+                                                >{{ $t(`global.buttons.learnMore`) }}</nuxt-link
+                                            >
+                                        </div>
                                     </div>
                                 </div>
 
@@ -80,7 +82,8 @@ export default {
         const { code } = app.i18n.localeProperties;
         try {
             const resources = await store.dispatch('resources/getResources', {
-                lng: code
+                lng: code,
+                perPage: '10'
             });
 
             const content = await store.dispatch('content/getContentBySlug', {
