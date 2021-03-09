@@ -15,29 +15,17 @@
                         <div v-if="product.sections">
                             <div v-for="item in product.sections" :key="item.key">
                                 <div class="row">
-                                    <div class="col-sm-12 col-md">
+                                    <div
+                                        :class="[
+                                            item.files.length === 2
+                                                ? 'col-sm-12 col-md-6'
+                                                : 'col-sm-12 col-md-9'
+                                        ]"
+                                    >
                                         <div v-html="item.article" />
                                     </div>
-                                    <div class="flex-column">
-                                        <div class="row">
-                                            <div
-                                                v-for="file in item.files"
-                                                :key="file.id"
-                                                class="flex-column"
-                                            >
-                                                <nuxt-link to="/" class="nav-link dropdown-toggle"
-                                                    ><img
-                                                        class="thumbnailImage"
-                                                        :src="
-                                                            baseUrl +
-                                                            '/thumbnails/' +
-                                                            file.thumbnail
-                                                        "
-                                                        alt="image"
-                                                /></nuxt-link>
-                                            </div>
-                                        </div>
-                                    </div>
+
+                                    <pdf-cover-image :item="item" />
                                 </div>
                                 <br />
                             </div>
@@ -72,11 +60,13 @@
 </template>
 <script>
 import ProductsNavigator from '~/components/elements/productsNavigator';
+import PdfCoverImage from '~/components/elements/pdfCoverImage';
 import config from '@/config';
 
 export default {
     components: {
-        ProductsNavigator
+        ProductsNavigator,
+        PdfCoverImage
     },
 
     async asyncData({ app, store, params }) {
