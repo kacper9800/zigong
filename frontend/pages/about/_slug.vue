@@ -17,10 +17,7 @@
                                 :key="index"
                                 class="col-sm-12 col-md-3"
                             >
-                                <a
-                                    :href="baseUrl + '/files/' + item.file"
-                                    class="nav-link dropdown-toggle"
-                                >
+                                <a :href="fileUrl(item)" class="nav-link dropdown-toggle">
                                     <h3 class="text-color text-center">{{ item.description }}</h3>
                                     <img
                                         :src="baseUrl + '/thumbnails/' + item.thumbnail"
@@ -139,6 +136,16 @@ export default {
 
         items() {
             return this.about.gallery.map(({ file }) => this.baseUrl + '/s720/' + file);
+        }
+    },
+
+    methods: {
+        fileUrl(item) {
+            if (item.mimetype === 'pdf') {
+                return '/file/' + item.file;
+            }
+
+            return '#';
         }
     }
 };

@@ -15,6 +15,9 @@ module.exports = (sequelize, Sequelize) => {
         allowNull: false,
         type: Sequelize.INTEGER,
       },
+      slug: {
+        type: Sequelize.STRING,
+      },
       name: {
         type: Sequelize.STRING,
       },
@@ -34,7 +37,7 @@ module.exports = (sequelize, Sequelize) => {
       timestamps: true,
       paranoid: true,
       defaultScope: {
-        attributes: { exclude: ["deletedAt"] },
+        attributes: { exclude: ["deletedAt", "createdAt", "updatedAt"] },
       },
     }
   );

@@ -5,6 +5,10 @@ export const actions = {
         return Promise.all([
             dispatch('about/getAllAboutData', {
                 lng: code
+            }),
+
+            dispatch('resources/getResources', {
+                lng: code
             })
         ]);
     }

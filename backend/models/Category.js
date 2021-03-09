@@ -25,7 +25,7 @@ module.exports = (sequelize, Sequelize) => {
       timestamps: true,
       paranoid: true,
       defaultScope: {
-        attributes: { exclude: ["deletedAt"] },
+        attributes: { exclude: ["deletedAt", "createdAt", "updatedAt"] },
       },
     }
   );

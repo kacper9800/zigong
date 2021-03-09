@@ -14,6 +14,9 @@ module.exports = {
       name: {
         type: Sequelize.STRING,
       },
+      slug: {
+        type: Sequelize.STRING,
+      },
       file: {
         type: Sequelize.TEXT,
       },

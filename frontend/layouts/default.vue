@@ -21,12 +21,14 @@ export default {
     watch: {
         '$i18n.locale'() {
             this.getAllAboutData({ lng: this.$i18n.locale });
+            this.getAllResources({ lng: this.$i18n.locale, perPage: '10' });
         }
     },
 
     methods: {
         ...mapActions({
-            getAllAboutData: 'about/getAllAboutData'
+            getAllAboutData: 'about/getAllAboutData',
+            getAllResources: 'resources/getResources'
         })
     }
 };
