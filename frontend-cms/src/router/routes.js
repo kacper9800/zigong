@@ -89,7 +89,7 @@ export default [
     },
     {
         path: '/reset-password',
-        name: 'reset-password',
+        name: 'forgot-password',
         component: () => lazyLoadView(import('@views/auth/ForgetPassword')),
         meta: {
             beforeResolve(routeTo, routeFrom, next) {
@@ -116,6 +116,40 @@ export default [
         path: '/categories',
         name: 'categories',
         component: () => import('@views/categories/'),
+        meta: {
+            authRequired: true
+        }
+    },
+    {
+        path: '/content/home-page/:lng',
+        name: 'home-page',
+        component: () => import('@views/content/HomePage'),
+        meta: {
+            authRequired: true
+        }
+    },
+    {
+        path: '/content/about-page/:lng',
+        name: 'about-page',
+        component: () => import('@views/content/AboutPage'),
+        meta: {
+            authRequired: true
+        }
+    },
+
+    {
+        path: '/content/resources/:lng',
+        name: 'resources',
+        component: () => import('@views/content/Resources'),
+        meta: {
+            authRequired: true
+        }
+    },
+
+    {
+        path: '/content/products-page/:lng',
+        name: 'products-page',
+        component: () => import('@views/content/ProductsPage'),
         meta: {
             authRequired: true
         }

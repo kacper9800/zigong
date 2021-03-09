@@ -62,23 +62,19 @@ export default {
                     name: 'Content',
                     icon: 'appstore',
                     subPages: [
-                        { path: '/home-page', name: 'Home ' },
-                        { path: '/about-page', name: 'About ' },
-                        { path: '/products-page', name: 'Products ' },
-                        { path: '/contact-us', name: 'Contact US ' }
-                    ]
-                },
-                {
-                    path: '/about',
-                    name: 'About',
-                    icon: 'appstore',
-                    subPages: [
-                        { path: '/add', name: 'Powders' },
-                        { path: 'cemented-carbides', name: 'Cemented Carbides' }
+                        { path: '/home-page/en', name: 'Home page' },
+                        { path: '/about-page/en', name: 'About page' },
+                        {
+                            path: '/products-page/en',
+                            name: 'Products '
+                        },
+                        { path: '/resources/en', name: 'Resources' },
+                        { path: '/contact-us/en', name: 'Contact US ' }
                     ]
                 }
             ],
             singlePages: [
+                { path: '/about', name: 'About', icon: 'appstore' },
                 { path: '/categories', name: 'Categories', icon: 'container' },
                 { path: '/products', name: 'Products', icon: 'appstore' },
                 { path: '/files', name: 'Files', icon: 'file' },

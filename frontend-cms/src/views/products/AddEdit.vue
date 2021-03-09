@@ -1,8 +1,24 @@
 <template>
     <div>
         <h1 class="page-header" style="color: #9e9e9e">
-            {{ editMode ? 'Edit product' : 'Create product' }}
+            {{ editMode ? 'Edit product - ' : 'Create product' }} {{ lng }}
         </h1>
+        <div v-if="id && lng">
+            <img
+                src="@assets/images/flags/en.png"
+                @click="$router.push(`/products/${id}/en/edit`)"
+                class="px-2"
+            />
+            <img
+                src="@assets/images/flags/pl.png"
+                @click="$router.push(`/products/${id}/pl/edit`)"
+            />
+            <img
+                src="@assets/images/flags/ru.png"
+                @click="$router.push(`/products/${id}/ru/edit`)"
+                class="px-2"
+            />
+        </div>
         <br />
 
         <a-row type="flex">
@@ -209,7 +225,8 @@ export default {
             pdf: false,
             key: 1,
             editMode: false,
-            lng: ''
+            lng: '',
+            id: null
         };
     },
 
@@ -239,7 +256,8 @@ export default {
                 id
             };
 
-            this.lgn = lng;
+            this.id = id;
+            this.lng = lng;
             this.editMode = true;
         }
     },
