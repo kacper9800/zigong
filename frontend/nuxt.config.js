@@ -32,7 +32,7 @@ export default {
 
     env: {
         appUrl: env.parsed.APP_URL || 'http://localhost:3000',
-        apiBaseUrl: env.parsed.API_BASE_URL || 'http://localhost:3001',
+        apiBaseUrl: env.parsed.APP_URL + '/api' || 'http://localhost:3001',
         mediaBaseUrl: env.parsed.MEDIA_BASE_URL || 'http://localhost:3001'
     },
 
@@ -118,7 +118,16 @@ export default {
 
     // Axios module configuration (https://go.nuxtjs.dev/config-axios)
     axios: {
-        baseURL: env.parsed.API_BASE_URL
+        prefix: '/api/',
+        proxy: true
+    },
+
+    proxy: {
+        '/api': { target: env.parsed.API_BASE_URL, pathRewrite: { '^/api': '' } },
+        '/public': {
+            target: env.parsed.API_BASE_URL,
+            pathRewrite: { '^/public': '' }
+        }
     },
 
     // Build Configuration (https://go.nuxtjs.dev/config-build)
