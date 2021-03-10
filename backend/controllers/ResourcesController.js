@@ -1,5 +1,5 @@
 const HttpStatuses = require("http-status-codes");
-const { File } = require("../models");
+const { File, Resource } = require("../models");
 
 class ResourceController {
   constructor(
@@ -46,7 +46,6 @@ class ResourceController {
     const resources = await this.categoryRepository.findAndCountAll({
       offset,
       limit,
-      order: [[sortBy, order]],
       where: {},
       attributes: { exclude },
       include: [
@@ -66,6 +65,10 @@ class ResourceController {
           where: { languageId },
           attributes: { exclude },
         },
+      ],
+      order: [
+        ["resource", sortBy, "ASC"],
+        [sortBy, order],
       ],
     });
 

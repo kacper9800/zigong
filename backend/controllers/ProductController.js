@@ -1,5 +1,5 @@
 const HttpStatuses = require("http-status-codes");
-const { File, Resource } = require("../models");
+const { File } = require("../models");
 const { Op } = require("sequelize");
 const slugGenerator = require("../helpers/slug");
 

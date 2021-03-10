@@ -25,7 +25,7 @@ class FileRepository extends AbstractRepository {
   async uploadFile(file) {
     const { versions, path } = config.imagerResizer;
 
-    if (file.size >= 9506136) {
+    if (file.size >= 52428800) {
       return false;
     }
 
