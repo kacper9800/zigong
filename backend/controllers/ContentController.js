@@ -42,7 +42,28 @@ class ContentController {
     return res.send(parsedData);
   }
 
-  update() {}
+  async update(req, res) {
+    const { slug } = req.params;
+    const language = req.language;
+
+    const content = await this.contentRepository.findOne({ where: { slug } });
+
+    if (!content) {
+      return res.sendStatus(HttpStatuses.NOT_FOUND);
+    }
+
+    const contentTranslation = await this.contentTranslationRepository.findOne({
+      where: { contentId: content.id, languageId: language.id },
+    });
+
+    if (!contentTranslation) {
+      return res.sendStatus(HttpStatuses.NOT_FOUND);
+    }
+
+    contentTranslation.update(req.body);
+
+    return res.send(contentTranslation);
+  }
 }
 
 module.exports = ContentController;

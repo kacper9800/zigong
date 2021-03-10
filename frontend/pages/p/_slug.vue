@@ -6,7 +6,6 @@
                     <div class="col-md-3 align-self-start">
                         <products-navigator :slug="slug" />
                     </div>
-
                     <div class="col-md-9 align-self-start">
                         <h1 class="text-color">{{ product.name }}</h1>
 
