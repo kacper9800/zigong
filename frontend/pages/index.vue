@@ -4,15 +4,16 @@
             <div class="container" style="margin-top: 100px">
                 <client-only>
                     <swiper class="swiper" :options="swiperOption">
-                        <swiper-slide v-for="item in content.promotionalImages" :key="item.file"
-                            ><nuxt-link :to="localePath('/' + item.redirectTo)"
+                        <swiper-slide v-for="item in content.promotionalImages" :key="item.file">
+                            <nuxt-link :to="localePath('/' + item.redirectTo)"
                                 ><img
                                     loading="lazy"
-                                    :src="baseUrl + '/s1440/' + item.file"
-                                    class="img-fluid"
+                                    :src="baseUrl + '/thumbnails/' + item.thumbnail"
+                                    :srcset="`${baseUrl}/s720/${item.file} 720w, ${baseUrl}/s1440/${item.file} 1440w`"
+                                    class="img-fluid w-100"
                                     alt="image" /></nuxt-link
                         ></swiper-slide>
-                        <div class="swiper-pagination" slot="pagination" />
+                        <div class="swiper-pagination d-none d-sm-block" slot="pagination" />
                         <div class="swiper-button-prev" slot="button-prev" />
                         <div class="swiper-button-next" slot="button-next" />
                     </swiper>
@@ -127,24 +128,24 @@
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-md-6 align-self-start d-none d-sm-block">
-                        <div class="embed-responsive embed-responsive-16by9">
-                            <iframe
-                                class="embed-responsive-item"
-                                :src="content.iso.youtube"
-                                frameborder="0"
-                            />
-                        </div>
+                        <lite-youtube
+                            :videoid="YouTubeGetID(content.iso.youtube)"
+                            :style="`
+                                background-image: url(https://i.ytimg.com/vi/${YouTubeGetID(
+                                    content.iso.youtube
+                                )}/hqdefault.jpg);
+                            `"
+                        />
                     </div>
 
                     <div class="col-md-6 col-sm-12">
-                        <h4 class="title-color">
-                            {{ content.news.title }}
-                        </h4>
+                        <h4 class="title-color"></h4>
                         <div class="card">
                             <img
                                 loading="lazy"
                                 class="card-img-top"
-                                :src="baseUrl + '/s720/' + content.news.image.file"
+                                :src="baseUrl + '/thumbnails/' + content.news.image.thumbnail"
+                                :srcset="`${baseUrl}/s720/${content.news.image.file} 720w, ${baseUrl}/s1440/${content.news.image.file} 1440w`"
                                 alt="image"
                             />
                             <div class="card-body">
@@ -256,6 +257,11 @@ export default {
         this.show = true;
     },
 
-    methods: {}
+    methods: {
+        YouTubeGetID(url) {
+            url = url.split(/(vi\/|v=|\/v\/|youtu\.be\/|\/embed\/)/);
+            return url[2] !== undefined ? url[2].split(/[^0-9a-z_\-]/i)[0] : url[0];
+        }
+    }
 };
 </script>

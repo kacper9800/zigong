@@ -37,23 +37,23 @@
 .hovereffect img {
     display: block;
     position: relative;
+    -webkit-transform: scale(1.3);
+    -ms-transform: scale(1.3);
+    transform: scale(1.3);
+}
+
+.hovereffect:hover img {
     -webkit-transform: scale(1.2);
     -ms-transform: scale(1.2);
     transform: scale(1.2);
 }
 
-.hovereffect:hover img {
-    -webkit-transform: scale(1.1);
-    -ms-transform: scale(1.1);
-    transform: scale(1.1);
-}
-
-.hovereffect h2 {
+.hovereffect {
     text-transform: uppercase;
     color: #fff;
     text-align: center;
     position: relative;
-    font-size: 17px;
+    font-size: 19px;
     padding: 10px;
 }
 

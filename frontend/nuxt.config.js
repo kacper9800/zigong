@@ -40,11 +40,12 @@ export default {
     css: [
         '@/assets/styles/bootstrap.main.scss',
         '@/assets/design/main.scss',
-        '@/assets/fonts/iconFonts.css'
+        '@/assets/fonts/iconFonts.css',
+        'node_modules/lite-youtube-embed/src/lite-yt-embed.css'
     ],
 
     // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
-    plugins: ['@/plugins/vuelidate', '@/plugins/vue-cool-lightbox'],
+    plugins: ['@/plugins/vuelidate', '@/plugins/vue-cool-lightbox', '@/plugins/youtube.client.js'],
 
     // Auto import components (https://go.nuxtjs.dev/config-components)
     components: true,

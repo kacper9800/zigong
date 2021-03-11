@@ -16,7 +16,9 @@
                     <div class="col-md-4 col-sm-12">
                         <p>
                             Email:
-                            <a href="mailto:info@zim-llc.com">info@zim-llc.com</a>
+                            <a href="mailto:info@zim-llc.com" style="color: white"
+                                >info@zim-llc.com</a
+                            >
                             <br />
                             © Zigong International Marketing, LLC
                         </p>
