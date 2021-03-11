@@ -2,8 +2,6 @@ import store from '@state/store';
 
 let crudRoutes = ['products'];
 
-console.log(crudRoutes);
-
 crudRoutes = crudRoutes.flatMap(route => [
     {
         path: `/${route}`,
