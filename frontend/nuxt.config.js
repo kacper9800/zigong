@@ -51,7 +51,13 @@ export default {
     components: true,
 
     // Modules for dev and build (recommended) (https://go.nuxtjs.dev/config-modules)
-    buildModules: ['@nuxtjs/pwa'],
+    buildModules: ['@nuxtjs/pwa', '@nuxtjs/google-analytics'],
+
+    googleAnalytics: {
+        id: env.parsed.GOOGLE_ANALYTICS_ID,
+        checkDuplicatedScript: true,
+        dev: true
+    },
 
     pwa: {
         manifest: {
