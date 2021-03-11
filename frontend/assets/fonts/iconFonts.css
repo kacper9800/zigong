@@ -1,17 +1,8 @@
-/*! 
-* @package IcoFont 
-* @version 1.0.1 
-* @author IcoFont https://icofont.com 
-* @copyright Copyright (c) 2015 - 2018 IcoFont 
-* @license - https://icofont.com/license/
-*/
-
 @font-face {
     font-family: 'IcoFont';
     font-weight: normal;
     font-style: 'Regular';
-    src: url('./icofont.woff2') format('woff2'),
-        url('./icofont.woff') format('woff');
+    src: url('./icofont.woff2') format('woff2'), url('./icofont.woff') format('woff');
 }
 
 [class^='icofont-'],

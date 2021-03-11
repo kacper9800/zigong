@@ -44,7 +44,7 @@
                                 <nuxt-link
                                     :to="localePath('/products/' + item.category.slug)"
                                     class="center"
-                                    ><h2>{{ item.name }}</h2></nuxt-link
+                                    >{{ item.name }}</nuxt-link
                                 >
                             </div>
                         </div>
@@ -57,9 +57,9 @@
                                 alt="image"
                             />
                             <div class="overlay-img">
-                                <nuxt-link :to="localePath('/contact-us')" class="center"
-                                    ><h2>{{ $t('products.cardQuestion') }}</h2></nuxt-link
-                                >
+                                <nuxt-link :to="localePath('/contact-us')" class="center">{{
+                                    $t('products.cardQuestion')
+                                }}</nuxt-link>
                             </div>
                         </div>
                     </div>

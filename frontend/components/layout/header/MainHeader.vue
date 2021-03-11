@@ -13,7 +13,9 @@
                             <a
                                 href="https://www.linkedin.com/company/zigong-international-marketing"
                             >
-                                <span><img src="@/assets/images/linkedIn.svg" /></span>
+                                <span
+                                    ><img src="@/assets/images/linkedIn.svg" alt="linkedIn"
+                                /></span>
                             </a>
                             <nuxt-link
                                 v-for="locale in availableLocales"

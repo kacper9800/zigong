@@ -44,7 +44,7 @@
                                 <nuxt-link
                                     :to="localePath('/p/' + item.product.slug)"
                                     class="center"
-                                    ><h2>{{ item.name }}</h2></nuxt-link
+                                    >{{ item.name }}</nuxt-link
                                 >
                             </div>
                         </div>
