@@ -51,7 +51,17 @@ export default {
     components: true,
 
     // Modules for dev and build (recommended) (https://go.nuxtjs.dev/config-modules)
-    buildModules: [],
+    buildModules: ['@nuxtjs/pwa'],
+
+    pwa: {
+        manifest: {
+            theme_color: '#4765a6',
+            background_color: '#4765a6',
+            name: 'Zigong International Marketing',
+            short_name: 'Zgcc-eu.com',
+            lang: 'en'
+        }
+    },
 
     primevue: {
         theme: 'saga-blue',
