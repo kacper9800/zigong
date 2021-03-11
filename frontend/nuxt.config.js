@@ -51,13 +51,7 @@ export default {
     components: true,
 
     // Modules for dev and build (recommended) (https://go.nuxtjs.dev/config-modules)
-    buildModules: ['@nuxtjs/pwa', '@nuxtjs/google-analytics'],
-
-    googleAnalytics: {
-        id: env.parsed.GOOGLE_ANALYTICS_ID,
-        checkDuplicatedScript: true,
-        dev: true
-    },
+    buildModules: ['@nuxtjs/pwa'],
 
     pwa: {
         manifest: {
@@ -77,6 +71,7 @@ export default {
 
     // Modules (https://go.nuxtjs.dev/config-modules)
     modules: [
+        '@nuxtjs/google-gtag',
         '@nuxtjs/auth-next',
         '@nuxtjs/axios',
         [
@@ -173,5 +168,18 @@ export default {
         config: {
             ignoredElements: ['stream']
         }
+    },
+
+    'google-gtag': {
+        id: 'G-1X39XFNJ8R',
+        config: {
+            anonymize_ip: false,
+            send_page_view: false,
+            linker: {
+                domains: ['zgcc-eu.com']
+            }
+        },
+        debug: false,
+        disableAutoPageTrack: false
     }
 };
