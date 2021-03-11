@@ -23,6 +23,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@sentry/node": "^6.2.2",
+    "@sentry/tracing": "^6.2.2",
     "@vitalets/google-translate-api": "^5.1.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",

@@ -61,5 +61,8 @@ const config = {
       },
     ],
   },
+  sentry: {
+    dsn: env("SENTRY_DSN"),
+  },
 };
 module.exports = config;
