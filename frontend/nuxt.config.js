@@ -71,6 +71,7 @@ export default {
 
     // Modules (https://go.nuxtjs.dev/config-modules)
     modules: [
+        '@nuxtjs/google-gtag',
         '@nuxtjs/auth-next',
         '@nuxtjs/axios',
         [
@@ -167,5 +168,18 @@ export default {
         config: {
             ignoredElements: ['stream']
         }
+    },
+
+    'google-gtag': {
+        id: 'G-1X39XFNJ8R',
+        config: {
+            anonymize_ip: false,
+            send_page_view: false,
+            linker: {
+                domains: ['zgcc-eu.com']
+            }
+        },
+        debug: false,
+        disableAutoPageTrack: false
     }
 };
