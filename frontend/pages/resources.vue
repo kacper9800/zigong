@@ -39,6 +39,7 @@
                                             <p v-for="element in item.resource" :key="element.id">
                                                 <nuxt-link
                                                     :to="localePath('/file/' + element.pdf.file)"
+                                                    class="default-link"
                                                     >→ {{ element.name }}</nuxt-link
                                                 >
                                             </p>

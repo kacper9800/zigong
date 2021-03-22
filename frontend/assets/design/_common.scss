@@ -243,6 +243,13 @@ input[type='tel'] {
 }
 
 /* Links */
+.default-link {
+    color: #555;
+    &:hover {
+        color: $secondary-color;
+    }
+}
+
 a {
     color: $blue;
     text-decoration: none;
